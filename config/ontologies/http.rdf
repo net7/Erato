@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:owl="http://www.w3.org/2002/07/owl#">
+
+<rdf:Description rdf:about="http://www.w3.org/2006/http#">
+ <rdfs:comment xml:lang="en">A namespace for describing HTTP messages
+   (http://www.w3.org/Protocols/rfc2616/rfc2616.html)</rdfs:comment>
+</rdf:Description>
+
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#Connection">
+  <rdfs:label xml:lang="en">Connection</rdfs:label>
+  <rdfs:comment xml:lang="en">An HTTP connection</rdfs:comment>
+  <rdfs:subClassOf rdf:parseType="Collection">
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.w3.org/2006/http#connectionAuthority"/>
+      <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+      <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</rdfs:Class>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#connectionAuthority">
+  <rdfs:label xml:lang="en">Connection authority</rdfs:label>
+  <rdfs:comment xml:lang="en">An HTTP Connection authority</rdfs:comment>
+  <rdfs:domain rdf:resource="http://www.w3.org/2006/http#Connection"/>
+</rdf:Property>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#request">
+  <rdfs:label xml:lang="en">Request</rdfs:label>
+  <rdfs:comment xml:lang="en">Has an HTTP request</rdfs:comment>
+  <rdfs:domain rdf:resource="http://www.w3.org/2006/http#Connection"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2006/http#Request"/>
+</rdf:Property>
+
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#Request">
+  <rdfs:label xml:lang="en">Request</rdfs:label>
+  <rdfs:comment xml:lang="en">An HTTP request</rdfs:comment>
+</rdfs:Class>
+
+<!-- request methods start -->
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#OptionsRequest">
+  <rdfs:label xml:lang="en">Options</rdfs:label>
+  <rdfs:comment xml:lang="en">The OPTIONS request</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/http#Request"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#GetRequest">
+  <rdfs:label xml:lang="en">Get</rdfs:label>
+  <rdfs:comment xml:lang="en">The GET request</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/http#Request"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#HeadRequest">
+  <rdfs:label xml:lang="en">Head</rdfs:label>
+  <rdfs:comment xml:lang="en">The HEAD request</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/http#Request"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#PostRequest">
+  <rdfs:label xml:lang="en">Post</rdfs:label>
+  <rdfs:comment xml:lang="en">The POST request</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/http#Request"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#PutRequest">
+  <rdfs:label xml:lang="en">Put</rdfs:label>
+  <rdfs:comment xml:lang="en">The PUT request</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/http#Request"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#DeleteRequest">
+  <rdfs:label xml:lang="en">Delete</rdfs:label>
+  <rdfs:comment xml:lang="en">The DELETE request</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/http#Request"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#TraceRequest">
+  <rdfs:label xml:lang="en">Trace</rdfs:label>
+  <rdfs:comment xml:lang="en">The TRACE request</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/http#Request"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#ConnectRequest">
+  <rdfs:label xml:lang="en">Connect</rdfs:label>
+  <rdfs:comment xml:lang="en">The CONNECT request</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/http#Request"/>
+</rdfs:Class>
+<!-- request methods end -->
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#requestURI">
+  <rdfs:label xml:lang="en">Request URI</rdfs:label>
+  <rdfs:comment xml:lang="en">Has an HTTP request URI</rdfs:comment>
+  <rdfs:domain rdf:resource="http://www.w3.org/2006/http#Request"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2006/http#RequestURI"/>
+</rdf:Property>
+
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#RequestURI">
+  <rdfs:label xml:lang="en">Request URI</rdfs:label>
+  <rdfs:comment xml:lang="en">The HTTP request URI</rdfs:comment>
+  <owl:oneOf rdf:parseType="Collection">
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#asterisk">
+      <rdfs:label xml:lang="en">Asterisk</rdfs:label>
+      <rdfs:comment xml:lang="en">An asterisk used as request URI</rdfs:comment>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+  </owl:oneOf>
+</rdfs:Class>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#absoluteURI">
+  <rdfs:label xml:lang="en">Absolute request URI</rdfs:label>
+  <rdfs:comment xml:lang="en">An absolute request URI</rdfs:comment>
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2006/http#requestURI"/>
+</rdf:Property>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#abs_path">
+  <rdfs:label xml:lang="en">Absolute path</rdfs:label>
+  <rdfs:comment xml:lang="en">An absolute path used as request URI</rdfs:comment>
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2006/http#requestURI"/>
+</rdf:Property>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#authority">
+  <rdfs:label xml:lang="en">Authority</rdfs:label>
+  <rdfs:comment xml:lang="en">An authority used as request URI</rdfs:comment>
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2006/http#requestURI"/>
+</rdf:Property>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#response">
+  <rdfs:label xml:lang="en">Response</rdfs:label>
+  <rdfs:comment xml:lang="en">Has an HTTP response</rdfs:comment>
+  <rdfs:domain rdf:resource="http://www.w3.org/2006/http#Request"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2006/http#Response"/>
+</rdf:Property>
+
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#Response">
+  <rdfs:label xml:lang="en">Response</rdfs:label>
+  <rdfs:comment xml:lang="en">The HTTP Response</rdfs:comment>
+</rdfs:Class>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#responseCode">
+  <rdfs:label xml:lang="en">Response code</rdfs:label>
+  <rdfs:comment xml:lang="en">Has an HTTP response code</rdfs:comment>
+  <rdfs:domain rdf:resource="http://www.w3.org/2006/http#Response"/>
+  <rdfs:range>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <owl:Class rdf:about="http://www.w3.org/2006/http#ResponseCode"/>
+        <owl:Class rdf:about="http://www.w3.org/2001/XMLSchema#positiveInteger"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:range>
+</rdf:Property>
+
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#ResponseCode">
+  <rdfs:label xml:lang="en">Response code</rdfs:label>
+  <rdfs:comment xml:lang="en">The HTTP Response Code</rdfs:comment>
+  <owl:oneOf rdf:parseType="Collection">
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#100">
+      <rdfs:label xml:lang="en">Continue</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#101">
+      <rdfs:label xml:lang="en">Switching Protocols</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#200">
+      <rdfs:label xml:lang="en">OK</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#201">
+      <rdfs:label xml:lang="en">Created</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#202">
+      <rdfs:label xml:lang="en">Accepted</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#203">
+      <rdfs:label xml:lang="en">Non-Authoritative Information</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#204">
+      <rdfs:label xml:lang="en">No Content</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#205">
+      <rdfs:label xml:lang="en">Reset Content</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#206">
+      <rdfs:label xml:lang="en">Partial Content</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#300">
+      <rdfs:label xml:lang="en">Multiple Choices</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#301">
+      <rdfs:label xml:lang="en">Moved Permanently</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#302">
+      <rdfs:label xml:lang="en">Found</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#303">
+      <rdfs:label xml:lang="en">See Other</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#304">
+      <rdfs:label xml:lang="en">Not Modified</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#305">
+      <rdfs:label xml:lang="en">Use Proxy</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#306">
+      <rdfs:label xml:lang="en">(Unused)</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#307">
+      <rdfs:label xml:lang="en">Temporary Redirect</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#400">
+      <rdfs:label xml:lang="en">Bad Request</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#401">
+      <rdfs:label xml:lang="en">Unauthorized</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#402">
+      <rdfs:label xml:lang="en">Payment Required</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#403">
+      <rdfs:label xml:lang="en">Forbidden</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#404">
+      <rdfs:label xml:lang="en">Not Found</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#405">
+      <rdfs:label xml:lang="en">Method Not Allowed</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#406">
+      <rdfs:label xml:lang="en">Not Acceptable</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#407">
+      <rdfs:label xml:lang="en">Proxy Authentication Required</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#408">
+      <rdfs:label xml:lang="en">Request Timeout</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#409">
+      <rdfs:label xml:lang="en">Conflict</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#410">
+      <rdfs:label xml:lang="en">Gone</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#411">
+      <rdfs:label xml:lang="en">Length Required</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#412">
+      <rdfs:label xml:lang="en">Precondition Failed</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#413">
+      <rdfs:label xml:lang="en">Request Entity Too Large</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#414">
+      <rdfs:label xml:lang="en">Request-URI Too Long</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#415">
+      <rdfs:label xml:lang="en">Unsupported Media Type</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#416">
+      <rdfs:label xml:lang="en">Requested Range Not Satisfiable</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#417">
+      <rdfs:label xml:lang="en">Expectation Failed</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#500">
+      <rdfs:label xml:lang="en">Internal Server Error</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#501">
+      <rdfs:label xml:lang="en">Not Implemented</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#502">
+      <rdfs:label xml:lang="en">Bad Gateway</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#503">
+      <rdfs:label xml:lang="en">Service Unavailable</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#504">
+      <rdfs:label xml:lang="en">Gateway Timeout</rdfs:label>
+    </owl:Thing>
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#505">
+      <rdfs:label xml:lang="en">HTTP Version Not Supported</rdfs:label>
+    </owl:Thing>
+    <!-- new response code, stub for subclassing -->
+    <owl:Thing rdf:about="http://www.w3.org/2006/http#NewResponseCode"/>
+  </owl:oneOf>
+</rdfs:Class>
+
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#NewResponseCode">
+  <rdfs:label xml:lang="en">New Response Code</rdfs:label>
+  <rdfs:comment xml:lang="en">New HTTP Response Code. If you want to define new header names, subclass this stub.</rdfs:comment>
+</rdfs:Class>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#header">
+  <rdfs:label xml:lang="en">Header</rdfs:label>
+  <rdfs:comment xml:lang="en">Has a header</rdfs:comment>
+  <rdfs:range rdf:resource="http://www.w3.org/2006/http#MessageHeader"/>
+</rdf:Property>
+
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#MessageHeader">
+  <rdfs:label xml:lang="en">Message header</rdfs:label>
+  <rdfs:comment xml:lang="en">A message header according to section 4.2 of HTTP 1.1</rdfs:comment>
+  <rdfs:subClassOf rdf:parseType="Collection">
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.w3.org/2006/http#fieldName"/>
+      <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+      <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+    </owl:Restriction>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.w3.org/2006/http#fieldValue"/>
+      <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+      <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</rdfs:Class>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#fieldName">
+  <rdfs:label xml:lang="en">Field name</rdfs:label>
+  <rdfs:comment xml:lang="en">Has a field name</rdfs:comment>
+  <rdfs:domain rdf:resource="http://www.w3.org/2006/http#MessageHeader"/>
+  <rdfs:range>
+    <rdfs:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <owl:Class rdf:about="http://www.w3.org/2006/http#HeaderName"/>
+        <owl:Class rdf:about="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+      </owl:unionOf>
+    </rdfs:Class>
+  </rdfs:range>
+</rdf:Property>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#fieldValue">
+  <rdfs:label xml:lang="en">Field value</rdfs:label>
+  <rdfs:comment xml:lang="en">Has a field value</rdfs:comment>
+  <rdfs:domain rdf:resource="http://www.w3.org/2006/http#MessageHeader"/>
+</rdf:Property>
+
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#HeaderElement">
+  <rdfs:label xml:lang="en">Header element</rdfs:label>
+  <rdfs:comment xml:lang="en">An element of a comma-separated list in a field value</rdfs:comment>
+  <rdfs:subClassOf rdf:parseType="Collection">
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.w3.org/2006/http#elementName"/>
+      <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+      <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+    </owl:Restriction>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.w3.org/2006/http#elementValue"/>
+      <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+      <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</rdfs:Class>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#elementName">
+  <rdfs:label xml:lang="en">Element name</rdfs:label>
+  <rdfs:comment xml:lang="en">Has an element name</rdfs:comment>
+  <rdfs:domain rdf:resource="http://www.w3.org/2006/http#HeaderElement"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+</rdf:Property>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#elementValue">
+  <rdfs:label xml:lang="en">Element value</rdfs:label>
+  <rdfs:comment xml:lang="en">Has an element value</rdfs:comment>
+  <rdfs:domain rdf:resource="http://www.w3.org/2006/http#HeaderElement"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+</rdf:Property>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#param">
+  <rdfs:label xml:lang="en">Parameter</rdfs:label>
+  <rdfs:comment xml:lang="en">Has a parameter</rdfs:comment>
+  <rdfs:domain rdf:resource="http://www.w3.org/2006/http#HeaderElement"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2006/http#Param"/>
+</rdf:Property>
+
+<rdfs:Class rdf:about="http://www.w3.org/2006/http#Param">
+  <rdfs:label xml:lang="en">Parameter</rdfs:label>
+  <rdfs:comment xml:lang="en">A parameter for a header element</rdfs:comment>
+  <rdfs:subClassOf rdf:parseType="Collection">
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.w3.org/2006/http#paramName"/>
+      <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+      <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+    </owl:Restriction>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.w3.org/2006/http#paramValue"/>
+      <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+      <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</rdfs:Class>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#paramName">
+  <rdfs:label xml:lang="en">Parameter name</rdfs:label>
+  <rdfs:comment xml:lang="en">Has a parameter name</rdfs:comment>
+  <rdfs:domain rdf:resource="http://www.w3.org/2006/http#Param"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+</rdf:Property>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#paramValue">
+  <rdfs:label xml:lang="en">Parameter value</rdfs:label>
+  <rdfs:comment xml:lang="en">Has a parameter value</rdfs:comment>
+  <rdfs:domain rdf:resource="http://www.w3.org/2006/http#Param"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+</rdf:Property>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#version">
+  <rdfs:label xml:lang="en">Version</rdfs:label>
+  <rdfs:comment xml:lang="en">The HTTP version</rdfs:comment>
+</rdf:Property>
+
+<rdf:Property rdf:about="http://www.w3.org/2006/http#body">
+  <rdfs:label xml:lang="en">Entity body</rdfs:label>
+  <rdfs:comment xml:lang="en">The HTTP entity body</rdfs:comment>
+</rdf:Property>
+
+</rdf:RDF>

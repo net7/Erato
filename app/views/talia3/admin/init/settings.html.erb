@@ -1,0 +1,36 @@
+<% if @talia3_init %>
+<h2>Talia3 configuration file settings</h2>
+<i>None of the following settings is mandatory</i>
+<form action="settings" method="post">
+  <%= token_tag(form_authenticity_token) %>
+  <h3>Site information</h3>
+  Application name: <input type="text" name="application_name" value="Talia3 Application"/>
+  <br/>
+  <br/>
+  Use confirmation emails during user registration
+  <input type="checkbox" name="user_emails_enabled" value="1" checked="checked"/>
+  <br/>
+  Application URL <input type="text" name="application_url" value="http://localhost:3000/"/>
+  <br>
+  Needed if <i>Use confirmation emails during user registration</i> is set.
+  <br/>
+  <br/>
+  Base URI: <input type="text" name="base_uri" value="http://localhost:3000/"/>
+
+  <h3>Local Repository</h3>
+  Type: SESAME <input type="hidden" name="type" value="sesame"/>
+  <br/>
+  Location: <input type="text" name="location" size="50"/>
+  <br/>
+
+  <h3>Data behaviour</h3>
+  Strict schema <input type="checkbox" name="strict_schema" value="1" checked="checked"/>
+  <br/>
+
+  <h3>API</h3>
+  Enable API <input type="checkbox" name="api_enabled" value="1"/>
+  <br/>
+  <br/>
+  <input type="submit" name="proceed" value="Proceed"/>
+</form>
+<% end %>

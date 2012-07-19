@@ -1,0 +1,30 @@
+<% q = controller.send :querystring %>
+
+<% # TODO: use _attribute partial when we use hashes and not records directly %>
+<% force    = local_assigns[:force]    || nil %>
+<% type     = local_assigns[:type]     || nil %>
+<% datatype = local_assigns[:datatype] || nil %>
+
+<% type     = force.to_s if force.present? %>
+<% force_datatype = (type == 'uri' || type == nil) ? :uri : force %>
+
+
+<%=  content_tag(:span, :hidden => true, :class => "attribute_prototype",  ) do %>
+
+<%=    text_field_tag "record[#{attribute_prototype}][][value]", "", :id => nil, :class => "record_attribute_value keyword span5", :size => 60, :disabled => true, :"placeholder"=>"insert a url or a keyword to search in Medusa"  %>
+
+<%=  text_field_tag '', nil,:type=>"button", :class => "agorized-input #{(type != 'uri') ? 'hidden' : ''}" %>
+<%= submit_tag '', :class => "clear-field hidden" %>
+
+
+<%=   talia3_literal_uri_selection attribute_prototype, nil, :disabled => true, :selected => type, :force => force %>
+<%=   talia3_datatype_selection attribute_prototype, nil, {:force => force_datatype, :selected => datatype, :disable_all => true}, 
+                                                     {:size => 20} %>
+
+<%=      talia3_language_selection attribute_prototype, "", (type || 'uri') %>
+
+<%=   link_to "Edit resource", talia3_universal_url(q.merge :uri => nil), :class =>'navigate-to hidden', :'data-controls-modal'=>'modal-from-dom', :'data-backdrop'=>'static' %>
+
+<%=   submit_tag 'Delete', :class => "attribute_remove" %>
+
+<%   end %>

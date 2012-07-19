@@ -1,0 +1,48 @@
+<% #FIXME: refactoring %>
+<% q = controller.send :querystring %>
+<tr>
+  <td colspan="2"><b>Inverse properties</b> (Values are always URIs)</td>
+</tr>
+<% inverse_properties.each do |attribute| %>
+  <tr/>
+    <td width="20%">
+      <span title="Inverse of <%= attribute.to_uri.to_s%>">
+        Inverse of "<%= talia3_resource_property_label record, attribute %>"
+      </span>
+    </td>
+    <td>
+      <%   record.query([nil, attribute.to_uri, record.uri]).each do |value| %>
+      <%     if Talia3::URI.valid?(value.subject) %>
+
+      <%       value = Talia3::URI.new(value.subject) %>
+      <br/>
+      <%=      content_tag('span', :class => 'record_attribute inverse', "data-attribute" => attribute) do %>
+
+      <%=        text_field_tag "inverse[#{attribute}][][value]", value,
+                   :id => nil, :class => "record_attribute_value", :size => 50, "data-value" => value %>
+
+      <%=        talia3_literal_uri_selection attribute, nil, :force => :uri %>
+
+
+      <%=        link_to "Edit resource", talia3_universal_url(q.merge :uri => nil), 
+                   :class => "navigate-to", :hidden => false ,  :'data-controls-modal'=>"modal-from-dom", :'data-backdrop'=>"static" %>
+
+      <%=        submit_tag 'Delete', :class => "attribute_remove" %>
+      <%=        tag :br %>
+      <%       end %>
+      <%     end %>
+      <%   end %>
+
+      <%=  submit_tag 'Add', :class => "attribute_clone", :'data-attribute' => "#{attribute}" %>
+      <%=  content_tag(:span, :hidden => true, :class => "attribute_prototype inverse") do %>
+      <%=    link_to "Edit resource", talia3_universal_url(q.merge :uri => nil), :class => 'navigate-to', :hidden => false,:'data-controls-modal'=>"modal-from-dom", :'data-backdrop'=>"static" %>
+      <%=    text_field_tag "inverse[#{attribute}][][value]", "", :id => nil, :class => "record_attribute_value", :size => 70, :disabled => true  %>
+      <%=    select_tag "inverse[#{attribute}][][uri_literal]", 
+               options_for_select([['uri']], 'uri'),
+               :id => nil, :class => "record_attribute_type", :disabled => true, :hidden => true %>
+        <%=    submit_tag 'Delete', :class => "attribute_remove" %>
+      <%=    tag :br %>
+      <%   end %>
+    </td>
+  </tr>
+<% end %>

@@ -1,0 +1,1453 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.4" />
+<title>Talia3</title>
+<style type="text/css">
+/* Sans-serif font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+div#toctitle,
+span#author, span#revnumber, span#revdate, span#revremark,
+div#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+/* Serif font. */
+div.sectionbody {
+  font-family: Georgia,"Times New Roman",Times,serif;
+}
+
+/* Monospace font. */
+tt {
+  font-size: inherit;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+tt {
+  font-size: inherit;
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revnumber, span#revdate, span#revremark {
+}
+
+div#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #777777;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toc {
+  margin-bottom: 2.5em;
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function()asciidocasciidoc.footnotes();
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  var cont = document.getElementById("content");
+  var noteholder = document.getElementById("footnotes");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      // Use [\s\S] in place of . so multi-line matches work.
+      // Because JavaScript has no s (dotall) regex flag.
+      note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      spans[i].innerHTML =
+        "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+        "' title='View footnote' class='footnote'>" + n + "</a>]";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+}
+
+}
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>Talia3</h1>
+<span id="author">Riccardo Giomi</span><br />
+<span id="email"><tt>&lt;<a href="mailto:giomi@netseven.it">giomi@netseven.it</a>&gt;</tt></span><br />
+<span id="revnumber">version 0.0.1,</span>
+<span id="revdate">17th of January 2011</span>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>Talia3 is a set of tools for Ruby on Rails 3 to help developers work
+with RDF data and repositories.</p></div>
+<div class="paragraph"><p>At the moment the plugin is in early development stage, offering very
+little in terms of features: playing with the console and running
+tests is pretty much all you can do with it.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="title">Talia3 and JRuby</div>Talia3 currently does not work with JRuby.</td>
+</tr></table>
+</div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="title">Talia3 and warble</div>Use of warble gem is untested or now.</td>
+</tr></table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_talia3_rdf_sparql_and_rdf_sesame">Talia3, RDF::SPARQL and RDF::Sesame</h3>
+<div class="paragraph"><p>Talia3 includes a substantial rewrite of two RDF.rb plugins:
+<a href="https://github.com/bendiken/rdf-sesame">rdf-sesame</a>
+and
+<a href="https://github.com/bendiken/sparql-client">sparql-client</a>.</p></div>
+<div class="paragraph"><p>The rewrite was needed to move these two plugins, essential for
+Talia3, up to par with the other RDF.rb at version 0.3.0.</p></div>
+<div class="paragraph"><p>Hopefully in the future these changs will be incorporated in those
+plugins, but for the moment there you have them.</p></div>
+</div>
+<div class="sect1">
+<h2 id="_requirements">Requirements</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+libxml2 (and headers) libxslt (and headers) for Nokogiri (used by RDF.rb)
+</p>
+</li>
+<li>
+<p>
+sqlite3 (and headers)
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation">Installation</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_using_the_talia3_test_application">Using the Talia3_test application</h3>
+<div class="paragraph"><p>It is suggested to download and install the Talia3 Test application,
+which cames bundled with all the gems needed and is also where the
+test suite for Talia3 is.</p></div>
+<div class="paragraph"><p>Follow
+<a href="https://net7.codebasehq.com/talia/talia3-test-application/raw/master/README.asciidoc">these instructions</a></p></div>
+</div>
+<div class="sect2">
+<h3 id="_from_scratch">From scratch</h3>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">No tests included are included in the base plugin.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p><strong>Clone or download the Talia3 plugin repository</strong> (if you have not alredy done so)</p></div>
+<div class="paragraph"><p>Clone:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;git clone git@codebasehq.com:net7/talia/talia3.git&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p><strong>or</strong></p></div>
+<div class="paragraph"><p><a href="https://net7.codebasehq.com/talia/talia3/archives/master">download</a>.</p></div>
+<div class="paragraph"><p><strong>Install the required gems</strong></p></div>
+<div class="paragraph"><p>(Optional, highly recommended) Using RVM, create an empty gemset.</p></div>
+<div class="paragraph"><p>Install Ruby on Rails 3:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;gem install bundler
+gem install rails -v 3.0.3&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p><strong>Create a new Rails project</strong></p></div>
+<div class="literalblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;rails new &lt;name&gt;&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p><strong>Copy or link the plugin directory</strong></p></div>
+<div class="paragraph"><p>Copy, move or link the talia3/ directory* in &lt;name&gt;/vendor/plugins/.</p></div>
+<div class="paragraph"><p><strong>Edit the Gemfile</strong></p></div>
+<div class="paragraph"><p>Edit the &lt;name&gt; Gemfile file, adding the required gems and also the
+Talia3 plugin. Here is a valid Gemfile, you can copy and replace all
+the file content with this:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;source 'http://rubygems.org'
+
+gem 'rails', '3.0.3'
+if defined?(JRUBY_VERSION)
+  gem 'jdbc-sqlite3'
+  gem 'activerecord-jdbc-adapter'
+  gem 'activerecord-jdbcsqlite3-adapter'
+  gem 'jruby-openssl'
+  gem 'jruby-rack'
+else
+  gem 'sqlite3-ruby', :require =&gt; 'sqlite3'
+end
+gem 'talia3', :path =&gt; 'vendor/plugins/talia3'&lt;/tt&gt;</pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">This configuration also detects Jruby, if present, and installs
+the right gems for it.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>If you are using only Ruby, just:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;gem 'sqlite3-ruby', :require =&gt; 'sqlite3'
+gem 'talia3', :path =&gt; 'vendor/plugins/talia3'&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>will do, while for Jruby only:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;gem 'jdbc-sqlite3'
+gem 'activerecord-jdbc-adapter'
+gem 'activerecord-jdbcsqlite3-adapter'
+gem 'jruby-openssl'
+gem 'jruby-rack'
+gem 'talia3', :path =&gt; 'vendor/plugins/talia3'&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p><strong>Run the bundler</strong>
+From the &lt;name&gt;/ directory, run:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;bundle install&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>and wait for the gems to download.</p></div>
+<div class="paragraph"><p><strong>Create a new sesame repository</strong>
+You will need a Sesame repository do play with Talia3, using the
+workbench, create a new repository and remember its location.</p></div>
+<div class="paragraph"><p>For the rest of these instructions, we will use
+<tt>http://localhost:8080/open-rdf/repositories/talia3</tt> in the examples.</p></div>
+<div class="paragraph"><p><strong>Initialize and configure Talia3</strong>
+From the &lt;name&gt;/ directory, run:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;rake talia3:init&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>this will create a new configuration file <tt>&lt;name&gt;/config/talia3.yml</tt>,
+which you can now edit. In particular define a repository for
+development - test:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;&lt;name&gt;/config/talia3.yml
+
+repositories:
+  development:
+    local:
+      type: sesame
+      location: http://localhost:8080/openrdf-sesame/repositories/talia3&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>All done! The following tutorial will show how to examine the
+Talia3 features using the console.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_talia3_tutorial">Talia3 tutorial</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Let&#8217;s start by opening the Rails console, from the &lt;name&gt;/ directory,
+run:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;rails console&lt;/tt&gt;</pre>
+</div></div>
+<div class="sect2">
+<h3 id="_talia3_repositories_and_configuration_in_general">Talia3 Repositories and configuration in general</h3>
+<div class="sect3">
+<h4 id="_configuration">Configuration</h4>
+<div class="paragraph"><p>The configuration for the plugin, taken from the configuration file
+<tt>config/talia3.yml</tt>, is available through:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;pp Talia3.config
+
+{:application_name=&gt;&quot;Talia3 Application&quot;,
+ :base_uri=&gt;&quot;http://localhost:3000/&quot;,
+ :contexts=&gt;{&quot;public&quot;=&gt;nil, &quot;ontology&quot;=&gt;nil},
+ :repositories=&gt;
+  {&quot;development&quot;=&gt;
+    {&quot;local&quot;=&gt;
+      {&quot;type&quot;=&gt;&quot;sesame&quot;,
+       &quot;location&quot;=&gt;
+        &quot;http://localhost:8080/openrdf-sesame/repositories/talia3_test&quot;}},
+   &quot;test&quot;=&gt;{&quot;local&quot;=&gt;nil},
+   &quot;production&quot;=&gt;{&quot;local&quot;=&gt;{&quot;type&quot;=&gt;nil, &quot;location&quot;=&gt;nil}}}}&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>You can focus the result on one of the base settings:</p></div>
+<div class="listingblock">
+<div class="title">Application name</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;Talia3.config(:application_name)
+#=&gt; &quot;Talia3 Application&quot;&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>This is a useful place to keep the application name once and for
+all. Future plugins for the Talia3 series will use this value.</p></div>
+<div class="listingblock">
+<div class="title">Base URI</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;Talia3.config(:base_uri)
+#=&gt; &quot;http://localhost:3000/&quot;&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>This is for convienience when creating URLs or URIs local to the
+application. We will see another use in a bit when using the Namespace
+class.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_repositories">Repositories</h4>
+<div class="paragraph"><p>Talia3 allows for some shortcuts when working with repositories:</p></div>
+<div class="listingblock">
+<div class="title">Get local repository for current environment</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;Talia3.repository(:local)
+# =&gt; #&lt;RDF::Sesame::Repository:...(http://localhost:8080/openrdf-sesame/repositories/talia3)&gt;&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>Talia3 configuration will always automatically account for the current
+Rails environment and use the corresponding configuration to create a
+new RDF::Repository object that allows for direct access to the
+repository using the fantastic work of the RDF.rb creator and
+contributors. Some examples:</p></div>
+<div class="listingblock">
+<div class="title">Inserting triples</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;statement1 = [
+  RDF::URI.new('http://localhost/uri'),          #subject
+  RDF::URI.new('http://purl.org/dc/terms/name'), #predicate
+  'URI'                                          #object
+]
+
+statement2 = [
+  RDF::URI.new('http://localhost/uri'),                 #subject
+  RDF::URI.new('http://purl.org/dc/terms/description'), #predicate
+  'URI description'                                     #object
+]
+
+repository = Talia3.repository(:local)
+repository &lt;&lt; statement1
+
+repository.insert(statement1, statement2)&lt;/tt&gt;</pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Querying</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;repository = Talia3.repository(:local)
+result = repository.query([RDF::URI.new('http://localhost/uri'), nil, nil])
+
+result.count
+# =&gt; 2 (possibly more with inference)
+
+result.each do |statement|
+  pp statement
+end
+# =&gt; (RDF::Statements)&lt;/tt&gt;</pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Clearing the repository</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;Talia3.repository(:local).clear&lt;/tt&gt;</pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content"><tt>Talia3.repository</tt> will default to local if no key is given,
+  making <tt>Talia3.repository(:local) == Talia3.repository</tt>.</td>
+</tr></table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_talia3_rdf_resources">talia3 RDF Resources</h3>
+<div class="sect3">
+<h4 id="_uris_and_namespaces">URIs and namespaces</h4>
+<div class="paragraph"><p>Talia3 always works with RDF::URI objects when dealing with URIs. To
+declare a URI simply create a new RDF::URI:</p></div>
+<div class="listingblock">
+<div class="title">Creating a new URI</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;uri = RDF::URI.new('http://example.org/an_uri')
+# =&gt; #&lt;RDF::URI:...(http://example.org/an_uri)&gt;&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>Talia3 namespaces are helpers to generate URIs with a commonly used
+base URI. The base class for namespaces is Talia::N.</p></div>
+<div class="listingblock">
+<div class="title">Get a list of defined namespaces</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;pp Talia3::N.namespaces
+
+{:ex=&gt;&quot;http://example.org/&quot;,
+ :exif=&gt;&quot;http://www.w3.org/2003/12/exif/ns#&quot;,
+ :http=&gt;&quot;http://www.w3.org/2006/http#&quot;,
+ :dc=&gt;&quot;http://purl.org/dc/terms/&quot;,
+ :xsd=&gt;&quot;http://www.w3.org/2001/XMLSchema#&quot;,
+ :dc11=&gt;&quot;http://purl.org/dc/elements/1.1/&quot;,
+ :rss=&gt;&quot;http://purl.org/rss/1.0/&quot;,
+ :doap=&gt;&quot;http://usefulinc.com/ns/doap#&quot;,
+ :skos=&gt;&quot;http://www.w3.org/2004/02/skos/core#&quot;,
+ :geo=&gt;&quot;http://www.w3.org/2003/01/geo/wgs84_pos#&quot;,
+ :wot=&gt;&quot;http://xmlns.com/wot/0.1/&quot;,
+ :owl=&gt;&quot;http://www.w3.org/2002/07/owl#&quot;,
+ :sioc=&gt;&quot;http://rdfs.org/sioc/ns#&quot;,
+ :types=&gt;&quot;http://rdfs.org/sioc/types#&quot;,
+ :xhtml=&gt;&quot;http://www.w3.org/1999/xhtml#&quot;,
+ :foaf=&gt;&quot;http://xmlns.com/foaf/0.1/&quot;,
+ :cert=&gt;&quot;http://www.w3.org/ns/auth/cert#&quot;,
+ :cc=&gt;&quot;http://creativecommons.org/ns#&quot;,
+ :rsa=&gt;&quot;http://www.w3.org/ns/auth/rsa#&quot;,
+ :rdfs=&gt;&quot;http://www.w3.org/2000/01/rdf-schema#&quot;}&lt;/tt&gt;</pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Generate some URIs</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;Talia3::N::DC.name
+# =&gt; #&lt;RDF::URI:...(http://purl.org/dc/terms/name)&gt;
+
+Talia3::N::EX.example1
+# =&gt; #&lt;RDF::URI:...(http://example.org/example1)&gt;&lt;/tt&gt;</pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">Talia3::N does not generate URIs for the rdf namespace
+  (<a href="http://www.w3.org/1999/02/22-rdf-syntax-ns">http://www.w3.org/1999/02/22-rdf-syntax-ns</a>#).
+  Use the RDF class to generate those.</td>
+</tr></table>
+</div>
+<div class="listingblock">
+<div class="title">URIs for the rdf namespace</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;RDF.type
+# =&gt; #&lt;RDF::URI:...(http://www.w3.org/1999/02/22-rdf-syntax-ns#type)&gt;&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>In addition to these namespaces, Talia3 offers two configuration
+specific namespace helpers, LOCAL and CONTEXTS.</p></div>
+<div class="listingblock">
+<div class="title">Generating a local URI</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;Talia3::N::LOCAL.uri =&gt;
+# =&gt; #&lt;RDF::URI:...(http://localhost:3000/uri)&gt;&lt;/tt&gt;</pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Generate a URI suitable for a context</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;Talia3::N::CONTEXTS.public
+# =&gt; #&lt;RDF::URI:...(http://localhost:3000/contexts/public)&gt;
+
+Talia3::N::CONTEXTS.ontology
+# =&gt; #&lt;RDF::URI:...(http://localhost:3000/contexts/ontology)&gt;&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>Context URIs are useful to organize data in a RDF store. Talia3 allows
+to redefine two contexts, "public" and "context" in the
+<tt>config/talia3.yml</tt> file:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;contexts:
+  # internal default to &quot;#{base_uri}public&quot;
+  public:
+  # internal default to &quot;#{base_uri}ontology&quot;
+  ontology:&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>You can redefine them by indicating the entire URI to use instead of
+the default.</p></div>
+<div class="paragraph"><p>More contextes will probably be added in the furure.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_statements_and_patterns">Statements and Patterns</h4>
+<div class="paragraph"><p>Statements and patterns are constructs inherited from the RDF.rb
+plugin. They allow to easily represent triples, quadruples and query
+patterns.</p></div>
+<div class="paragraph"><p>Even more interesting all methods that accept statements or patterns
+as a parameter also allow for an array of 3 or 4 URIs and will
+autogenerate an object of the right class for them internally.</p></div>
+<div class="paragraph"><p>If you are wondering what the fourth element in an array is: it is the
+<strong>context</strong> for the statement/pattern.</p></div>
+<div class="paragraph"><p>Some examples:</p></div>
+<div class="listingblock">
+<div class="title">Creating some statements</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;# All the following are treated the same way by Talia3 methods:
+statement = RDF::Statement.new(
+  Talia3::N::LOCAL.uri, RDF.type,
+  Talia3::N::EX.type1,
+  :context =&gt; Talia3::N::CONTEXTS.public
+)
+
+array_statement = [
+  Talia3::N::LOCAL.uri,
+  RDF.type,
+  Talia3::N::EX.type1,
+  Talia3::N::CONTEXTS.public
+]
+
+statement_from_array = RDF::Statement.from array_statement&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>Patters are statements that also accept nil and a symbol as one of
+their values. Patterns are used to query any statent container (like a
+repository).</p></div>
+<div class="listingblock">
+<div class="title">Creating some patterns</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;# All the following are treated the same way by Talia3 methods:
+pattern = RDF::Query::Pattern.new(
+  Talia3::N::LOCAL.uri, RDF.type,
+  nil,
+  :context =&gt; Talia3::N::CONTEXTS.public
+)
+
+array_pattern = [
+  Talia3::N::LOCAL.uri,
+  RDF.type,
+  nil,
+  Talia3::N::CONTEXTS.public
+]
+
+pattern_from_array = RDF::Query::Pattern.from array_pattern&lt;/tt&gt;</pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">The null (default) context is set by using nil as value or not
+passing anything.</td>
+</tr></table>
+</div>
+<div class="listingblock">
+<div class="title">Querying from a pattern</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;Talia3.repository.query([Talia3::N::LOCAL.uri, nil, nil])&lt;/tt&gt;</pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Results of a repository query are statements</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;results = Talia3.repository.query([Talia3::N::LOCAL.uri, nil, nil])
+results.each do |result|
+  pp result
+end
+# =&gt; #&lt;RDF::Statement:...(&lt;http://localhost:3000/uri&gt; &lt;http://purl.org/dc/terms/name&gt; URI .)&gt;
+# =&gt; #&lt;RDF::Statement:0x4a5304e(&lt;http://localhost:3000/uri&gt; &lt;http://purl.org/dc/terms/description&gt; URI description .)&gt;&lt;/tt&gt;</pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Accessing a statement values</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;statement = RDF::Statement.new(
+  Talia3::N::LOCAL.uri, RDF.type,
+  Talia3::N::EX.type1,
+  :context =&gt; Talia3::N::CONTEXTS.public
+)
+
+statement.subject
+statement.predicate
+statement.object
+statement.context&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>The same methods apply to patterns.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_resource">Resource</h4>
+<div class="paragraph"><p>A Talia3 resource is an object that can contain and operate on
+statements, has a context and some repositories. It also works
+mostly(*) with statements related to a specific URI.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">(*) While when loading data from a store only those statements are
+  fetched, you can always add any statement you want and save them,
+  for example, even if those statements have nothing to do with your
+  URI. This actually considered a desired feature.</td>
+</tr></table>
+</div>
+<div class="listingblock">
+<div class="title">A Talia3::Resource object should always be initialized with a URI</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;resource = Talia3::Resource.new(Talia3::N::LOCAL.uri)&lt;/tt&gt;</pre>
+</div></div>
+<div class="listingblock">
+<div class="title">By default it has context :public and uses the :local repository</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;resource.context
+# =&gt; #&lt;RDF::URI:...(http://localhost:3000/contexts/public)&gt;
+
+resource.repository
+# =&gt; #&lt;RDF::Sesame::Repository:...(http://localhost:8080/openrdf-sesame/repositories/talia3)&gt;&lt;/tt&gt;</pre>
+</div></div>
+<div class="listingblock">
+<div class="title">You can change the context</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;resource.context = :ontology)
+resource.context = Talia3::N::LOCAL.whatever
+resource.context = :null&lt;/tt&gt;</pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">Use :null instead of nil to use the default context.</td>
+</tr></table>
+</div>
+<div class="listingblock">
+<div class="title">You can change the repository used&#8230;</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;resource.use_repository :repository2
+# =&gt; Exception: Repository repository2 not declared for this object.&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>... but of course you must have it declared in config/talia3.yml&#8230;</p></div>
+<div class="paragraph"><p>(and the repository must exist in Sesame)</p></div>
+<div class="listingblock">
+<div class="title">Adding a new repository to the configuration</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;...
+repositories:
+  development:
+    local:
+      type: sesame
+      location: http://localhost:8080/openrdf-sesame/repositories/talia3
+    repository2:
+      type: sesame
+      location: http://localhost:8080/openrdf-sesame/repositories/talia3_2
+  ...
+...&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>... and the repository must be declared usable by the resource</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;resource.repositories.defined?(:repository2)
+# =&gt; true
+
+resource.repositories &lt;&lt; :repository2
+
+resource.repositories.include?(:respository2)
+# =&gt; true
+
+resource.use_repository :repository2&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>All these options can also be set when the resource is created:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;uri = Talia3::N::LOCAL.uri
+options = {
+  :context      =&gt; :ontology,
+  :repositories =&gt; [:repository2],
+  :repository   =&gt; :repository2
+}
+
+resource = Talia3::Resource.new(uri, options)&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>The best way to set new context and repositories to objects is to
+create a new class extending Talia3::Resource:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;class MyResource &lt; Talia3::Resource
+  set_context :ontology
+  add_repository :repository2
+
+  def initialize((uri=nil, options={})
+    use_repository(:repository2)
+  end
+end
+
+resource = MyResource.new(Talia3::N::LOCAL.uri)&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p><strong>Loading</strong></p></div>
+<div class="paragraph"><p>When loading a resource, only those statements that have the resource
+URI as either subject or object are loaded.</p></div>
+<div class="paragraph"><p>Please note that only statements with the correct context will be
+fetched.</p></div>
+<div class="listingblock">
+<div class="title">Loading a resource</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;resource = Talia3::Resource.new(uri).load!
+
+# this does the same thing:
+resource = Talia3::Resource.for(uri)&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>The following will save any statement currently held by the resource:</p></div>
+<div class="listingblock">
+<div class="title">Saving a resource</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;resource.save!&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>The following will delete from the store any statement that are
+contained in the resource. The statements are <strong>not</strong> removed from the
+resource itself.</p></div>
+<div class="listingblock">
+<div class="title">Deleting statements from the repositories</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;resource.delete!&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>There is also a method to delete from the store any statement that is
+"around" the current URI. Note that this does not consider statements
+present in the resource.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;# Note how we don't need to load:
+Talia3::Resource.new(uri).cleanse_uri!&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>On the same line you can delete from a store all statements in the
+same context as the resource:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;Talia3::Resource.new(uri).cleanse_context!&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>A resource is a statement container, which means that you can access
+and modify its statements:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;resource = Talia3::Resource.for(uri)
+
+# Add the statement
+resource &lt;&lt; [uri, Talia3::N::RDFS.label, 'URI label']
+
+# Remove the statement
+resource - [uri, Talia3::N::RDFS.label, 'URI label']
+
+# Interrogate the repository
+result = resource.query([uri, nil, nil])
+result.size
+result.each do |statement|
+ pp statement
+end
+
+# Clear all statements from the resource
+resource.clear&lt;/tt&gt;</pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">all operators that work with a statement will work with another
+resource, on the basis that we want to repeat the same operation for
+every statement of the second resource.</td>
+</tr></table>
+</div>
+<div class="listingblock">
+<div class="title">Operations between resources</div>
+<div class="content">
+<pre class="code">&lt;tt&gt;resource1 &lt;&lt; resource2
+# equivalent to resource.each {|s| resource1 &lt;&lt; s}
+
+resource1 + resource2
+# equivalent to resource.each {|s| resource1 &lt;&lt; s}
+
+resource1 - resource2
+# equivalent to resource.each {|s| resource1 - s}&lt;/tt&gt;</pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">When adding statements, the inserted statements context will be
+  automatically changed to the resource context.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Talia3 resources also have a method to quickly access the objects of
+all stamentents that have <tt>uri</tt> has subject and the given predicate:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;resource[Talia3::N::DC.name]
+# =&gt; [#&lt;RDF::Literal:0x48d4060(&quot;URI&quot;)&gt;]&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>Note that the method returns an array of values: being this a RDF
+resource we always assume that more than one value is possible. Even
+when working with strings we must expect more than one result, one per
+language.</p></div>
+<div class="paragraph"><p><strong>Advanced loading</strong></p></div>
+<div class="paragraph"><p>One interesting feature of the resource is the possibility to change
+the meaning of "around" our URI: as we have seen, by default the
+resource will grab all statements that have the resource&#8217;s uri as
+either subject or object.</p></div>
+<div class="paragraph"><p>We can change this behaviour by the :direction and :depth
+options. :depth can be either 1 or 2, :direction can be one of :left,
+:right or :both.</p></div>
+<div class="paragraph"><p>These options can be set in various ways:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+At initialization time
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;Talia3::Resource.new(uri, :direction =&gt; :right, :depth =&gt; 2)
+Talia3::Resource.for(uri, :direction =&gt; :right, :depth =&gt; 2)&lt;/tt&gt;</pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+During the life cycle of the object
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;resource = Talia3::Resource.new(uri)
+resource.direction = :right
+resource.depth = 2&lt;/tt&gt;</pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Only for the duration of one load operation, as options for <tt>load!</tt>
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;resource = Talia3::Resource.new(uri)
+resource.load!(:direction =&gt; :right, :depth =&gt; 2)&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p><strong>:direction</strong> allows to load statements that are related to the
+#resource uri only by having it as subject (:right) or object
+(:left). :both is the default and we have seen its behaviour.</p></div>
+<div class="paragraph"><p><strong>:depth</strong> if its value is 2 the <tt>load!</tt> operation will fetch more
+statements, including those related to the resource URI through
+another statement, in a valid direction.</p></div>
+<div class="paragraph"><p>For example, let&#8217;s say that a repository contains the following
+statements:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;# Note the public context
+Talia3.repository.insert(
+  [Talia3::N::LOCAL.uri1, RDF.type, Talia3::N::EX.type1, Talia3::N::CONTEXTS.public],
+  [Talia3::N::LOCAL.uri1, Talia3::N::DC.name, &quot;name&quot;, Talia3::N::CONTEXTS.public],
+  [Talia3::N::LOCAL.uri2, RDF.type, Talia3::N::EX.type2, Talia3::N::CONTEXTS.public],
+  [Talia3::N::LOCAL.uri2, Talia3::N::EX.relation, Talia3::N::LOCAL.uri1, Talia3::N::CONTEXTS.public]
+)&lt;/tt&gt;</pre>
+</div></div>
+<div class="paragraph"><p>Here&#8217;s what different values for <tt>:depth' and `:direction</tt> would
+return:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="code">&lt;tt&gt;Talia3::Resource.for(Talia3::N::LOCAL.uri1, :direction =&gt; :right)
+# [Talia3::N::LOCAL.uri1, RDF.type, Talia3::N::EX.type1]
+# [Talia3::N::LOCAL.uri1, Talia3::N::DC.name, &quot;name&quot;]
+
+Talia3::Resource.for(Talia3::N::LOCAL.uri1, :direction =&gt; :left)
+# [Talia3::N::LOCAL.uri2, Talia3::N::EX.relation, Talia3::N::LOCAL.uri1]
+
+Talia3::Resource.for(Talia3::N::LOCAL.uri1, :depth =&gt; 2)
+# [Talia3::N::LOCAL.uri1, RDF.type, Talia3::N::EX.type1]
+# [Talia3::N::LOCAL.uri1, Talia3::N::DC.name, &quot;name&quot;]
+# [Talia3::N::LOCAL.uri2, RDF.type, Talia3::N::EX.type2]
+# [Talia3::N::LOCAL.uri2, Talia3::N::EX.relation, Talia3::N::LOCAL.uri1]
+# Note how the fourth statement is related to our uri through the third&lt;/tt&gt;</pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">values of :depth greater then two are not allowed, for efficiency reasons.</td>
+</tr></table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_talia3_activemodel_resources">Talia3 ActiveModel Resources</h3>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">TODO</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Copyright (c) 2010 Net7 SRL, <a href="http://www.netseven.it/">http://www.netseven.it/</a></p></div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Version 0.0.1<br />
+Last updated 2011-05-05 15:45:07 CEST
+</div>
+</div>
+</body>
+</html></div></div>
+    
+    <div id="footer">
+  Generated on Thu Aug 25 17:54:19 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

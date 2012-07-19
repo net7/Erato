@@ -1,0 +1,27 @@
+<% #FIXME: refactoring %>
+<% q = controller.send :querystring %>
+
+<% exclude = local_assigns[:exclude] || []%>
+<% attributes.each do |attribute| %>
+<%   unless exclude.include? attribute %>
+  <tr/>
+    <td width="20%">
+      <% property_label = talia3_resource_property_label record, attribute %>
+      <span title="<%= attribute.to_uri.to_s%>"><%= property_label %></span>
+      <% if (property_object_type = record.property_object_type attribute).present? %>
+      <%   property_object_type = property_object_type.to_uri%>
+      <br/>
+      <a class="record_new_resource"
+         target="_blank"
+         href="<%= talia3_universal_new_url(q.dup.tap {|q| q[:uri] = nil; q[:type] = property_object_type.to_s})%>"
+         title="New valid object for this property (<%=property_object_type.to_s%>)"
+         alt="New resource">
+        <img src="/images/add.png" class="type-separator"/></a>
+      <% end %>
+    </td>
+    <td>
+      <%= render :partial => 'talia3/universal/shared/attribute', :object => attribute, :locals => {:record => record, :errors => errors} %>
+    </td>
+  </tr>
+<%   end %>
+<% end %>

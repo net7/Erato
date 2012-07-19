@@ -1,0 +1,1647 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Talia3::Record
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (R)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Talia3.html" title="Talia3 (module)">Talia3</a></span></span>
+     &raquo; 
+    <span class="title">Record</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Talia3::Record
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="Resource.html" title="Talia3::Resource (class)">Resource</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="Resource.html" title="Talia3::Resource (class)">Resource</a></span></li>
+          
+            <li class="next">Talia3::Record</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+      <dt class="r2">Extended by:</dt>
+      <dd class="r2">ActiveModel::Callbacks</dd>
+      
+    
+  
+    
+      <dt class="r1">Includes:</dt>
+      <dd class="r1">ActiveModel::Dirty, ActiveModel::Validations, <span class='object_link'><a href="Record/ActiveModelImplementation.html" title="Talia3::Record::ActiveModelImplementation (module)">ActiveModelImplementation</a></span>, <span class='object_link'><a href="Record/ActiveRecordImplementation.html" title="Talia3::Record::ActiveRecordImplementation (module)">ActiveRecordImplementation</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/models/talia3/record.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+description and examples here.
+</p>
+</div>
+  </div>
+
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+remember ActiveModel stuff: Dirty, Validations, callbacks and so on.
+</p>
+</div>
+  </div>
+
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+note how #[] and #[]= are different because #attribute and #set_attribute
+are rewritten.
+</p>
+</div>
+  </div>
+
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+A record <b>requires</b> a uri before you can read or write attributes, it
+this a problem for ActiveModel?
+</p>
+</div>
+  </div>
+
+
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+ActiveModel::AttributeMethods uses some of the same tricks and methods that
+I use for dynamic attributes. For this reason, Talia3::Record **does not**
+support ActiveModel::AttributeMethods as its features are overwritten by
+Talia3&#8217;s.
+</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+On the same note, ActiveModel::Dirty features might not work 100% correctly
+as its interface with ActiveModel::AttributeMethods had to be rewritten and
+something could have been missed.
+</p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+   
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Record/ActiveModelImplementation.html" title="Talia3::Record::ActiveModelImplementation (module)">ActiveModelImplementation</a></span>, <span class='object_link'><a href="Record/ActiveRecordImplementation.html" title="Talia3::Record::ActiveRecordImplementation (module)">ActiveRecordImplementation</a></span>
+    
+   
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Record/Relation.html" title="Talia3::Record::Relation (class)">Relation</a></span>
+    
+  
+</p>
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h2>Instance Attribute Summary</h2>
+  
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="Record/ActiveModelImplementation.html" title="Talia3::Record::ActiveModelImplementation (module)">ActiveModelImplementation</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Record/ActiveModelImplementation.html#errors-instance_method" title="Talia3::Record::ActiveModelImplementation#errors (method)">errors</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="Resource.html" title="Talia3::Resource (class)">Resource</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Resource.html#options-instance_method" title="Talia3::Resource#options (method)">options</a></span>, <span class='object_link'><a href="Resource.html#uri-instance_method" title="Talia3::Resource#uri (method)">uri</a></span></p>
+
+  
+  
+  
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create-class_method" title="create (class method)">+ (Object) <strong>create</strong>(attributes) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#from_type-class_method" title="from_type (class method)">+ (Object) <strong>from_type</strong>(type) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#model_name-class_method" title="model_name (class method)">+ (Object) <strong>model_name</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#table_name-class_method" title="table_name (class method)">+ (String) <strong>table_name</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns a ActiveRecord-like table name for this class.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create-instance_method" title="#create (instance method)">- (Object) <strong>create</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete-instance_method" title="#delete (instance method)">- (Object) <strong>delete</strong> </a>
+    
+
+    
+      (also: #destroy)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#id-instance_method" title="#id (instance method)">- (Object) <strong>id</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Talia3::Record) <strong>initialize</strong>(uri_or_params = nil, options = nil) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new Record object.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#respond_to%3F-instance_method" title="#respond_to? (instance method)">- (Boolean) <strong>respond_to?</strong>(method) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Adds dynamic methods to the list of methods an instance responds to.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save-instance_method" title="#save (instance method)">- (Talia3::Record) <strong>save</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Saves the record.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_attribute-instance_method" title="#set_attribute (instance method)">- (Object) <strong>set_attribute</strong>(name, value) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Sets an attribute value, overwriting existing values.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type-instance_method" title="#type (instance method)">- (RDF::URI, Talia3::RDF::OWL.thing) <strong>type</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns a single type URI for this resource.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update%21-instance_method" title="#update! (instance method)">- (Talia3::Record) <strong>update!</strong> </a>
+    
+
+    
+      (also: #update)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Updates the record.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_attributes-instance_method" title="#update_attributes (instance method)">- (Object) <strong>update_attributes</strong>(attributes) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#uri-instance_method" title="#uri (instance method)">- (Object) <strong>uri</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Basic validations for records.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Record/ActiveRecordImplementation.html" title="Talia3::Record::ActiveRecordImplementation (module)">ActiveRecordImplementation</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Record/ActiveRecordImplementation.html#attributes%3D-instance_method" title="Talia3::Record::ActiveRecordImplementation#attributes= (method)">#attributes=</a></span>, <span class='object_link'><a href="Record/ActiveRecordImplementation.html#included-class_method" title="Talia3::Record::ActiveRecordImplementation.included (method)">included</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Record/ActiveModelImplementation.html" title="Talia3::Record::ActiveModelImplementation (module)">ActiveModelImplementation</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Record/ActiveModelImplementation.html#attributes-instance_method" title="Talia3::Record::ActiveModelImplementation#attributes (method)">#attributes</a></span>, <span class='object_link'><a href="Record/ActiveModelImplementation.html#read_attribute_for_validation-instance_method" title="Talia3::Record::ActiveModelImplementation#read_attribute_for_validation (method)">#read_attribute_for_validation</a></span>, <span class='object_link'><a href="Record/ActiveModelImplementation.html#to_key-instance_method" title="Talia3::Record::ActiveModelImplementation#to_key (method)">#to_key</a></span>, <span class='object_link'><a href="Record/ActiveModelImplementation.html#to_model-instance_method" title="Talia3::Record::ActiveModelImplementation#to_model (method)">#to_model</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Resource.html" title="Talia3::Resource (class)">Resource</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Resource.html#%5B%5D-instance_method" title="Talia3::Resource#[] (method)">#[]</a></span>, <span class='object_link'><a href="Resource.html#%5B%5D%3D-instance_method" title="Talia3::Resource#[]= (method)">#[]=</a></span>, <span class='object_link'><a href="Resource.html#all_properties-instance_method" title="Talia3::Resource#all_properties (method)">#all_properties</a></span>, <span class='object_link'><a href="Resource.html#attribute-instance_method" title="Talia3::Resource#attribute (method)">#attribute</a></span>, <span class='object_link'><a href="Resource.html#delete%21-instance_method" title="Talia3::Resource#delete! (method)">#delete!</a></span>, <span class='object_link'><a href="Resource.html#depth%3D-instance_method" title="Talia3::Resource#depth= (method)">#depth=</a></span>, <span class='object_link'><a href="Resource.html#direction%3D-instance_method" title="Talia3::Resource#direction= (method)">#direction=</a></span>, <span class='object_link'><a href="Resource.html#for-class_method" title="Talia3::Resource.for (method)">for</a></span>, <span class='object_link'><a href="Resource.html#from_lod-class_method" title="Talia3::Resource.from_lod (method)">from_lod</a></span>, <span class='object_link'><a href="Resource.html#from_sparql-class_method" title="Talia3::Resource.from_sparql (method)">from_sparql</a></span>, <span class='object_link'><a href="Resource.html#inspect-instance_method" title="Talia3::Resource#inspect (method)">#inspect</a></span>, <span class='object_link'><a href="Resource.html#inverse_properties-instance_method" title="Talia3::Resource#inverse_properties (method)">#inverse_properties</a></span>, <span class='object_link'><a href="Resource.html#label-instance_method" title="Talia3::Resource#label (method)">#label</a></span>, <span class='object_link'><a href="Resource.html#load%21-instance_method" title="Talia3::Resource#load! (method)">#load!</a></span>, <span class='object_link'><a href="Resource.html#persisted%3D-instance_method" title="Talia3::Resource#persisted= (method)">#persisted=</a></span>, <span class='object_link'><a href="Resource.html#persisted%3F-instance_method" title="Talia3::Resource#persisted? (method)">#persisted?</a></span>, <span class='object_link'><a href="Resource.html#raw-instance_method" title="Talia3::Resource#raw (method)">#raw</a></span>, <span class='object_link'><a href="Resource.html#raw_set-instance_method" title="Talia3::Resource#raw_set (method)">#raw_set</a></span>, <span class='object_link'><a href="Resource.html#raw_set_inverse-instance_method" title="Talia3::Resource#raw_set_inverse (method)">#raw_set_inverse</a></span>, <span class='object_link'><a href="Resource.html#save%21-instance_method" title="Talia3::Resource#save! (method)">#save!</a></span>, <span class='object_link'><a href="Resource.html#type-class_method" title="Talia3::Resource.type (method)">type</a></span>, <span class='object_link'><a href="Resource.html#type%3D-instance_method" title="Talia3::Resource#type= (method)">#type=</a></span>, <span class='object_link'><a href="Resource.html#undefined_properties-instance_method" title="Talia3::Resource#undefined_properties (method)">#undefined_properties</a></span></p>
+
+  
+  
+  
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Talia3::Record (class)">Talia3::Record</a></span></tt>) <strong>initialize</strong>(uri_or_params = nil, options = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+Possibly change arguments so that you can use new(&lt;b&gt;attributes&lt;/b&gt;)?
+</p>
+</div>
+  </div>
+
+
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+You probably won&#8217;t want to use this method, but use the dynamic class
+generation feature of Talia3.
+</p>
+</div>
+  </div>
+
+<p>
+Creates a new Record object.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uri_or_param</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>, <tt><span class='object_link'><a href="URI.html" title="Talia3::URI (class)">Talia3::URI</a></span></tt>, <tt>RDF::URI</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the resource URI or an hash of values to set.
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+<b>ignored</b>
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/record.rb', line 84</span>
+
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id uri_or_params'>uri_or_params</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='ivar'>@errors</span> <span class='op'>=</span> <span class='const'>ActiveModel</span><span class='op'>::</span><span class='const'>Errors</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
+  <span class='comment'># TODO: use this somehow if present? Atm just avoiding it to generate an error.
+</span>  <span class='id uri_or_params'>uri_or_params</span><span class='period'>.</span><span class='id delete'>delete</span> <span class='symbol'>:type</span> <span class='kw'>if</span> <span class='id uri_or_params'>uri_or_params</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
+  <span class='id new_uri'>new_uri</span> <span class='op'>=</span> <span class='id uri_or_params'>uri_or_params</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id uri_or_params'>uri_or_params</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:uri</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id uri_or_params'>uri_or_params</span>
+  <span class='kw'>super</span> <span class='id make_uri'>make_uri</span><span class='lparen'>(</span><span class='id new_uri'>new_uri</span><span class='rparen'>)</span>
+  <span class='id fill_from_params'>fill_from_params</span><span class='lparen'>(</span><span class='id uri_or_params'>uri_or_params</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id uri_or_params'>uri_or_params</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+<div id="method_missing_details" class="method_details_list">
+  <h2>Dynamic Method Handling</h2>
+  <p class="notice this">
+    This class handles dynamic methods through the <tt>method_missing</tt> method
+    
+  </p>
+  
+    <div class="method_details first">
+  <p class="signature first" id="method_missing-instance_method">
+  
+    - (<tt>Object</tt>) <strong>method_missing</strong>(*args)  <span class="extras">(private)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+There <b>MUST</b> be a better way to write this&#8230; Refactor!
+</p>
+</div>
+  </div>
+
+<p>
+Modified &#8220;method missing&#8221; handling that allows for dynamic
+attributes.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/record.rb', line 248</span>
+
+<span class='kw'>def</span> <span class='id method_missing'>method_missing</span><span class='lparen'>(</span><span class='op'>*</span><span class='id args'>args</span><span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id args'>args</span><span class='period'>.</span><span class='id size'>size</span>
+  <span class='kw'>when</span> <span class='int'>1</span>
+    <span class='kw'>return</span> <span class='id attribute'>attribute</span> <span class='id args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>                                    <span class='kw'>if</span> <span class='id attributes'>attributes</span><span class='period'>.</span><span class='id include?'>include?</span> <span class='id args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+    <span class='kw'>return</span> <span class='id attribute_changed?'>attribute_changed?</span> <span class='id args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>..</span><span class='op'>-</span><span class='int'>10</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_sym'>to_sym</span>       <span class='kw'>if</span> <span class='id args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_s'>to_s</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>_changed\?$</span><span class='regexp_end'>/</span></span>
+    <span class='kw'>return</span> <span class='id attribute_change'>attribute_change</span> <span class='id args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>..</span><span class='op'>-</span><span class='int'>8</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_sym'>to_sym</span>          <span class='kw'>if</span> <span class='id args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_s'>to_s</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>_change$</span><span class='regexp_end'>/</span></span>
+    <span class='kw'>return</span> <span class='id attribute_was'>attribute_was</span> <span class='id args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>..</span><span class='op'>-</span><span class='int'>5</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_sym'>to_sym</span>             <span class='kw'>if</span> <span class='id args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_s'>to_s</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>_was$</span><span class='regexp_end'>/</span></span>
+    <span class='kw'>return</span> <span class='id reset_attribute'>reset_attribute</span> <span class='id args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='lbracket'>[</span><span class='int'>6</span><span class='op'>..</span><span class='id args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id size'>size</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_sym'>to_sym</span> <span class='kw'>if</span> <span class='id args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_s'>to_s</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^reset_</span><span class='regexp_end'>/</span></span>
+  <span class='kw'>when</span> <span class='int'>2</span>
+    <span class='kw'>if</span> <span class='id args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_s'>to_s</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>=$</span><span class='regexp_end'>/</span></span> <span class='kw'>and</span> <span class='id attributes'>attributes</span><span class='period'>.</span><span class='id include?'>include?</span> <span class='id args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>..</span><span class='op'>-</span><span class='int'>2</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_sym'>to_sym</span>
+      <span class='id set_attribute'>set_attribute</span> <span class='id args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>..</span><span class='op'>-</span><span class='int'>2</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_sym'>to_sym</span><span class='comma'>,</span> <span class='id args'>args</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
+      <span class='kw'>return</span> <span class='id args'>args</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='op'>*</span><span class='id args'>args</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="create-class_method">
+  
+    + (<tt>Object</tt>) <strong>create</strong>(attributes) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Exception</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+97
+98
+99
+100</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/record.rb', line 97</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id create'>create</span><span class='lparen'>(</span><span class='id attributes'>attributes</span><span class='rparen'>)</span>
+  <span class='id raise'>raise</span> <span class='const'>Exception</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No type for this class</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id type'>type</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id from_type'>from_type</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id type'>type</span><span class='rparen'>)</span><span class='period'>.</span><span class='id fill_from_params'>fill_from_params</span> <span class='id attributes'>attributes</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="from_type-class_method">
+  
+    + (<tt>Object</tt>) <strong>from_type</strong>(type) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+93
+94
+95</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/record.rb', line 93</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id from_type'>from_type</span><span class='lparen'>(</span><span class='id type'>type</span><span class='rparen'>)</span>
+  <span class='id eval'>eval</span><span class='lparen'>(</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>URI</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id type'>type</span><span class='rparen'>)</span><span class='period'>.</span><span class='id to_class_name'>to_class_name</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="model_name-class_method">
+  
+    + (<tt>Object</tt>) <strong>model_name</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+See if this can be moved in record/active_model_implementation.rb
+</p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44
+45
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/record.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id model_name'>model_name</span>
+  <span class='kw'>unless</span> <span class='id type'>type</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+    <span class='ivar'>@_model_name</span> <span class='op'>||=</span> <span class='const'>ActiveModel</span><span class='op'>::</span><span class='const'>Name</span><span class='period'>.</span><span class='id new'>new</span> <span class='const'>Struct</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:name</span><span class='rparen'>)</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id type'>type</span><span class='period'>.</span><span class='id to_class_name'>to_class_name</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='kw'>super</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="table_name-class_method">
+  
+    + (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>table_name</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns a ActiveRecord-like table name for this class.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+Works with dynamic classes as well:
+</p>
+</div></h4>
+      <pre class="example code"><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>FOAF</span><span class='op'>::</span><span class='const'>Person</span><span class='period'>.</span><span class='id table_name'>table_name</span>
+<span class='comment'>#=&gt; &quot;foaf_person&quot;</span></pre>
+    
+  </div>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+60
+61
+62</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/record.rb', line 60</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id table_name'>table_name</span>
+  <span class='lparen'>(</span><span class='id name'>name</span><span class='period'>.</span><span class='id underscore'>underscore</span><span class='period'>.</span><span class='id split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>/</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='int'>1</span><span class='op'>..</span><span class='op'>-</span><span class='int'>1</span><span class='rbracket'>]</span> <span class='op'>*</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>_</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id to_sym'>to_sym</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="create-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+132
+133
+134
+135</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/record.rb', line 132</span>
+
+<span class='kw'>def</span> <span class='id create'>create</span>
+  <span class='id run_callbacks'>run_callbacks</span> <span class='symbol'>:create</span> <span class='kw'>do</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="delete-instance_method">
+  
+    - (<tt>Object</tt>) <strong>delete</strong> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='destroy-instance_method'>destroy</span></span>
+    </span>
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+174
+175
+176
+177
+178</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/record.rb', line 174</span>
+
+<span class='kw'>def</span> <span class='id delete'>delete</span>
+  <span class='id run_callbacks'>run_callbacks</span> <span class='symbol'>:delete</span> <span class='kw'>do</span>
+    <span class='id delete!'>delete!</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="id-instance_method">
+  
+    - (<tt>Object</tt>) <strong>id</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+118
+119
+120</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/record.rb', line 118</span>
+
+<span class='kw'>def</span> <span class='id id'>id</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id to_key'>to_key</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='op'>?</span> <span class='kw'>nil</span> <span class='op'>:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id to_key'>to_key</span><span class='period'>.</span><span class='id first'>first</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="respond_to?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>respond_to?</strong>(method) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Adds dynamic methods to the list of methods an instance responds to.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>method</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+188
+189
+190
+191</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/record.rb', line 188</span>
+
+<span class='kw'>def</span> <span class='id respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id method'>method</span><span class='rparen'>)</span>
+  <span class='id method'>method</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id method'>method</span><span class='period'>.</span><span class='id to_s'>to_s</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>=$</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id method'>method</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>..</span><span class='op'>-</span><span class='int'>2</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_sym'>to_sym</span> <span class='op'>:</span> <span class='id method'>method</span>
+  <span class='kw'>super</span> <span class='id method'>method</span> <span class='kw'>or</span> <span class='id attributes'>attributes</span><span class='period'>.</span><span class='id include?'>include?</span> <span class='id method'>method</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="save-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Talia3::Record (class)">Talia3::Record</a></span></tt>) <strong>save</strong>(options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+implement options (validations for one).
+</p>
+</div>
+  </div>
+
+<p>
+Saves the record.
+</p>
+<p>
+Implements callbacks and ActiveModel::Dirty#previous_changes.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+optional TODO!
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Talia3::Record (class)">Talia3::Record</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+self
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Talia3::Resource#save</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+146
+147
+148
+149
+150
+151
+152
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/record.rb', line 146</span>
+
+<span class='kw'>def</span> <span class='id save'>save</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id run_callbacks'>run_callbacks</span> <span class='symbol'>:save</span> <span class='kw'>do</span>
+    <span class='ivar'>@previously_changed</span> <span class='op'>=</span> <span class='id changes'>changes</span>
+    <span class='ivar'>@changed_attributes</span><span class='period'>.</span><span class='id clear'>clear</span>
+    <span class='id save!'>save!</span>
+  <span class='kw'>end</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="set_attribute-instance_method">
+  
+    - (<tt>Object</tt>) <strong>set_attribute</strong>(name, value) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Sets an attribute value, overwriting existing values.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>RDF::URI</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt><span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>, <tt>Array&lt;Object&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The value argument.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+110
+111
+112
+113
+114
+115
+116</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/record.rb', line 110</span>
+
+<span class='kw'>def</span> <span class='id set_attribute'>set_attribute</span><span class='lparen'>(</span><span class='id name'>name</span><span class='comma'>,</span> <span class='id value'>value</span><span class='rparen'>)</span>
+  <span class='id name'>name</span> <span class='op'>=</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>URI</span><span class='period'>.</span><span class='id new'>new</span> <span class='id name'>name</span>
+  <span class='kw'>if</span> <span class='id attributes'>attributes</span><span class='period'>.</span><span class='id include?'>include?</span><span class='lparen'>(</span><span class='id name'>name</span><span class='period'>.</span><span class='id to_key'>to_key</span><span class='rparen'>)</span> <span class='kw'>and</span> <span class='kw'>not</span> <span class='id attribute'>attribute</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span> <span class='op'>==</span> <span class='id value'>value</span>
+    <span class='id attribute_will_change!'>attribute_will_change!</span> <span class='id name'>name</span><span class='period'>.</span><span class='id to_key'>to_key</span>
+  <span class='kw'>end</span>
+  <span class='kw'>super</span> <span class='id name'>name</span><span class='comma'>,</span> <span class='id value'>value</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="type-instance_method">
+  
+    - (<tt>RDF::URI</tt>, <tt>Talia3::RDF::OWL.thing</tt>) <strong>type</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+configurable main type
+</p>
+</div>
+  </div>
+
+<p>
+Returns a single type URI for this resource.
+</p>
+<p>
+Required to implement the `HasSchema` behaviour. The default is the first
+rdf:type from the resource RDF, or Talia3::N::OWL.Thing.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RDF::URI</tt>, <tt>Talia3::RDF::OWL.thing</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>HasSchema</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+127
+128
+129
+130</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/record.rb', line 127</span>
+
+<span class='kw'>def</span> <span class='id type'>type</span>
+  <span class='kw'>return</span> <span class='ivar'>@type</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id type'>type</span> <span class='kw'>if</span> <span class='ivar'>@type</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='kw'>and</span> <span class='kw'>not</span> <span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span> <span class='op'>==</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>Record</span>
+  <span class='kw'>super</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="update!-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Talia3::Record (class)">Talia3::Record</a></span></tt>) <strong>update!</strong> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='update-instance_method'>update</span></span>
+    </span>
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Updates the record.
+</p>
+<p>
+As there is no difference between saved and updated records for
+Talia3::Records, this is the same as #save!. The distinction could be
+useful to use different callbacks though.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Talia3::Record (class)">Talia3::Record</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+self
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+164
+165
+166
+167
+168
+169
+170
+171</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/record.rb', line 164</span>
+
+<span class='kw'>def</span> <span class='id update!'>update!</span>
+  <span class='id run_callbacks'>run_callbacks</span> <span class='symbol'>:update</span> <span class='kw'>do</span>
+    <span class='ivar'>@previously_changed</span> <span class='op'>=</span> <span class='id changes'>changes</span>
+    <span class='ivar'>@changed_attributes</span><span class='period'>.</span><span class='id clear'>clear</span>
+    <span class='kw'>super</span>
+  <span class='kw'>end</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="update_attributes-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_attributes</strong>(attributes) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+102
+103
+104
+105</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/record.rb', line 102</span>
+
+<span class='kw'>def</span> <span class='id update_attributes'>update_attributes</span><span class='lparen'>(</span><span class='id attributes'>attributes</span><span class='rparen'>)</span>
+  <span class='id fill_from_params'>fill_from_params</span> <span class='id attributes'>attributes</span>
+  <span class='id save'>save</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="uri-instance_method">
+  
+    - (<tt>Object</tt>) <strong>uri</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+add uri format validation via Talia3::URI#valid?
+</p>
+</div>
+  </div>
+
+<p>
+Basic validations for records.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+71</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/record.rb', line 71</span>
+
+<span class='id validates'>validates</span> <span class='symbol'>:uri</span><span class='comma'>,</span> <span class='symbol'>:presence</span> <span class='op'>=&gt;</span> <span class='kw'>true</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Aug 25 17:54:21 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

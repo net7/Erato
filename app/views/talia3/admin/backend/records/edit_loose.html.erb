@@ -1,0 +1,100 @@
+<%= link_to "Backend", talia3_admin_backend_path %>
+<h2>Edit <%= @type.short%></h2>
+<table width="90%" border="1">
+<%= form_for @record, :as => :record, :url => talia3_record_path(@record.id) do |f| %>
+  <%= hidden_field_tag :type, @record.type.to_key %>
+  <tr>
+    <td width="20%"><%= f.label :uri %></td>
+    <td><%= @record.uri.to_s %></td>
+  </tr>
+  <% unless @record.properties.include? :rdfs__label %>
+  <tr>
+    <td width="20%"><%= label_tag "record[rdfs__label]", 'Label'  %></td>
+    <td><%= text_field_tag "record[rdfs__label]", @record.raw(:rdfs__label) %></td>
+  </tr>
+  <% end %>
+  <% @record.attributes.each do |attribute| %>
+  <% schema = @record.property_schema(attribute) %>
+    <tr>
+      <td width="20%"><%= f.label attribute %></td>
+      <td>
+      (<%= @record.attribute attribute %>)
+      <br/>
+      <% case schema[:type] %>
+      <% when :string %>
+      <%   if (values = @record.attribute attribute).is_a? Array %>
+      <%     values.each do |value|%>
+        <%= text_field_tag "record[#{attribute}]", value, :id => "record_#{attribute}"%>
+      <%     end %>
+      <%     if values.size.zero? %>
+      <%= f.text_field attribute, :value => "" %>
+      <%     end %>
+      <%   else %>
+        <%= f.text_field attribute %>
+      <%   end %>
+      <% when :object %>
+      <%   @values = @record.attribute(attribute) || [] %>
+        [<%= Talia3::URI.new(schema[:object_type]).short%>]
+        <br/>
+        <% options = Talia3::Record.class_for(schema[:object_type]).all.map do |p|
+             @values.delete p.id.to_sym
+             p.uri == @record.uri ? nil : [p.label, p.id]
+           end.compact %>
+        <%= f.select attribute, options, {}, :multiple => true %>
+        <br/>
+        <% options = @values.map do |o|
+              if Talia3::URI.valid_key? o
+                o = Talia3::Record.for(o)
+                if o.type.nil?
+                  [o, o]
+                else
+                  [o.uri.to_s, o.id]
+                end
+              elsif Talia3::URI.valid_string? o
+                [o, o]
+              else
+                nil
+              end
+          end.compact %>
+        <%= select_tag "record[#{attribute}_others]", options_for_select(options, @values), :multiple => true %>
+        <br/>
+        <br/>
+        <%= text_field_tag "record[#{attribute}_extra]", nil, :id => "record_#{attribute}_extra"%>
+      </td>
+      <% else %>
+      <td><%= @record.property_object_type(attribute).to_s %></td>
+    <% end%>
+    </tr>
+  <% end %>
+  <% (@record.undefined_properties - [:rdfs__label]).each do |property|%>
+  <% values = @record.attribute property %>
+  <% values = [values] unless values.is_a? Array %>
+  <tr>
+    <td>
+      <%= label_tag "record[#{property}]", Talia3::URI.new(property).short %>
+    </td>
+    <td>
+      <%= @record.attribute(property) %>
+      <% values.each do |v| %>
+      <br/><%= text_field_tag "record[#{property}][]", (v.is_a?(Symbol) ? v.to_uri.to_s : v.to_s) %>
+      <% end %>
+      <br/><%= text_field_tag "record[#{property}_extra]", nil, :id => "record_#{property}_extra"%>
+    </td>
+  </tr>
+  <% end %>
+  <tr>
+    <td>
+      <%= text_field_tag "attribute_name"%>
+    </td>
+    <td>
+      <%= text_field_tag "attribute_value"%>
+      <%= select_tag "attribute_value_type", options_for_select([[:string, "string"], [:uri, "uri"]]), :id => "attribute_value_type"%>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <%= f.submit %>
+    </td>
+  </tr>
+<% end %>
+</table>

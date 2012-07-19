@@ -1,0 +1,40 @@
+<%= link_to "Backend", talia3_admin_backend_path %>
+<h2>New <%= @type.short%></h2>
+<table width="90%" border="1">
+<%= form_for @record, :as => :record, :url => talia3_records_url do |f| %>
+  <%= hidden_field_tag :type, @type %>
+  <tr>
+    <td width="20%">*<%= f.label :uri %></td>
+    <td><%= f.text_field :uri %></td>
+  </tr>
+  <% @record.attributes.each do |attribute| %>
+  <% schema = @record.property_schema(attribute) %>
+    <tr>
+      <td width="20%"><%= f.label @record.property_label(attribute) %></td>
+      <% case schema[:type] %>
+      <% when :string, :email, :image %>
+      <td><%= f.text_field attribute %></td>
+      <% when :object %>
+      <td>
+        [<%= Talia3::URI.new(schema[:object_type]).short%>]
+        <br/>
+        <%= f.select attribute, 
+                     (Talia3::Record.class_for(schema[:object_type]).all.collect do |p|
+                       p.uri == @record.uri ? nil : [p.uri.to_s, p.id]
+                     end.compact || []),
+                     {}, :multiple => true %>
+        <br/>
+        <br/>
+      </td>
+      <% else %>
+      <td><%= @record.property_object_type(attribute).to_s %></td>
+    <% end%>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan="2">
+      <%= f.submit %>
+    </td>
+  </tr>
+<% end %>
+</table>

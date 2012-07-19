@@ -1,0 +1,1063 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Talia3::Mixin::HasRepositories
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (H)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../Talia3.html" title="Talia3 (module)">Talia3</a></span></span> &raquo; <span class='title'>Mixin</span>
+     &raquo; 
+    <span class="title">HasRepositories</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Talia3::Mixin::HasRepositories
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+    <dt class="r1">Included in:</dt>
+    <dd class="r1"><span class='object_link'><a href="../Ontology.html" title="Talia3::Ontology (class)">Ontology</a></span>, <span class='object_link'><a href="../Resource.html" title="Talia3::Resource (class)">Resource</a></span></dd>
+    
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/models/talia3/mixin/has_repositories.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+Add #import examples.
+</p>
+</div>
+  </div>
+
+<p>
+This mixin allows to associate repositories to a class and it&#8217;s
+objects.
+</p>
+<p>
+First of all the module adds methods to access Talia3 repository
+configuration directly:
+</p>
+<p>
+It also allows to associate repositories to an object and then declare
+which one is used for read/write operations:
+</p>
+<p>
+*<b>Warning</b>*: adding a repository that does not exist does not raises
+</p>
+<pre class="code">
+  and error. The error will be raised the first time the repository
+  is actually used with #use_repository
+</pre>
+<p>
+A class implementing this mixin can also have repositories. They can be
+used as default repositories for all new objects of that class. Also, the
+class has a default repository to use in all operations, this defaults to
+:local. This default repository will also be used by #use_repository if no
+name is specified.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+Checking if a repository name is present in the
+</p>
+</div></h4>
+      <pre class="example code">configuration:
+has_repositories.repositories.defined? :local
+=&gt; true</pre>
+    
+      <h4><div class='inline'><p>
+Getting all repository names from the configuration:
+</p>
+</div></h4>
+      <pre class="example code">has_repositories.repositories.defined
+=&gt; [:local, ...]</pre>
+    
+      <h4><div class='inline'><p>
+Add a repository:
+</p>
+</div></h4>
+      <pre class="example code"><span class='id has_repositories'>has_repositories</span><span class='period'>.</span><span class='id add_repository'>add_repository</span><span class='lparen'>(</span><span class='symbol'>:my_repo</span><span class='rparen'>)</span></pre>
+    
+      <h4><div class='inline'><p>
+Clear all repositories, except for the default :local one:
+</p>
+</div></h4>
+      <pre class="example code"><span class='id has_repositories'>has_repositories</span><span class='period'>.</span><span class='id clear_repositories'>clear_repositories</span></pre>
+    
+      <h4><div class='inline'><p>
+Get all repositories:
+</p>
+</div></h4>
+      <pre class="example code">has_repositories.repositories
+=&gt; #&lt;Talia3::Repositories:0x9522e08 @names=[:local, :my_repo]&gt;</pre>
+    
+      <h4><div class='inline'><p>
+Get all available repository names:
+</p>
+</div></h4>
+      <pre class="example code">has_repositories.repositories.names
+=&gt; [:local, :my_repo]</pre>
+    
+      <h4><div class='inline'><p>
+Check if a repository is available:
+</p>
+</div></h4>
+      <pre class="example code">has_repositories.repositories.include? :zzz
+=&gt; false</pre>
+    
+      <h4><div class='inline'><p>
+Set current repository:
+</p>
+</div></h4>
+      <pre class="example code"><span class='id has_repositories'>has_repositories</span><span class='period'>.</span><span class='id use_repository'>use_repository</span><span class='lparen'>(</span><span class='symbol'>:my_repo</span><span class='rparen'>)</span>
+<span class='comment'># The following is a low-level method that bypasses all checks,
+</span><span class='comment'># use with caution.
+</span><span class='id has_repositories'>has_repositories</span><span class='period'>.</span><span class='id repository'>repository</span> <span class='op'>=</span> <span class='const'>RDF</span><span class='op'>::</span><span class='const'>Repository</span><span class='period'>.</span><span class='id new'>new</span></pre>
+    
+      <h4><div class='inline'><p>
+Set the default repository to use:
+</p>
+</div></h4>
+      <pre class="example code"><span class='comment'># Setting a default repository also does a add_repository.
+</span>
+<span class='comment'># This is not needed:
+</span><span class='comment'># HasRepositoriesClass.add_repository :my_repo 
+</span><span class='const'>HasRepositoriesClass</span><span class='period'>.</span><span class='id default_repository'>default_repository</span> <span class='symbol'>:my_repo</span></pre>
+    
+      <h4><div class='inline'><p>
+Get the default repository name:
+</p>
+</div></h4>
+      <pre class="example code"><span class='const'>HasRepositoriesClass</span><span class='period'>.</span><span class='id default_repository'>default_repository</span>
+<span class='comment'># =&gt; :my_repo</span></pre>
+    
+      <h4><div class='inline'><p>
+You don&#8217;t need to do anything for an object to use the default
+repository:
+</p>
+</div></h4>
+      <pre class="example code"><span class='const'>HasRepositoriesClass</span><span class='period'>.</span><span class='id repository'>repository</span>
+<span class='comment'># =&gt; #&lt;RDF::Sesame::Repository:....&gt; # the :my_repo repository</span></pre>
+    
+      <h4><div class='inline'><p>
+HasRepositories#repositories and related examples work
+</p>
+</div></h4>
+      <pre class="example code">the same way for the class as for the object:
+
+HasRepositoriesClass.repositories
+=&gt; #&lt;Talia3::Repositories:0x9522e08 @names=[:local]&gt;</pre>
+    
+  </div>
+<h3>Author:</h3>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Riccardo Giomi <giomi@netseven.it>
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+   
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="HasRepositories/ClassMethods.html" title="Talia3::Mixin::HasRepositories::ClassMethods (module)">ClassMethods</a></span>
+    
+   
+    
+  
+</p>
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#included-class_method" title="included (class method)">+ (Object) <strong>included</strong>(base) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_repository-instance_method" title="#add_repository (instance method)">- (Talia3::Mixin::HasRepositories) <strong>add_repository</strong>(name) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Adds a repository by name for this object.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clear_repositories-instance_method" title="#clear_repositories (instance method)">- (Talia3::Mixin::HasRepositories) <strong>clear_repositories</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Clears all declared repositories.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_repository-instance_method" title="#get_repository (instance method)">- (RDF::Repository) <strong>get_repository</strong>(name = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns a repository by name.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#repositories-instance_method" title="#repositories (instance method)">- (Talia3::Repositories) <strong>repositories</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The object-specific repositories.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#repository-instance_method" title="#repository (instance method)">- (RDF::Repository) <strong>repository</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the active repository.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#repository%3D-instance_method" title="#repository= (instance method)">- (RDF::Repository) <strong>repository=</strong>(repository) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Sets the active repository.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_repository-instance_method" title="#use_repository (instance method)">- (RDF::Repository) <strong>use_repository</strong>(name = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Selects the active repository based on its name.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="included-class_method">
+  
+    + (<tt>Object</tt>) <strong>included</strong>(base) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/has_repositories.rb', line 85</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id included'>included</span><span class='lparen'>(</span><span class='id base'>base</span><span class='rparen'>)</span>
+  <span class='id base'>base</span><span class='period'>.</span><span class='id extend'>extend</span> <span class='const'>ClassMethods</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="add_repository-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Talia3::Mixin::HasRepositories (module)">Talia3::Mixin::HasRepositories</a></span></tt>) <strong>add_repository</strong>(name) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Adds a repository by name for this object.
+</p>
+<p>
+The name must be defined in the Talia3 configuration.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>repository</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>, <tt><span class='object_link'><a href="../../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+name in configuration
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Talia3::Mixin::HasRepositories (module)">Talia3::Mixin::HasRepositories</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+self (chainable)
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+265
+266
+267
+268</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/has_repositories.rb', line 265</span>
+
+<span class='kw'>def</span> <span class='id add_repository'>add_repository</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
+  <span class='id repositories'>repositories</span> <span class='op'>&lt;&lt;</span> <span class='id name'>name</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="clear_repositories-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Talia3::Mixin::HasRepositories (module)">Talia3::Mixin::HasRepositories</a></span></tt>) <strong>clear_repositories</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Clears all declared repositories.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Talia3::Mixin::HasRepositories (module)">Talia3::Mixin::HasRepositories</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+self (chainable)
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+274
+275
+276
+277
+278</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/has_repositories.rb', line 274</span>
+
+<span class='kw'>def</span> <span class='id clear_repositories'>clear_repositories</span>
+  <span class='id repositories'>repositories</span><span class='period'>.</span><span class='id clear'>clear</span>
+  <span class='ivar'>@repository</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_repository-instance_method">
+  
+    - (<tt>RDF::Repository</tt>) <strong>get_repository</strong>(name = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+Only works on repositories declared for this object.
+</p>
+</div>
+  </div>
+
+<p>
+Returns a repository by name.
+</p>
+<p>
+If no name is given, the first repository found is returned.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'></span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>, <tt><span class='object_link'><a href="../../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RDF::Repository</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Exception</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if the name is not declared
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+253
+254
+255
+256</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/has_repositories.rb', line 253</span>
+
+<span class='kw'>def</span> <span class='id get_repository'>get_repository</span><span class='lparen'>(</span><span class='id name'>name</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id name'>name</span> <span class='op'>||=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id default_repository'>default_repository</span>
+  <span class='id repositories'>repositories</span><span class='lbracket'>[</span><span class='id name'>name</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="repositories-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Repositories.html" title="Talia3::Repositories (class)">Talia3::Repositories</a></span></tt>) <strong>repositories</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The object-specific repositories.
+</p>
+<p>
+By default an object will have access to its class repositories, which in
+turn defaults to at least :local.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Repositories.html" title="Talia3::Repositories (class)">Talia3::Repositories</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a repositories wrapper
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+195
+196
+197</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/has_repositories.rb', line 195</span>
+
+<span class='kw'>def</span> <span class='id repositories'>repositories</span>
+  <span class='ivar'>@repositories</span> <span class='op'>||=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id repositories'>repositories</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="repository-instance_method">
+  
+    - (<tt>RDF::Repository</tt>) <strong>repository</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The method returns the repository itself, not its name.
+</p>
+</div>
+  </div>
+
+<p>
+Returns the active repository.
+</p>
+<p>
+This is the repository used in any read/write operation.
+</p>
+<p>
+Defaults to the repository defined with self.default_repository.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RDF::Repository</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+208
+209
+210</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/has_repositories.rb', line 208</span>
+
+<span class='kw'>def</span> <span class='id repository'>repository</span>
+  <span class='ivar'>@repository</span> <span class='op'>||</span> <span class='id get_repository'>get_repository</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="repository=-instance_method">
+  
+    - (<tt>RDF::Repository</tt>) <strong>repository=</strong>(repository) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The method expects the repository itself, not its
+</p>
+</div>
+  </div>
+
+<p>
+Sets the active repository
+</p>
+<p>
+This will be repository used in any read/write operation.
+</p>
+<p>
+name. See #use_repository for that.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'></span>
+      
+      
+        <span class='type'>(<tt>RDF::Repository</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RDF::Repository</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+236
+237
+238
+239
+240
+241</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/has_repositories.rb', line 236</span>
+
+<span class='kw'>def</span> <span class='id repository='>repository=</span><span class='lparen'>(</span><span class='id repository'>repository</span><span class='rparen'>)</span>
+  <span class='kw'>unless</span> <span class='id repository'>repository</span><span class='period'>.</span><span class='id is_a?'>is_a?</span> <span class='const'>RDF</span><span class='op'>::</span><span class='const'>Repository</span> <span class='kw'>or</span> <span class='id repository'>repository</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+    <span class='id raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Parameter must be a RDF::Repository</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@repository</span> <span class='op'>=</span> <span class='id repository'>repository</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="use_repository-instance_method">
+  
+    - (<tt>RDF::Repository</tt>) <strong>use_repository</strong>(name = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+Only works on repositories declared for this object.
+</p>
+</div>
+  </div>
+
+<p>
+Selects the active repository based on its name.
+</p>
+<p>
+This is will repository used in any read/write operation.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>the</span>
+      
+      
+        <span class='type'>(<tt>optional</tt>, <tt><span class='object_link'><a href="../../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>, <tt><span class='object_link'><a href="../../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+repository name; usually defaults to :local.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RDF::Repository</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+222
+223
+224</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/has_repositories.rb', line 222</span>
+
+<span class='kw'>def</span> <span class='id use_repository'>use_repository</span><span class='lparen'>(</span><span class='id name'>name</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='ivar'>@repository</span> <span class='op'>=</span> <span class='id get_repository'>get_repository</span> <span class='id name'>name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Aug 25 17:54:24 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<% if @talia3_init %>
+<form action="import" enctype="multipart/form-data" method="post">
+  <h2>Clear Talia3 repository</h2>
+  <input type="checkbox" name="clear_repository" value="1"/>Clear repository
+  <h2>Talia3 data import</h2>
+  <%= token_tag(form_authenticity_token) %>
+  <h3>Ontologies import</h3>
+  <% @ontology_files.each do |f| %>
+  <input type="checkbox" name="ontologies[<%= File.basename(f, '.rdf') %>]" value="1" checked="checked"/>
+  <%= File.basename(f, '.rdf') %>
+  <br/>
+  <% end %>
+  <h3>Views import</h3>
+  <% @view_files.each do |f| %>
+  <input type="checkbox" name="ontologies[<%= File.basename(f, '.n3') %>]" value="1" checked="checked"/>
+  <%= File.basename(f, '.n3') %>
+  <br/>
+  <% end %>
+  <h3>Data import</h3>
+  <input type="file" name="data"/>
+  <br/>
+  <br/>
+  <input type="submit" name="import" value="Proceed"/>
+</form>
+<% end %>

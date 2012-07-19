@@ -1,0 +1,58 @@
+<%= link_to "Backend", talia3_admin_backend_path %>
+<h2>New <%= @type.short%></h2>
+<table width="90%" border="1">
+<%= form_for @record, :as => :record, :url => talia3_records_url do |f| %>
+  <%= hidden_field_tag :type, @record.type.to_key%>
+  <tr>
+    <td width="20%">*<%= f.label :uri %></td>
+    <td><%= f.text_field :uri %></td>
+  </tr>
+  <% unless @record.properties.include? :rdfs__label %>
+  <tr>
+    <td width="20%"><%= label_tag "record[rdfs__label]", 'Label'  %></td>
+    <td><%= text_field_tag "record[rdfs__label]", @record.raw(:rdfs__label) %></td>
+  </tr>
+  <% end %>
+  <% @record.attributes.each do |attribute| %>
+  <% schema = @record.property_schema(attribute) %>
+    <tr>
+      <td width="20%"><%= f.label attribute %></td>
+      <td>
+        <% case schema[:type] %>
+        <% when :string %>
+        <%= f.text_field attribute, :value => "" %>
+        <% when :object %>
+        [<%= Talia3::URI.new(schema[:object_type]).short%>]
+        <br/>
+        <%= f.select attribute, 
+                     (Talia3::Record.class_for(schema[:object_type]).all.collect do |p|
+                       p.uri == @record.uri ? nil : [p.label, p.id]
+                     end.compact || []),
+                     {}, :multiple => true %>
+        <br/>
+        <br/>
+        <%= text_field_tag "record[#{attribute}_extra]", nil, :id => "record_#{attribute}_extra"%>
+      <% else %>
+        <%= text_field_tag "record[#{attribute}_extra]", nil, :id => "record_#{attribute}_extra"%>
+        <%= select_tag "record[#{attribute}_extra_type]", options_for_select([[:string, "string"], [:uri, "uri"]]), :id => "record_#{attribute}_extra_type"%>
+    <% end%>
+    </td>
+
+    </tr>
+  <% end %>
+  <tr>
+    <td>
+      <%= text_field_tag "attribute_name"%>
+    </td>
+    <td>
+      <%= text_field_tag "attribute_value"%>
+      <%= select_tag "attribute_value_type", options_for_select([[:string, "string"], [:uri, "uri"]]), :id => "attribute_value_type"%>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <%= f.submit %>
+    </td>
+  </tr>
+<% end %>
+</table>

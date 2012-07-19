@@ -1,0 +1,21 @@
+<%= link_to 'Configuration', talia3_admin_config_path %>
+<h2>Views</h2>
+<h3>Views management</h3>
+<% if @views.empty? %>
+<i>No views defined</i>
+<% end %>
+<ul>
+  <% @views.each do |v| %>
+  <li>
+    <%= v.label %> (<%= v.name %>) | 
+    <%= link_to "Remove", talia3_admin_config_path(:delete_view, :uri => v.class.to_key), :confirm => 'Delete?'%>
+  </li>
+  <% end %>
+</ul>
+<h3>Import view</h3>
+<b>Content must be in N3 format (for now)</b>
+<br/>
+<form action="/talia3/admin/config/import_view" enctype="multipart/form-data" method="post">
+  <input type="file" name="view_file"/>
+  <input type="submit" name="import" value="Import"/>
+<form>

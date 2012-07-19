@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= Talia3.config['application_name']%> - <%= @title %></title>
+
+    <script type="text/javascript" src="/javascripts/talia3/universal/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/talia3/universal/jquery_ujs.js"></script>
+
+
+    <script type="text/javascript" src="/javascripts/talia3/universal/edit.js"></script>
+  
+    <script src="/javascripts/talia3/universal/dojo/lib/dojo/dojo.js" type="text/javascript" charset="utf-8"></script>     
+    <script src="/javascripts/talia3/universal/dojo/request/init.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/javascripts/talia3/universal/dojo/request/md5.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/javascripts/talia3/universal/dojo/request/request.js" type="text/javascript" charset="utf-8"></script>
+  
+  
+    <%=  stylesheet_link_tag "/stylesheets/talia3/universal/bootstrap/lib/bootstrap.less" , :rel=>"stylesheet/less"%>
+    <%= javascript_include_tag "/javascripts/talia3/universal/less.js" %>
+    <%=  stylesheet_link_tag "/stylesheets/talia3/universal/dojo/lib/dijit/themes/tundra/tundra.css" %>
+    <%=   stylesheet_link_tag "/stylesheets/talia3/universal/dojo/css/style.css" %>
+    <%=  stylesheet_link_tag "/stylesheets/talia3/universal/override.css" %>
+
+    <%= javascript_include_tag "/javascripts/talia3/universal/bootstrap-twipsy.js" %>
+    <%= javascript_include_tag "/javascripts/talia3/universal/bootstrap-popover.js" %>
+    <%= javascript_include_tag "/javascripts/talia3/universal/bootstrap-modal.js" %>
+  </head>
+  <!-- <body>
+  
+  
+    <p><%= link_to "Home", :root %></p>
+  
+    <%= render 'talia3/partials/messages' %>
+    <h2><%= @title %></h2></p> -->
+    <%= yield %>
+  
+  <div id="modal-from-dom" class="modal hide fade">
+    <div class="modal-header">
+      <a class="close" href="#">×</a>
+      <h3>Warning!</h3>
+    </div>
+    <div class="modal-body">
+      <p id="modal_text"></p>
+    </div>
+    <div class="modal-footer">
+      <a class="btn primary" href="#">Cancel</a>
+      <a class="btn secondary" href="#">Ok</a>
+    </div>
+  </div>
+
+  </div>
+  </div> <!-- wrapper -->
+ </body> 
+</html>
+

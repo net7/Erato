@@ -1,0 +1,63 @@
+<body>
+<p><%= link_to "Home", '/' %></p>
+
+<h3>Add a new ontology</h3>
+<p>You can either load an <em>ontology file</em> or indicate the
+  <em>ontology URL</em> where the ontology can be found online.</p>
+<p>
+  In both cases you can optionally specify a valid URI
+  as <em>namespace</em>: it will be used to identify the new ontology.
+  <br/>
+  Namespace defaults to 
+  <em>file://&lt;filename&gt;</em> for uploaded
+  ontologies, or the provided URL for remote ontologies.
+</p>
+<table cellpadding="5" width="100%">
+  <tr>
+    <td width="50%">
+      <form action="<%= talia3_universal_ontologies_path %>" method="post">
+        <%= "Ontology URL" %>: <input type="text" name="url" value="<%= params[:url]%>"/>
+        <br/>
+        <%= "Format" %>
+        <select name="format">
+          <%= options_for_select [["Auto", ""], ["RDF/XML", "application/rdf+xml"], ["Turtle / N3", "text/n3"], ["Ntriples", "text/plain"]], params[:format]%>
+        </select>
+        <br/>
+        <%= "Base namespace" %> (<%= "optional" %>):  <input type="text" name="id" value="<%= params[:id]%>"/>
+        <br/>
+        <br/>
+        <input type="submit" name="import_remote" value="Import from remote location"/>
+      </form>
+    </td>
+    <td width="50%">
+      <form action="<%= talia3_universal_ontologies_path %>" enctype="multipart/form-data" method="post">
+        <%= "Ontology file" %>: <input type="file" name="ontology_file"/>
+        <br/>
+        <%= "Format" %>
+        <select name="format">
+          <%= options_for_select [["Auto", ""], ["RDF/XML", "application/rdf+xml"], ["Turtle / N3", "text/n3"], ["Ntriples", "text/plain"], params[:format]]%>
+        </select>
+        <br/>
+        <%= "Base namespace" %> (<%= "optional" %>):  <input type="text" name="id" value="<%= params[:id]%>"/>
+        <br/>
+        <br/>
+        <input type="submit" name="import_file" value="Import file"/>
+      </form>
+    </td>
+  </tr>
+</table>
+<br/>
+<hr/>
+<br/>
+<div>
+  <h3>Currently loaded ontologies:</h3>
+  <ul>
+  <% @ontologies.each do |ontology| %>
+    <li>
+      <%= ontology.context %>
+      |
+      <%= link_to("Delete", talia3_universal_ontology_path(Base64.encode64(ontology.context.to_s)), :method => :delete, :confirm => "Are you sure?")%>
+    </li>
+  <% end %>
+  </ul>
+</div>

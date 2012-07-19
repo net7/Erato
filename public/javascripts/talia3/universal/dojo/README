@@ -1,0 +1,132 @@
+# Medusalib 
+
+Medusalib is a library that allows you to automatically create 
+one or more HTML widgets for querying the Medusa servers. 
+
+### Prerequisites 
+
+In order to use the library you will need your **User ID**, 
+your **API Key** and one or more **tokens**. In order to do this 
+you will also need to create a **channel**. To learn more, see the 
+*Front App* section of this document.
+
+Also, jQuery is required (for now).
+
+### Installation
+
+1. **Stylesheets**
+
+	I assume that the directory `dojo` is at the same level of the HTML file. 
+
+	Include the theme and the library stylesheet.
+
+		<link rel="stylesheet" href="dojo/lib/dijit/themes/tundra/tundra.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="dojo/css/style.css" type="text/css" media="screen">
+
+	You can choose a different theme by replacing `tundra` with the name 
+	of the theme you like.
+
+2. **Scripts**
+
+	You will need to include four `js` files:
+
+	    <script src="dojo/lib/dojo/dojo.js" type="text/javascript" charset="utf-8"></script>     
+    	<script src="dojo/request/init.js" type="text/javascript" charset="utf-8"></script>
+    	<script src="dojo/request/md5.js" type="text/javascript" charset="utf-8"></script>
+    	<script src="dojo/request/request.js" type="text/javascript" charset="utf-8"></script>
+
+3. **Initialization code**
+
+	All you need to do now is to initialize the library:
+
+		dojo.ready(function() {               
+    		document.medusaReq = new semlib.MedusaRequest({
+        		tokenForFieldType: function(type) { return theToken; },
+        		userId: theUserId,
+        		apiKey: theApiKey                    
+    		});
+		});
+
+	Refer to the section "Arguments" for a complete reference.
+
+### Arguments
+
+* **tokenForFieldType** — *required function*  
+	Function used to get the token relative to a type.  
+
+	*Callback parameters*:
+  	* `type` The library will ask the token for that type during the initialization.
+
+	*Discussion*:  
+
+	It is recommended that you provide this argument, but if you want you can
+	populate your HTML with tags using IDs in the form of `call-token-<name>`, where
+	`<name>` is the type of the field. For example, if there is a 
+	field with fieldType `geocoverage`, you may have an element like:
+
+		<input type="hidden" value="geocoverage-token" id="call-token-geocoverage" />
+	
+	and ignore this argument.
+
+	Defaults to:
+
+		function(type) {
+    		return jQuery("#call-token-" + type).attr("value");
+  		}
+
+* **userId** — *required*  
+	The user id.
+
+* **apiKey** — *required*  
+	The api key.
+
+* **selector** — *optional*  
+	the selector of a DOM element. It defaults to '.agorized-input'.  
+
+	*Attributes of DOM element*:  
+  	* `keyword` this parameter will be used to get the keyword when querying the server 
+	(it's the search term). If you want, you can provide the term yourself. 
+	See the *getTerm* argument.
+  	* `type-name` this parameter will be used to get the type of the field. This is
+	used to differentiate fields with the same *selector*.
+
+* **theme** — *optional*  
+	The theme. Defaults to `tundra`.
+
+* **emptyMessage** — *optional*  
+	A placeholder string. Defaults to `Empty`.
+
+* **hideCancel** — *optional function*  
+	Called often. Sometimes you may want to hide the cancel button (`x`) 
+	using this function. For example, if the input is empty or if that action
+	is not allowed.
+
+	*Callback parameters*:
+  	* `type` You may want to hide the `x` only for certain types.
+
+	Defaults to:
+
+		function(type) { // Show always.
+    		return false;
+  		}
+
+* **getTerm** — *optional function*  
+	Called to get the term. 
+
+	*Callback parameters*:
+  	* `object` The objects that responds to *selector*.
+
+	Defaults to:
+
+		function(object) {
+    		return jQuery(object).attr("keyword");
+  		}
+
+* **debug** — *optional*  
+	True to enable debugging. Defaults to `false`.
+
+### Clearing a field
+
+You can clear a field of type `x` with:
+
+	document.medusaReq.clear(x);

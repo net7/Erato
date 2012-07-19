@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Talia3::Mixin::RDFExportable
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (R)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../Talia3.html" title="Talia3 (module)">Talia3</a></span></span> &raquo; <span class='title'>Mixin</span>
+     &raquo; 
+    <span class="title">RDFExportable</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Talia3::Mixin::RDFExportable
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+    <dt class="r1">Included in:</dt>
+    <dd class="r1"><span class='object_link'><a href="../Ontology.html" title="Talia3::Ontology (class)">Ontology</a></span>, <span class='object_link'><a href="../Resource.html" title="Talia3::Resource (class)">Resource</a></span>, <span class='object_link'><a href="../Update/Changeset.html" title="Talia3::Update::Changeset (class)">Update::Changeset</a></span></dd>
+    
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/models/talia3/mixin/rdf_exportable.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+more documentation! More examples!
+</p>
+</div>
+  </div>
+
+
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+Requires the class to include HasGraph or implement
+</p>
+</div>
+  </div>
+
+<h1>Mixin for classes that can be exported in xml.</h1>
+<p>
+a #graph method that returns an RDF::Graph object.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_rdf-instance_method" title="#to_rdf (instance method)">- (Object) <strong>to_rdf</strong> </a>
+    
+
+    
+      (also: #to_xml)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="to_rdf-instance_method">
+  
+    - (<tt>Object</tt>) <strong>to_rdf</strong> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='to_xml-instance_method'>to_xml</span></span>
+    </span>
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+17
+18
+19
+20
+21
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/rdf_exportable.rb', line 17</span>
+
+<span class='kw'>def</span> <span class='id to_rdf'>to_rdf</span>
+  <span class='id must_implement_graph'>must_implement_graph</span>
+  <span class='const'>RDF</span><span class='op'>::</span><span class='const'>RDFXML</span><span class='op'>::</span><span class='const'>Writer</span><span class='period'>.</span><span class='id buffer'>buffer</span> <span class='symbol'>:base_uri</span> <span class='op'>=&gt;</span> <span class='const'>Talia3</span><span class='period'>.</span><span class='id base_uri'>base_uri</span><span class='period'>.</span><span class='id dup'>dup</span><span class='comma'>,</span> <span class='symbol'>:prefixes</span> <span class='op'>=&gt;</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='period'>.</span><span class='id namespaces'>namespaces</span><span class='period'>.</span><span class='id dup'>dup</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id writer'>writer</span><span class='op'>|</span>
+    <span class='id writer'>writer</span> <span class='op'>&lt;&lt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id graph'>graph</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Aug 25 17:54:24 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

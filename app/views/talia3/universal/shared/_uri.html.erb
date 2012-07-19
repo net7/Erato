@@ -1,0 +1,14 @@
+<% if new %>
+
+<%   if q[:namespace].blank? %>
+<%=    text_field_tag "uri", uri.to_s, :id => 'uri', :class => "record_attribute_uri", :size => 70 %>
+<%   else %>
+<%=    hidden_field_tag :uri, uri.to_s %>
+<%=    q[:namespace].strip %><%=    text_field_tag "uri_local_name", uri.to_s.sub(/#{q[:namespace]}/, ''), :id => 'uri_local_name', :size => 20 %>
+<%   end %>
+
+<% else %>
+
+<%=  uri.to_s%>
+
+<% end %>

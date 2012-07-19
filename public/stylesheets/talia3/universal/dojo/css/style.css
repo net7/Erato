@@ -1,0 +1,163 @@
+.agorized-description {
+	font-weight: bold;
+	padding-right: 10px;
+	padding: 4px;
+}
+
+.agorized-value {
+	white-space: nowrap;
+	vertical-align: middle;
+	height: 20px;
+	line-height: 20px;
+}
+
+td.label {
+	vertical-align: middle;
+}
+
+#metadata-edit td.label,
+#metadata-edit td.value {
+	vertical-align: bottom;
+	height: 35px;
+}
+
+#metadata-edit tr {
+	width: 10% !important;
+}
+
+#metadata-edit tr td {
+	padding: 10px 0;
+	padding-bottom: 15px;
+}
+
+#metadata-edit .agorized-metadata-name {
+	padding-right: 10px;
+	color: #bbb;
+	padding: 4px;
+}
+
+#metadata-edit .agorized-metadata-name,
+.agorized-description {
+	float: left;
+	margin-bottom: 10px;
+}
+
+.clear {
+	clear: both;
+}
+
+.dijitSplitter {
+	outline: none;	
+}
+
+.agorized-input {
+	vertical-align: middle;
+    color: #999 !important;
+	padding: 3px;
+	border: 1px solid #f7f7f7;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    -webkit-box-shadow: 0px 1px 2px #efefef;
+    font-family: "Droid Mono", Monaco, Menlo, sans-serif;
+}
+
+.agorized-input, 
+.remove-metadata {
+    -webkit-transition: all 0.2s;
+}
+
+.agorized-input:hover {
+    color: #000 !important;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    -webkit-box-shadow: 0px 1px 2px #efefef;
+}
+
+.hidden {
+    display: none;
+}
+
+#suggestionContainer ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+#dijit_layout_ContentPane_1 {
+	padding: 0 !important;
+}
+
+#suggestionContainer ul li {
+	display: block;
+	font-size: 12px;
+	padding: 5px 3px;
+	color: #666;
+}
+
+#suggestionContainer ul li.selected, #suggestionContainer ul li:hover {
+	background-color: #efefef;
+	color: #000;
+	cursor: pointer;
+}
+
+#suggestionContainer ul li.selected {
+	font-weight: bold;
+}
+
+#suggestionContainer ul li:active {
+    background-color: #000;
+    color: #fff;
+}
+
+.remove-metadata-container a {
+	background: white;
+    text-decoration: none;
+    padding: 4px 7px;
+    font-size: 14px;
+    font-family: sans-serif;
+	vertical-align: middle;
+    color: #bbb;
+}
+
+.remove-metadata-container a:hover {
+    color: #7c1e27 !important;
+}
+
+/* More info panel. */
+
+.moreInfoPane .moreInfoTitle {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	display: block;
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+
+.moreInfoTitle div {
+	float: left;
+	margin-right: 10px;
+	min-height: 60px;
+}
+
+.moreInfoTitle div img {
+	border: 1px solid #ccc;
+}
+
+.moreInfoTitle h3 {
+	font-size: 13px;
+	margin: 0;
+	margin-bottom: 10px;
+}
+
+#moreInfo {
+	font-size: 12px;
+}
+
+.moreInfoTitle a {
+	color: #999;
+	font-size: 11px;
+	text-decoration: none;
+}

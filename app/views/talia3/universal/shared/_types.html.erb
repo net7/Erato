@@ -1,0 +1,46 @@
+<form action="<%= talia3_universal_new_url(q.reject{|n, v| n == :type})%>" method="post" onsubmit="if(!this.type.value) return false;">
+  <%= "New instance of class (type class URI):" %>
+  <input type="text" name="type" value=""/>
+  <input type="submit" value="<%= "Go" %>"/>
+</form>
+
+<% if o > 0 %>
+<%=  link_to("Previous #{l}", talia3_universal_types_url(q.merge :l => l, :o => (o - l).abs)) %>
+<% end %>
+
+<table class="table-instances">
+<%   types.each do |t| %>
+<%     unless (types.size > l and t == types.last) %>
+<tr>
+<td class="type-instance">
+<%       labels = talia3_uri_labels t %>
+<%=      link_to talia3_main_label(t, labels), talia3_universal_instances_url(q.merge :type => t.to_s), :title => t.to_s, :class => 'talia3_type_link' %>
+<%         labels.each_with_index do |label, index| %>
+<%           if index > 0 %>
+|<%=           link_to label.language.to_s, '#', :title => label.value, :onclick => 'return false;' %>
+<%           end %>
+<%         end %>
+</td>
+<td>
+<img class="type-separator" src="/images/add.png" />
+<%=      link_to 'New instance for this class', talia3_universal_new_url(q.merge({:type => t.to_s, :uri => nil})), :class => 'talia3_new_link' %>
+</td>
+</tr>
+<%     end %>
+<%   end %>
+</table>
+
+<% if types.size > l %>
+<%=  link_to("Next #{l}", talia3_universal_types_url(q.merge :l => l, :o => o + l)) %>
+<% end %>
+
+<% if @untyped_present %>
+<table class="table-instances">
+  <tr>
+    <td class="type-instance" colspan="2">
+      <%= link_to 'Untyped resources', talia3_universal_instances_url(q.merge :type => nil),
+            :title => 'Untyped resources', :class => 'talia3_type_link' %>
+    </td>
+  </tr>
+</table>
+<% end %>

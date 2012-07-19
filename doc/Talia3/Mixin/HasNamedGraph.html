@@ -1,0 +1,799 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Talia3::Mixin::HasNamedGraph
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (H)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../Talia3.html" title="Talia3 (module)">Talia3</a></span></span> &raquo; <span class='title'>Mixin</span>
+     &raquo; 
+    <span class="title">HasNamedGraph</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Talia3::Mixin::HasNamedGraph
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+      <dt class="r1">Includes:</dt>
+      <dd class="r1">HasGraph</dd>
+      
+    
+  
+  
+    <dt class="r2">Included in:</dt>
+    <dd class="r2"><span class='object_link'><a href="../Ontology.html" title="Talia3::Ontology (class)">Ontology</a></span>, <span class='object_link'><a href="../Resource.html" title="Talia3::Resource (class)">Resource</a></span>, <span class='object_link'><a href="../Update/Changeset.html" title="Talia3::Update::Changeset (class)">Update::Changeset</a></span></dd>
+    
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">app/models/talia3/mixin/has_named_graph.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Mixin for classes that can store statements with a fixed context.</h1>
+<p>
+This is a wrapper for an RDF::Graph.
+</p>
+<p>
+The main difference with <span class='object_link'><a href="HasGraph.html" title="Talia3::Mixin::HasGraph (module)">HasGraph</a></span> is that that the
+statements container has a single context. <b>Any statement added to this
+graph will have the context changed accordingly.</b>
+</p>
+<p>
+Unless instructed otherwise all named graphs will default to the :public
+context, as defined in the talia3.yml configuration file.
+</p>
+<p>
+New class method #set_context also allows to declare the default context
+for all objects of this class.
+</p>
+<p>
+<b>Important</b>: Changing the context of an object, clears that object
+statements.
+</p>
+<p>
+<b>Important</b>: While Talia3 support RDF.rb&#8217;s RDF::URI objects,
+</p>
+<pre class="code">
+             use of Talia3::URI should be preferred.</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+Setting the default context for all HasNamedGraphClass objects:
+</p>
+</div></h4>
+      <pre class="example code"><span class='const'>HasNamedGraphClass</span><span class='period'>.</span><span class='id set_context'>set_context</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://example.org/context</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='const'>HasNamedGraphClass</span><span class='period'>.</span><span class='id set_context'>set_context</span><span class='lparen'>(</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>URI</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://example.org/context</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='const'>HasNamedGraphClass</span><span class='period'>.</span><span class='id set_context'>set_context</span><span class='lparen'>(</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>CONTEXTS</span><span class='period'>.</span><span class='id ontology'>ontology</span><span class='rparen'>)</span></pre>
+    
+      <h4><div class='inline'><p>
+If a symbol is used when setting a context, it will be converted internally
+in Talia3::N::CONTEXTS.<em>symbol.to_s</em>:
+</p>
+</div></h4>
+      <pre class="example code"><span class='const'>HasNamedGraphClass</span><span class='period'>.</span><span class='id set_context'>set_context</span><span class='lparen'>(</span><span class='symbol'>:public</span><span class='rparen'>)</span>
+<span class='id is'>is</span> <span class='id equivalent'>equivalent</span> <span class='id to'>to</span>
+<span class='const'>HasNamedGraphClass</span><span class='period'>.</span><span class='id set_context'>set_context</span><span class='lparen'>(</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>CONTEXTS</span><span class='period'>.</span><span class='id public'>public</span><span class='rparen'>)</span></pre>
+    
+      <h4><div class='inline'><p>
+To set the context to nil use the symbol :null (Still valid?)
+</p>
+</div></h4>
+      <pre class="example code"><span class='const'>HasNamedGraphClass</span><span class='period'>.</span><span class='id set_context'>set_context</span><span class='lparen'>(</span><span class='symbol'>:null</span><span class='rparen'>)</span>
+<span class='id has_named_graph'>has_named_graph</span><span class='period'>.</span><span class='id context'>context</span> <span class='op'>=</span> <span class='symbol'>:null</span></pre>
+    
+      <h4><div class='inline'><p>
+Best use for set_context is in class declaration:
+</p>
+</div></h4>
+      <pre class="example code"><span class='kw'>class</span> <span class='const'>HasNamedGraphClass</span>
+  <span class='id include'>include</span> <span class='label'>Talia3:</span><span class='const'>HasNamedGraph</span>
+  <span class='id set_context'>set_context</span> <span class='symbol'>:public</span>
+  <span class='kw'>def</span> <span class='id initialize'>initialize</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id context'>context</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id context'>context</span>
+    <span class='comment'>#...
+</span>  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    
+      <h4><div class='inline'><p>
+Getting the current default context:
+</p>
+</div></h4>
+      <pre class="example code"><span class='const'>HasNamedGraphClass</span><span class='period'>.</span><span class='id context'>context</span><span class='period'>.</span><span class='id to_s'>to_s</span>
+<span class='comment'>#=&gt; &quot;http://example.org/context&quot;</span></pre>
+    
+      <h4><div class='inline'><p>
+Getting an object context:
+</p>
+</div></h4>
+      <pre class="example code"><span class='const'>HasNamedGraphClass</span><span class='period'>.</span><span class='id new'>new</span><span class='period'>.</span><span class='id context'>context</span><span class='period'>.</span><span class='id to_s'>to_s</span>
+<span class='comment'>#=&gt; &quot;http://example.org/context&quot;</span></pre>
+    
+      <h4><div class='inline'><p>
+Setting an object context:
+</p>
+</div></h4>
+      <pre class="example code"><span class='id has_named_graph'>has_named_graph</span><span class='period'>.</span><span class='id context'>context</span> <span class='op'>=</span> <span class='symbol'>:public</span>
+<span class='id has_named_graph'>has_named_graph</span><span class='period'>.</span><span class='id context'>context</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://example.org/context</span><span class='tstring_end'>&quot;</span></span>
+<span class='id has_named_graph'>has_named_graph</span><span class='period'>.</span><span class='id context'>context</span> <span class='op'>=</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>URI</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://example.org/context</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id has_named_graph'>has_named_graph</span><span class='period'>.</span><span class='id context'>context</span> <span class='op'>=</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>CONTEXTS</span><span class='period'>.</span><span class='id ontology'>ontology</span></pre>
+    
+      <h4><div class='inline'><p>
+Deleting all statements with our context from a repository:
+</p>
+</div></h4>
+      <pre class="example code"><span class='id has_named_graph'>has_named_graph</span><span class='period'>.</span><span class='id context'>context</span> <span class='op'>=</span> <span class='symbol'>:public</span>
+<span class='id has_named_graph'>has_named_graph</span><span class='period'>.</span><span class='id cleanse_context!'>cleanse_context!</span><span class='lparen'>(</span><span class='const'>Talia3</span><span class='period'>.</span><span class='id repository'>repository</span><span class='rparen'>)</span></pre>
+    
+      <h4><div class='inline'><p>
+Deleting all statements with a given uri and our context from a repository:
+</p>
+</div></h4>
+      <pre class="example code"><span class='id has_named_graph'>has_named_graph</span><span class='period'>.</span><span class='id context'>context</span> <span class='op'>=</span> <span class='symbol'>:public</span>
+<span class='id has_named_graph'>has_named_graph</span><span class='period'>.</span><span class='id cleanse_uri!'>cleanse_uri!</span><span class='lparen'>(</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri'>uri</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='period'>.</span><span class='id repository'>repository</span><span class='rparen'>)</span></pre>
+    
+  </div>
+<h3>Author:</h3>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Riccardo Giomi <giomi@netseven.it>
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+   
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="HasNamedGraph/ClassMethods.html" title="Talia3::Mixin::HasNamedGraph::ClassMethods (module)">ClassMethods</a></span>
+    
+   
+    
+  
+</p>
+
+
+  
+
+
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#included-class_method" title="included (class method)">+ (Object) <strong>included</strong>(base) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cleanse_context%21-instance_method" title="#cleanse_context! (instance method)">- (RDF::HasNamedGraph) <strong>cleanse_context!</strong>(repository = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Removes all statements with our context from the given repository.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cleanse_uri%21-instance_method" title="#cleanse_uri! (instance method)">- (RDF::HasNamedGraph) <strong>cleanse_uri!</strong>(uri = nil, repository = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Removes all statements that have the given URI as subject or predicate from
+the given repository.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#context%3D-instance_method" title="#context= (instance method)">- (Object) <strong>context=</strong>(context) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Sets the context.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="included-class_method">
+  
+    + (<tt>Object</tt>) <strong>included</strong>(base) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/has_named_graph.rb', line 78</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id included'>included</span><span class='lparen'>(</span><span class='id base'>base</span><span class='rparen'>)</span>
+  <span class='id base'>base</span><span class='period'>.</span><span class='id extend'>extend</span> <span class='const'>ClassMethods</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="cleanse_context!-instance_method">
+  
+    - (<tt>RDF::HasNamedGraph</tt>) <strong>cleanse_context!</strong>(repository = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Removes all statements with our context from the given repository.
+</p>
+<p>
+Works regardless of statements currently present in the graph. Statements
+are <b>not</b> cleared if present.
+</p>
+<p>
+<tt>repository</tt> can be omitted if the object responds to #repository
+(includes <span class='object_link'><a href="HasRepositories.html" title="Talia3::Mixin::HasRepositories (module)">Talia3::Mixin::HasRepositories</a></span>).
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>repository</span>
+      
+      
+        <span class='type'>(<tt>optional</tt>, <tt>RDF::Repository</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+optional if object responds to <span class='object_link'><a href="HasRepositories.html#repository-instance_method" title="Talia3::Mixin::HasRepositories#repository (method)">Talia3::Mixin::HasRepositories#repository</a></span>
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RDF::HasNamedGraph</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+self (chainable)
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if argument is an invalid repository
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Exception</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if repository is read-only
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+187
+188
+189
+190
+191
+192</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/has_named_graph.rb', line 187</span>
+
+<span class='kw'>def</span> <span class='id cleanse_context!'>cleanse_context!</span><span class='lparen'>(</span><span class='id repository'>repository</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id repository'>repository</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id repository'>repository</span> <span class='kw'>if</span> <span class='id repository'>repository</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='kw'>and</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='symbol'>:repository</span>
+  <span class='id context'>context</span>    <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id context'>context</span> <span class='kw'>if</span> <span class='id context'>context</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id cleanse_context!'>cleanse_context!</span> <span class='id repository'>repository</span><span class='comma'>,</span> <span class='id context'>context</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="cleanse_uri!-instance_method">
+  
+    - (<tt>RDF::HasNamedGraph</tt>) <strong>cleanse_uri!</strong>(uri = nil, repository = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+better URI validation.
+</p>
+</div>
+  </div>
+
+<p>
+Removes all statements that have the given URI as subject or predicate from
+the given repository.
+</p>
+<p>
+Works regardless of statements currently present in the graph. Statements
+are <b>not</b> cleared if present.
+</p>
+<p>
+<tt>uri</tt> can be omitted if the object responds to #uri
+</p>
+<p>
+<tt>repository</tt> can be omitted if the object responds to #repository
+(includes HasRepositories).
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uri</span>
+      
+      
+        <span class='type'>(<tt>optional</tt>, <tt><span class='object_link'><a href="../URI.html" title="Talia3::URI (class)">Talia3::URI</a></span></tt>, <tt>RDF::URI</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+optional if object responds to #uri
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>repository</span>
+      
+      
+        <span class='type'>(<tt>optional</tt>, <tt>RDF::Repository</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+optional if object responds to HasRepositories#repository
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RDF::HasNamedGraph</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+self (chainable)
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if an argument is invalid
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Exception</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if repository is read-only
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/has_named_graph.rb', line 215</span>
+
+<span class='kw'>def</span> <span class='id cleanse_uri!'>cleanse_uri!</span><span class='lparen'>(</span><span class='id uri'>uri</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id repository'>repository</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id uri'>uri</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id uri'>uri</span> <span class='kw'>if</span> <span class='id uri'>uri</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='kw'>and</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='symbol'>:uri</span>
+  <span class='id repository'>repository</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id repository'>repository</span> <span class='kw'>if</span> <span class='id repository'>repository</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='kw'>and</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='symbol'>:repository</span>
+  <span class='id raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalud uri argument</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id uri'>uri</span><span class='period'>.</span><span class='id is_a?'>is_a?</span> <span class='const'>RDF</span><span class='op'>::</span><span class='const'>URI</span> <span class='kw'>or</span> <span class='op'>!</span><span class='id uri'>uri</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id empty?'>empty?</span>
+  <span class='id raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No repository chosen</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id repository'>repository</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='id raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Argument must be a RDF::Repository, </span><span class='embexpr_beg'>#{</span><span class='id repository'>repository</span><span class='period'>.</span><span class='id class'>class</span><span class='rbrace'>}</span><span class='tstring_content'> given</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id repository'>repository</span><span class='period'>.</span><span class='id is_a?'>is_a?</span> <span class='const'>RDF</span><span class='op'>::</span><span class='const'>Repository</span>
+  <span class='id raise'>raise</span> <span class='const'>Exception</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Repository is read-only</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id repository'>repository</span><span class='period'>.</span><span class='id mutable?'>mutable?</span>
+  <span class='id patterns'>patterns</span> <span class='op'>=</span> <span class='lbracket'>[</span>
+              <span class='const'>RDF</span><span class='op'>::</span><span class='const'>Query</span><span class='op'>::</span><span class='const'>Pattern</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id uri'>uri</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='symbol'>:context</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id context'>context</span><span class='rparen'>)</span><span class='comma'>,</span>
+              <span class='const'>RDF</span><span class='op'>::</span><span class='const'>Query</span><span class='op'>::</span><span class='const'>Pattern</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id uri'>uri</span><span class='comma'>,</span> <span class='symbol'>:context</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id context'>context</span><span class='rparen'>)</span>
+             <span class='rbracket'>]</span> 
+  <span class='id repository'>repository</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='op'>*</span><span class='id patterns'>patterns</span><span class='rparen'>)</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="context=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>context=</strong>(context) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+Changing the context clears the current statements.
+</p>
+</div>
+  </div>
+
+<p>
+Sets the context.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>the</span>
+      
+      
+        <span class='type'>(<tt>Talia3::RDF</tt>, <tt>RDF::URI</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+new context&#8217;s URI
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>
+the argument
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+167
+168
+169
+170
+171</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/has_named_graph.rb', line 167</span>
+
+<span class='kw'>def</span> <span class='id context='>context=</span><span class='lparen'>(</span><span class='id context'>context</span><span class='rparen'>)</span>
+  <span class='id clear_graph'>clear_graph</span> <span class='kw'>if</span> <span class='id graph'>graph</span><span class='period'>.</span><span class='id size'>size</span> <span class='comment'># TODO: would it be better to change context to triples? How?
+</span>  <span class='id graph'>graph</span><span class='period'>.</span><span class='id context'>context</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id format_context'>format_context</span> <span class='id context'>context</span>
+  <span class='id context'>context</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Aug 25 17:54:24 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

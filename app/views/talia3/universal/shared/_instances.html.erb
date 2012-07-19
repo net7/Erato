@@ -1,0 +1,34 @@
+<% unless @type.nil? %>
+<%= link_to 'New instance of this type', talia3_universal_new_url(q.merge({:uri => nil})), :class => 'talia3_new_link' %>
+<% end %>
+<% if o > 0 %>
+<%=  link_to("Previous #{l}", talia3_universal_instances_url(q.merge :l => l, :o => o - l)) %>
+<% end %>
+<%= content_tag :table, :class=>"table-instances" do %>
+<%   instances.each do |i| %>
+<%     unless (instances.size > l and i == instances.last) %>
+<tr>
+<%       if i %>
+<td>
+<%       labels = talia3_uri_labels i, repository %>
+<%=        link_to talia3_main_label(i, labels), talia3_universal_url(q.merge :uri => i.to_s), :title => i.to_s, :class => 'talia3_instance_link' %>
+<%         labels.each_with_index do |label, index| %>
+<%           if index > 0 %>
+|<%=           link_to label.language.to_s, '#', :title => label.value, :onclick => 'return false;' %>
+<%           end %>
+<%         end %>
+<%       else %>
+<%=        i.to_s %>
+<%       end %>
+</td>
+<td>
+  <%= link_to("", i.to_s, :class => "delete_instance", :onclick => "return false;") %>
+<%     end %>
+</td>
+</tr>
+<%   end %>
+<% end %>
+<% tag :hr %>
+<% if instances.size > l %>
+<%=   link_to("Next #{l}", talia3_universal_instances_url(q.merge :l => l, :o => o + l)) %>
+<% end %>

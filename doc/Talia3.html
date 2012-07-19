@@ -1,0 +1,2126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Talia3
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (T)</a> &raquo; 
+    
+    
+    <span class="title">Talia3</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Talia3
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/talia3.rb<span class="defines">,<br />
+  app/helpers/talia3/resource_helper.rb,<br /> app/helpers/talia3/universal/service_helper.rb</span>
+</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+Examples for new settings
+</p>
+</div>
+  </div>
+
+<p>
+Talia3 base module and configuration handling.
+</p>
+<p>
+Allows easy access to the Talia3 configuration as defined in 
+config/talia3.yml. It also creates and caches RDF::Repository objects for
+defined repositories.
+</p>
+<p>
+Implements the base features needed to create dynamic classes that extend
+Talia3::Record and are based on a RDF type. For example, the
+Talia3::FOAF::Agent class will be available at all times, even if the class
+is defined nowhere. It will have type# foaf:Agent. If a class with the same
+name and namespace as one that can be created dynamically is already
+defined (in a model file for example), the static class will be used
+instead. This allows an application to override this feature and define its
+own classes for semantic types. A prerequisite for the creation of a
+dynamic class with the correct type is that the type&#8217;s namespace and
+prefix must be known to Talia3. See also <span class='object_link'><a href="Talia3/N.html" title="Talia3::N (class)">N</a></span>.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+Example config/talia3.yml file:
+</p>
+</div></h4>
+      <pre class="example code">application_name: Talia3 Application
+application_url: http://localhost:3000/
+base_uri: http://localhost:3000/
+user_emails_enabled: true
+api_enabled: true
+contexts:
+  public:  
+  ontology: 
+repositories:
+  development:
+    local: 
+        type: sesame
+        location: http://localhost:8080/openrdf-sesame/repositories/talia3
+loose_schema: false</pre>
+    
+      <h4><div class='inline'><p>
+Getting all configuration for Talia3:
+</p>
+</div></h4>
+      <pre class="example code">Talia3.config
+=&gt; {
+  &quot;application_name&quot;=&gt;&quot;Talia3 Application&quot;,
+  &quot;base_uri&quot;=&gt;&quot;http://localhost:3000/&quot;, 
+  &quot;contexts&quot;=&gt;{&quot;public&quot;=&gt;nil, &quot;ontology&quot;=&gt;nil},
+  &quot;repositories&quot;=&gt;{
+    &quot;development&quot;=&gt;{
+      &quot;local&quot;=&gt;{&quot;type&quot;=&gt;&quot;sesame&quot;,
+                &quot;location&quot;=&gt;&quot;http://localhost:8080/openrdf-sesame/repositories/talia3&quot;}
+    }
+  },
+  &quot;loose_schema&quot;=&gt;false
+}</pre>
+    
+      <h4><div class='inline'><p>
+Getting the application name
+</p>
+</div></h4>
+      <pre class="example code">Talia3.config(:application_name)
+=&gt; &quot;Talia3 Application&quot;</pre>
+    
+      <h4><div class='inline'><p>
+Getting the default repository for the current environment:
+</p>
+</div></h4>
+      <pre class="example code">Talia3.repository(:local)
+Talia3.repository
+=&gt; #&lt;RDF::Sesame::Repository:0x0000000(http://localhost:8080/openrdf-sesame/repositories/talia3)&gt;</pre>
+    
+      <h4><div class='inline'><p>
+Checking if a repository&#8217;s name is defined in the current
+environment:
+</p>
+</div></h4>
+      <pre class="example code">Talia3.repository_name? :zzz
+=&gt; false</pre>
+    
+      <h4><div class='inline'><p>
+Getting all repository names for for current environment:
+</p>
+</div></h4>
+      <pre class="example code">Talia3.repository_names
+=&gt; [&quot;local&quot;]</pre>
+    
+      <h4><div class='inline'><p>
+Requesting a dynamic, specialized, Talia3::Record class with type
+foaf:Person:
+</p>
+</div></h4>
+      <pre class="example code">p = Talia3::FOAF::Person
+=&gt; #&lt;Talia3::FOAF::Person:0x...&gt;
+p.type.to_s
+=&gt; &quot;http://xmlns.com/foaf/0.1/Person&quot;</pre>
+    
+      <h4><div class='inline'><p>
+Rails auto-load still works and has priority:
+</p>
+</div></h4>
+      <pre class="example code">Talia3::Auth::User.is_a? Talia3::Record
+=&gt; false</pre>
+    
+  </div>
+<h3>Author:</h3>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Riccardo Giomi <giomi@netseven.it>
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+   
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Talia3/Auth.html" title="Talia3::Auth (module)">Auth</a></span>, <span class='object_link'><a href="Talia3/Metal.html" title="Talia3::Metal (module)">Metal</a></span>, <span class='object_link'><a href="Talia3/ResourceHelper.html" title="Talia3::ResourceHelper (module)">ResourceHelper</a></span>, <span class='object_link'><a href="Talia3/Universal.html" title="Talia3::Universal (module)">Universal</a></span>
+    
+   
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Talia3/AdminController.html" title="Talia3::AdminController (class)">AdminController</a></span>, <span class='object_link'><a href="Talia3/ApplicationController.html" title="Talia3::ApplicationController (class)">ApplicationController</a></span>, <span class='object_link'><a href="Talia3/Engine.html" title="Talia3::Engine (class)">Engine</a></span>, <span class='object_link'><a href="Talia3/N.html" title="Talia3::N (class)">N</a></span>, <span class='object_link'><a href="Talia3/Namespace.html" title="Talia3::Namespace (class)">Namespace</a></span>, <span class='object_link'><a href="Talia3/Ontology.html" title="Talia3::Ontology (class)">Ontology</a></span>, <span class='object_link'><a href="Talia3/Record.html" title="Talia3::Record (class)">Record</a></span>, <span class='object_link'><a href="Talia3/Repositories.html" title="Talia3::Repositories (class)">Repositories</a></span>, <span class='object_link'><a href="Talia3/Resource.html" title="Talia3::Resource (class)">Resource</a></span>, <span class='object_link'><a href="Talia3/Schema.html" title="Talia3::Schema (class)">Schema</a></span>, <span class='object_link'><a href="Talia3/URI.html" title="Talia3::URI (class)">URI</a></span>, <span class='object_link'><a href="Talia3/Update.html" title="Talia3::Update (class)">Update</a></span>
+    
+  
+</p>
+
+
+
+
+
+  
+    <h2>
+      Plugin utilities
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#root-class_method" title="root (class method)">+ (String) <strong>root</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the path to the Talia3 plugin root.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Talia3 configuration and settings
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#config-class_method" title="config (class method)">+ (Hash) <strong>config</strong>(key = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns a hash with the configuration as stored in config/talia3.yml.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#config%3D-class_method" title="config= (class method)">+ (Hash) <strong>config=</strong>(new_config) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Allows to change the Talia3 configuration hash in memory.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#config_file-class_method" title="config_file (class method)">+ (String) <strong>config_file</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the relative path to the application configuration file.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#load_config-class_method" title="load_config (class method)">+ (Hash) <strong>load_config</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Loads configuration from the talia3.yml file.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#write_config-class_method" title="write_config (class method)">+ (true) <strong>write_config</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Writes the configuration back to the talia3.yml file.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Application methods
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#application_url-class_method" title="application_url (class method)">+ (String) <strong>application_url</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The base url for the application.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#user_emails_enabled%3F-class_method" title="user_emails_enabled? (class method)">+ (Boolean) <strong>user_emails_enabled?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns whether the application should send confirmation emails to users.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Repository methods
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#repository-class_method" title="repository (class method)">+ (RDF::Repository) <strong>repository</strong>(name = :local) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns an instanced RDF::Repository object.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#repository_name%3F-class_method" title="repository_name? (class method)">+ (Boolean) <strong>repository_name?</strong>(name) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns true if the argument is a configured repository&#8217;s name for
+the current environment.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#repository_names-class_method" title="repository_names (class method)">+ (Array&lt;String&gt;) <strong>repository_names</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the configured repository names for current environment.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Other configuration methods
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#api_enabled%3F-class_method" title="api_enabled? (class method)">+ (Boolean) <strong>api_enabled?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns true if Talia3 default APIs are enabled.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#application_name-class_method" title="application_name (class method)">+ (String) <strong>application_name</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the &#8220;application name&#8221; setting for Talia3.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#base_uri-class_method" title="base_uri (class method)">+ (String) <strong>base_uri</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the &#8220;base URI&#8221; setting for Talia3.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#locales-class_method" title="locales (class method)">+ (Array&lt;String&gt;) <strong>locales</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the &#8220;locales&#8221; setting for Talia3.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#strict_schema%3F-class_method" title="strict_schema? (class method)">+ (Boolean) <strong>strict_schema?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns true if the current configuration limits Record .
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Miscellaneous
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#table_name_prefix-class_method" title="table_name_prefix (class method)">+ (Object) <strong>table_name_prefix</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Defines database table prefixes for classes inside this module.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#const_missing-class_method" title="const_missing (class method)">+ (Class) <strong>const_missing</strong>(constant) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Reimplements constant missing to allow for dynamic classes like
+Talia3::FOAF::Person.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#prepare_repository-class_method" title="prepare_repository (class method)">+ (Object) <strong>prepare_repository</strong>(name) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the a RDF::Repository configured with the parameters found in
+conf/talia3.yml for the given name and current environment.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="api_enabled?-class_method">
+  
+    + (<tt>Boolean</tt>) <strong>api_enabled?</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns true if Talia3 default APIs are enabled.
+</p>
+<p>
+This is a shortcut for !!<span class='object_link'><a href="#config-class_method" title="Talia3.config (method)">config</a></span>(:api_enabled)  and its use should
+be preferred.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+285
+286
+287</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 285</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id api_enabled?'>api_enabled?</span>
+  <span class='op'>!</span><span class='op'>!</span><span class='kw'>self</span><span class='period'>.</span><span class='id config'>config</span><span class='lparen'>(</span><span class='symbol'>:api_enabled</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="application_name-class_method">
+  
+    + (<tt><span class='object_link'><a href="String.html" title="String (class)">String</a></span></tt>) <strong>application_name</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the &#8220;application name&#8221; setting for Talia3
+</p>
+<p>
+This is a shortcut for <span class='object_link'><a href="#config-class_method" title="Talia3.config (method)">config</a></span>(:application_name) and its use
+should be preferred.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+233
+234
+235</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 233</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id application_name'>application_name</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id config'>config</span> <span class='symbol'>:application_name</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="application_url-class_method">
+  
+    + (<tt><span class='object_link'><a href="String.html" title="String (class)">String</a></span></tt>) <strong>application_url</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The base url for the application.
+</p>
+<p>
+Needed to create back links from registration confirmation emails.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+186
+187
+188</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 186</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id application_url'>application_url</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id config'>config</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>application_url</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="base_uri-class_method">
+  
+    + (<tt><span class='object_link'><a href="String.html" title="String (class)">String</a></span></tt>) <strong>base_uri</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the &#8220;base URI&#8221; setting for Talia3
+</p>
+<p>
+This is used as a base to build local URIs.
+</p>
+<p>
+This is a shortcut for <span class='object_link'><a href="#config-class_method" title="Talia3.config (method)">config</a></span>(:base_uri) and its use should be
+preferred.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+246
+247
+248</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 246</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id base_uri'>base_uri</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id config'>config</span> <span class='symbol'>:base_uri</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="config-class_method">
+  
+    + (<tt>Hash</tt>) <strong>config</strong>(key = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+this method should not be used to check for configuration setting values,
+specific method from this class should be used.
+</p>
+</div>
+  </div>
+
+<p>
+Returns a hash with the configuration as stored in config/talia3.yml.
+</p>
+<p>
+Optional argument allows to get the subset of configuration for the
+required key.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="String.html" title="String (class)">String</a></span></tt>, <tt><span class='object_link'><a href="Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+optional configuration item key.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The configuration hash
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+121
+122
+123</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 121</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id config'>config</span><span class='lparen'>(</span><span class='id key'>key</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id key'>key</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='op'>?</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>Engine</span><span class='period'>.</span><span class='id config'>config</span><span class='period'>.</span><span class='id talia3'>talia3</span> <span class='op'>:</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>Engine</span><span class='period'>.</span><span class='id config'>config</span><span class='period'>.</span><span class='id talia3'>talia3</span><span class='lbracket'>[</span><span class='id key'>key</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="config=-class_method">
+  
+    + (<tt>Hash</tt>) <strong>config=</strong>(new_config) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Allows to change the Talia3 configuration hash in memory.
+</p>
+<p>
+Argument hash substitutes the configuration hash in its entirety. Use
+selfself.write_config to save the new configuration to file.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>new_config</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the new configuration hash.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The new configuration
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+149
+150
+151
+152
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 149</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id config='>config=</span><span class='lparen'>(</span><span class='id new_config'>new_config</span><span class='rparen'>)</span>
+  <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>Engine</span><span class='period'>.</span><span class='id config'>config</span><span class='period'>.</span><span class='id talia3'>talia3</span> <span class='op'>=</span> <span class='id new_config'>new_config</span>
+  <span class='comment'># Some options might alter Rails routes, reload them:
+</span>  <span class='const'>Rails</span><span class='period'>.</span><span class='id application'>application</span><span class='period'>.</span><span class='id reload_routes!'>reload_routes!</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="config_file-class_method">
+  
+    + (<tt><span class='object_link'><a href="String.html" title="String (class)">String</a></span></tt>) <strong>config_file</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the relative path to the application configuration file.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The path.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 129</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id config_file'>config_file</span>
+  <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>config</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>talia3.yml</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="const_missing-class_method">
+  
+    + (<tt>Class</tt>) <strong>const_missing</strong>(constant) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Reimplements constant missing to allow for dynamic classes like
+Talia3::FOAF::Person.
+</p>
+<p>
+Note that the Rails auto-load feature for Talia3 classes and modules still
+works and has priority, you won&#8217;t get what you expect if the
+requested class already exists. This means, though, that you can always
+override dynamic classes by creating their model file.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>const</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the missing constant, in the description example that would be
+&#8220;FOAF&#8220;
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a anonymous, intermediate class that will resolve the second constant
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 357</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id const_missing'>const_missing</span><span class='lparen'>(</span><span class='id constant'>constant</span><span class='rparen'>)</span>
+  <span class='kw'>begin</span>
+    <span class='kw'>super</span><span class='lparen'>(</span><span class='id constant'>constant</span><span class='rparen'>)</span>
+  <span class='kw'>rescue</span> <span class='const'>NameError</span>
+    <span class='kw'>unless</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='period'>.</span><span class='id namespace?'>namespace?</span> <span class='id constant'>constant</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id downcase'>downcase</span><span class='period'>.</span><span class='id to_sym'>to_sym</span>
+      <span class='id raise'>raise</span> 
+    <span class='kw'>else</span>
+      <span class='id namespace'>namespace</span> <span class='op'>=</span> <span class='id eval'>eval</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Talia3::N::</span><span class='embexpr_beg'>#{</span><span class='id constant'>constant</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+      <span class='id klass'>klass</span> <span class='op'>=</span> <span class='const'>Class</span><span class='period'>.</span><span class='id new'>new</span>
+      <span class='id klass'>klass</span><span class='period'>.</span><span class='id class_eval'>class_eval</span> <span class='kw'>do</span>
+        <span class='id cattr_accessor'>cattr_accessor</span> <span class='symbol'>:namespace</span>
+        <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id const_missing'>const_missing</span><span class='lparen'>(</span><span class='id constant'>constant</span><span class='rparen'>)</span>
+          <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>Record</span><span class='period'>.</span><span class='id class_for'>class_for</span><span class='lparen'>(</span><span class='id namespace'>namespace</span><span class='period'>.</span><span class='id __send__'>__send__</span> <span class='id constant'>constant</span><span class='rparen'>)</span>
+        <span class='kw'>end</span>
+      <span class='kw'>end</span>
+      <span class='id klass'>klass</span><span class='period'>.</span><span class='id namespace'>namespace</span> <span class='op'>=</span> <span class='id namespace'>namespace</span>
+      <span class='id const_set'>const_set</span> <span class='id constant'>constant</span><span class='comma'>,</span> <span class='id klass'>klass</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="load_config-class_method">
+  
+    + (<tt>Hash</tt>) <strong>load_config</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Loads configuration from the talia3.yml file.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The loaded configuration hash
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+137
+138
+139</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 137</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id load_config'>load_config</span>
+  <span class='const'>File</span><span class='period'>.</span><span class='id exists?'>exists?</span><span class='lparen'>(</span><span class='id config_file'>config_file</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='const'>YAML</span><span class='period'>.</span><span class='id load_file'>load_file</span><span class='lparen'>(</span><span class='id config_file'>config_file</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="locales-class_method">
+  
+    + (<tt>Array&lt;<span class='object_link'><a href="String.html" title="String (class)">String</a></span>&gt;</tt>) <strong>locales</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the &#8220;locales&#8221; setting for Talia3.
+</p>
+<p>
+While this is for use with Rails i18n, it is also used to select label
+languages from RDF literals. In particular, the order of languages in this
+array is the same order with which labels are scanned.
+</p>
+<p>
+For this last use this Talia3 allows a special value &#8220;none&#8221; for
+label with no language.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+262
+263
+264</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 262</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id locales'>locales</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id config'>config</span> <span class='symbol'>:locales</span> <span class='op'>||</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="prepare_repository-class_method">
+  
+    + (<tt>Object</tt>) <strong>prepare_repository</strong>(name) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the a RDF::Repository configured with the parameters found in
+conf/talia3.yml for the given name and current environment.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>repository</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="String.html" title="String (class)">String</a></span></tt>, <tt><span class='object_link'><a href="Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+name
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>
+RDF::Repository
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 310</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id prepare_repository'>prepare_repository</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
+  <span class='id name'>name</span> <span class='op'>=</span> <span class='id name'>name</span><span class='period'>.</span><span class='id to_s'>to_s</span>
+  <span class='kw'>begin</span>
+    <span class='id repositories'>repositories</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id config'>config</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>repositories</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='const'>Rails</span><span class='period'>.</span><span class='id env'>env</span><span class='rbracket'>]</span>
+    <span class='id repository'>repository</span> <span class='op'>=</span> <span class='id repositories'>repositories</span><span class='lbracket'>[</span><span class='id name'>name</span><span class='rbracket'>]</span>
+    <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='id repository'>repository</span>
+  <span class='kw'>rescue</span>
+    <span class='id raise'>raise</span> <span class='const'>Exception</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>%Q(</span><span class='tstring_content'>Invalid or absent configuration for repositories in &quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Rails</span><span class='period'>.</span><span class='id env'>env</span><span class='rbrace'>}</span><span class='tstring_content'>&quot;, please check your config/talia3.yml file</span><span class='tstring_end'>)</span></span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>case</span> <span class='id repository'>repository</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>type</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+    <span class='kw'>when</span> <span class='kw'>nil</span> <span class='kw'>then</span> <span class='id raise'>raise</span> <span class='const'>Exception</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Repository </span><span class='embexpr_beg'>#{</span><span class='id name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> not configured</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>sesame</span><span class='tstring_end'>'</span></span> <span class='kw'>then</span>
+      <span class='kw'>unless</span> <span class='id repository'>repository</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>location</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+        <span class='id raise'>raise</span> <span class='const'>Exception</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No location defined, please check config/talia3.yml configuration file</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>end</span>
+      <span class='const'>RDF</span><span class='op'>::</span><span class='const'>Sesame</span><span class='op'>::</span><span class='const'>Repository</span><span class='period'>.</span><span class='id new'>new</span> <span class='id repository'>repository</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>location</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+
+    <span class='comment'># TODO: support for repositoris of type &quot;file&quot;
+</span>    <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>file</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>then</span>
+      <span class='id raise'>raise</span> <span class='const'>NotImplementedError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Repositories of &quot;file&quot; type are a TODO</span><span class='tstring_end'>'</span></span>
+
+    <span class='comment'># TODO: support for repositoris of type &quot;memory&quot;
+</span>    <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>memory</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>then</span>
+      <span class='id raise'>raise</span> <span class='const'>NotImplementedError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Repositories of &quot;memory&quot; type are a TODO</span><span class='tstring_end'>'</span></span>
+
+    <span class='kw'>else</span>
+      <span class='id raise'>raise</span> <span class='const'>Exception</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>%Q(</span><span class='tstring_content'>Unknown repository type &quot;</span><span class='embexpr_beg'>#{</span><span class='id repository'>repository</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>type</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>&quot;</span><span class='tstring_end'>)</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="repository-class_method">
+  
+    + (<tt>RDF::Repository</tt>) <strong>repository</strong>(name = :local) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns an instanced RDF::Repository object.
+</p>
+<p>
+<p>
+Returns the a RDF::Repository configured with the parameters found in
+conf/talia3.yml for the given name and current environment.
+</p>
+
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>optional</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="String.html" title="String (class)">String</a></span></tt>, <tt><span class='object_link'><a href="Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+repository name, defaults to :local
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RDF::Repository</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+218
+219
+220
+221
+222</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 218</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id repository'>repository</span><span class='lparen'>(</span><span class='id name'>name</span><span class='op'>=</span><span class='symbol'>:local</span><span class='rparen'>)</span>
+  <span class='id name'>name</span> <span class='op'>=</span> <span class='id name'>name</span><span class='period'>.</span><span class='id to_s'>to_s</span>
+  <span class='ivar'>@repositories</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='ivar'>@repositories</span><span class='lbracket'>[</span><span class='id name'>name</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id prepare_repository'>prepare_repository</span> <span class='id name'>name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="repository_name?-class_method">
+  
+    + (<tt>Boolean</tt>) <strong>repository_name?</strong>(name) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns true if the argument is a configured repository&#8217;s name for
+the current environment.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>repository</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="String.html" title="String (class)">String</a></span></tt>, <tt><span class='object_link'><a href="Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+name to check
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+207
+208
+209</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 207</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id repository_name?'>repository_name?</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
+  <span class='id repository_names'>repository_names</span><span class='period'>.</span><span class='id include?'>include?</span> <span class='id name'>name</span><span class='period'>.</span><span class='id to_s'>to_s</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="repository_names-class_method">
+  
+    + (<tt>Array&lt;<span class='object_link'><a href="String.html" title="String (class)">String</a></span>&gt;</tt>) <strong>repository_names</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the configured repository names for current environment.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+196
+197
+198
+199</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 196</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id repository_names'>repository_names</span>
+  <span class='kw'>begin</span><span class='semicolon'>;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id config'>config</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>repositories</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='const'>Rails</span><span class='period'>.</span><span class='id env'>env</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id keys'>keys</span>
+  <span class='kw'>rescue</span> <span class='const'>NoMethodError</span><span class='semicolon'>;</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="root-class_method">
+  
+    + (<tt><span class='object_link'><a href="String.html" title="String (class)">String</a></span></tt>) <strong>root</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the path to the Talia3 plugin root.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+102
+103
+104
+105</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 102</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id root'>root</span>
+  <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>Engine</span><span class='period'>.</span><span class='id root'>root</span>
+  <span class='comment'>#File.join File.dirname(__FILE__), '..'
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="strict_schema?-class_method">
+  
+    + (<tt>Boolean</tt>) <strong>strict_schema?</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns true if the current configuration limits Record 
+</p>
+<pre class="code">
+  attributes to the ones defined in a schema.
+</pre>
+<p>
+This is a shortcut for !<span class='object_link'><a href="#config-class_method" title="Talia3.config (method)">config</a></span>(:loose_schema)  and its use should
+be preferred.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+274
+275
+276</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 274</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id strict_schema?'>strict_schema?</span>
+  <span class='op'>!</span><span class='kw'>self</span><span class='period'>.</span><span class='id config'>config</span> <span class='symbol'>:loose_schema</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="table_name_prefix-class_method">
+  
+    + (<tt>Object</tt>) <strong>table_name_prefix</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Defines database table prefixes for classes inside this module.
+</p>
+<p>
+Used by ActiveRecord to assemble the table name associated to a class.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+298
+299
+300</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 298</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id table_name_prefix'>table_name_prefix</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>talia3_</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="user_emails_enabled?-class_method">
+  
+    + (<tt>Boolean</tt>) <strong>user_emails_enabled?</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns whether the application should send confirmation emails to users.
+</p>
+<p>
+This value is also dependent on selfself.application_url as confirmation 
+emails need a complete link back to the application to finish the
+registration process.
+</p>
+<p>
+For this reason, confirmation emails will be disabled if no application_url
+is provided.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+176
+177
+178</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 176</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id user_emails_enabled?'>user_emails_enabled?</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id config'>config</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>user_emails_enabled</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='kw'>and</span> <span class='kw'>not</span> <span class='kw'>self</span><span class='period'>.</span><span class='id config'>config</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>application_url</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id blank?'>blank?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="write_config-class_method">
+  
+    + (<tt>true</tt>) <strong>write_config</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Writes the configuration back to the talia3.yml file.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>
+Exception if the file cannot be written.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+160
+161
+162
+163
+164</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3.rb', line 160</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id write_config'>write_config</span>
+  <span class='comment'>#config_file is defined in lib/talia3/engine.rb.
+</span>  <span class='const'>File</span><span class='period'>.</span><span class='id open'>open</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id config_file'>config_file</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>w+</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id io'>io</span><span class='op'>|</span> <span class='id io'>io</span><span class='period'>.</span><span class='id write'>write</span> <span class='const'>YAML</span><span class='period'>.</span><span class='id dump'>dump</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id config'>config</span><span class='rparen'>)</span><span class='rbrace'>}</span>
+  <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Aug 25 17:54:19 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

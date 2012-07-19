@@ -1,0 +1,3737 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Talia3::Resource
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (R)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Talia3.html" title="Talia3 (module)">Talia3</a></span></span>
+     &raquo; 
+    <span class="title">Resource</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Talia3::Resource
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Talia3::Resource</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2">Mixin::HasNamedGraph, Mixin::HasRepositories, Mixin::HasSchema, Mixin::RDFExportable</dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">app/models/talia3/resource.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+Talk about #type and Talia3::HasSchema
+</p>
+</div>
+  </div>
+
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+Talk about attribute interpretation, #[], #raw, #attributes and # value.
+</p>
+</div>
+  </div>
+
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+Talk about #[]=.
+</p>
+</div>
+  </div>
+
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+Allow to change repository when saving.
+</p>
+</div>
+  </div>
+
+
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+Please note that this class is not Rails-friendly, all ActiveModel and
+similar conventions are  implemented in Talia3::Record.
+</p>
+</div>
+  </div>
+
+<h1>A set of statements loosely tied to a specific URI.</h1>
+<p>
+The resource implements Talia3::HasNamedGraph and Talia3::HasRepositories,
+which means it has both a context and one or more repositories. Also, any
+statement added to the resource will  have his context forced to the
+resource&#8217;s own context.
+</p>
+<p>
+Statements can be loaded, saved and removed to/from a repository.
+</p>
+<p>
+<b>Important</b>: While Talia3 support RDF.rb&#8217;s RDF::URI objects,
+</p>
+<pre class="code">
+             use of Talia3::URI should be preferred.
+</pre>
+<h2>Behaviours</h2>
+<p>
+By default, when loaded, a resource contains statements which have the
+resource URI as either subject or object.
+</p>
+<p>
+Imagine the following triples in the repository, (ignoring contexts for
+now):
+</p>
+<pre class="code">
+  <span class='lbracket'>[</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri1'>uri1</span><span class='comma'>,</span> <span class='const'>RDF</span><span class='period'>.</span><span class='id type'>type</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>EX</span><span class='period'>.</span><span class='id type1'>type1</span><span class='rbracket'>]</span>
+  <span class='lbracket'>[</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri1'>uri1</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>DC</span><span class='period'>.</span><span class='id name'>name</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='lbracket'>[</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri2'>uri2</span><span class='comma'>,</span> <span class='const'>RDF</span><span class='period'>.</span><span class='id type'>type</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>EX</span><span class='period'>.</span><span class='id type2'>type2</span><span class='rbracket'>]</span>
+  <span class='lbracket'>[</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri2'>uri2</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>EX</span><span class='period'>.</span><span class='id relation'>relation</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri1'>uri1</span><span class='rbracket'>]</span>
+</pre>
+<p>
+r = Talia3::Resource.for(Talia3::N::LOCAL.uri1) would contain only the
+following triples:
+</p>
+<pre class="code">
+  <span class='lbracket'>[</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri1'>uri1</span><span class='comma'>,</span> <span class='const'>RDF</span><span class='period'>.</span><span class='id type'>type</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>EX</span><span class='period'>.</span><span class='id type1'>type1</span><span class='rbracket'>]</span>
+  <span class='lbracket'>[</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri1'>uri1</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>DC</span><span class='period'>.</span><span class='id name'>name</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='lbracket'>[</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri2'>uri2</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>EX</span><span class='period'>.</span><span class='id relation'>relation</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri1'>uri1</span><span class='rbracket'>]</span>
+</pre>
+<p>
+It is possible to change the loading behaviour by passing options either on
+initialization or when loading. Loading options do not persist, while
+initialization options are stored for future operations.
+</p>
+<p>
+The <tt>:depth</tt> option allows to load more statements, including those
+related to the resource URI through another statement.
+</p>
+<p>
+With the triples of the first example in the repository:
+</p>
+<pre class="code">
+  <span class='id r'>r</span> <span class='op'>=</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>Resource</span><span class='period'>.</span><span class='id for'>for</span><span class='lparen'>(</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri1'>uri1</span><span class='comma'>,</span> <span class='symbol'>:depth</span> <span class='op'>=&gt;</span> <span class='int'>2</span><span class='rparen'>)</span>
+</pre>
+<p>
+would return everything as the third statement is related to our uri
+through the fourth.
+</p>
+<p>
+<b>Note:</b> To avoid possible performance problems, :depth only accepts
+either 1 ora 2 as value. More will raise an exception.
+</p>
+<p>
+The <tt>:direction</tt> option allows to fetch those statements that have
+the requested URI as subject only (<em>:right</em>), as object only
+(<em>:left</em>) or both (<em>:both</em>); <em>:both</em> is the default.
+</p>
+<p>
+With the triples of the first example in the repository, the following:
+</p>
+<pre class="code">
+  <span class='id r'>r</span> <span class='op'>=</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>Resource</span><span class='period'>.</span><span class='id for'>for</span><span class='lparen'>(</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri1'>uri1</span><span class='comma'>,</span> <span class='symbol'>:direction</span> <span class='op'>=&gt;</span> <span class='symbol'>:left</span><span class='rparen'>)</span>
+</pre>
+<p>
+would return:
+</p>
+<pre class="code">
+  <span class='lbracket'>[</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri2'>uri2</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>EX</span><span class='period'>.</span><span class='id relation'>relation</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri1'>uri1</span><span class='rbracket'>]</span>
+</pre>
+<p>
+while:
+</p>
+<pre class="code">
+  <span class='id r'>r</span> <span class='op'>=</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>Resource</span><span class='period'>.</span><span class='id for'>for</span><span class='lparen'>(</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri1'>uri1</span><span class='comma'>,</span> <span class='symbol'>:direction</span> <span class='op'>=&gt;</span> <span class='symbol'>:right</span><span class='rparen'>)</span>
+</pre>
+<p>
+would return:
+</p>
+<pre class="code">
+  <span class='lbracket'>[</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri1'>uri1</span><span class='comma'>,</span> <span class='const'>RDF</span><span class='period'>.</span><span class='id type'>type</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>EX</span><span class='period'>.</span><span class='id type1'>type1</span><span class='rbracket'>]</span>
+  <span class='lbracket'>[</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri1'>uri1</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>DC</span><span class='period'>.</span><span class='id name'>name</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+Create a new resource:
+</p>
+</div></h4>
+      <pre class="example code"><span class='id r'>r</span> <span class='op'>=</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>Resource</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri'>uri</span><span class='rparen'>)</span></pre>
+    
+      <h4><div class='inline'><p>
+Load statements for the resource from the repository:
+</p>
+</div></h4>
+      <pre class="example code"><span class='id r'>r</span><span class='period'>.</span><span class='id load!'>load!</span></pre>
+    
+      <h4><div class='inline'><p>
+Create and load:
+</p>
+</div></h4>
+      <pre class="example code"><span class='id r'>r</span> <span class='op'>=</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>Resource</span><span class='period'>.</span><span class='id for'>for</span><span class='lparen'>(</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri'>uri</span><span class='rparen'>)</span></pre>
+    
+      <h4><div class='inline'><p>
+Add statemens to a resource:
+</p>
+</div></h4>
+      <pre class="example code"><span class='id r'>r</span> <span class='op'>=</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>Resource</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri'>uri</span><span class='rparen'>)</span>
+<span class='id r'>r</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>LOCAL</span><span class='period'>.</span><span class='id uri1'>uri1</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>DC</span><span class='period'>.</span><span class='id description'>description</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span></pre>
+    
+      <h4><div class='inline'><p>
+Save resource statements
+</p>
+</div></h4>
+      <pre class="example code"><span class='id r'>r</span><span class='period'>.</span><span class='id save!'>save!</span></pre>
+    
+      <h4><div class='inline'><p>
+Clear resource statements:
+</p>
+</div></h4>
+      <pre class="example code"><span class='id r'>r</span><span class='period'>.</span><span class='id clear'>clear</span></pre>
+    
+      <h4><div class='inline'><p>
+Delete statements from repository:
+</p>
+</div></h4>
+      <pre class="example code"><span class='id r'>r</span><span class='period'>.</span><span class='id delete!'>delete!</span></pre>
+    
+      <h4><div class='inline'><p>
+Delete statements from the repository around this resource uri:
+</p>
+</div></h4>
+      <pre class="example code">Talia3::Resource.new(Talia3::N::LOCAL.uri).cleanse_uri!
+
+Note that this operation has nothing to do with this resource
+current statements
+Same as .load!(:depth =&gt; 1, :direction =&gt; :both).delete! but more efficient.</pre>
+    
+      <h4><div class='inline'><p>
+Delete statements with our own context from the active repository:
+</p>
+</div></h4>
+      <pre class="example code">Talia3::Resource.new(Talia3::N::LOCAL.uri).cleanse_context!
+
+Note that this operation has nothing to do with this resource
+current statements</pre>
+    
+      <h4><div class='inline'><p>
+Accessing resource statements:
+</p>
+</div></h4>
+      <pre class="example code"><span class='id r'>r</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id statement'>statement</span><span class='op'>|</span> <span class='id puts'>puts</span> <span class='id statement'>statement</span><span class='period'>.</span><span class='id inspect'>inspect</span><span class='rbrace'>}</span></pre>
+    
+      <h4><div class='inline'><p>
+Accessing objects for resource URI and specific predicate:
+</p>
+</div></h4>
+      <pre class="example code">r[Talia3::N::DC.name]
+=&gt; [#&lt;RDF::Literal:0x574f252(&quot;Example URI&quot;)&gt;] </pre>
+    
+  </div>
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="Record.html" title="Talia3::Record (class)">Record</a></span></p>
+</div>
+
+
+  
+  
+  
+  
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#options-instance_method" title="#options (instance method)">- (Hash) <strong>options</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The options for this resource.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#uri-instance_method" title="#uri (instance method)">- (RDF::Uri) <strong>uri</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The URI for this resource.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#for-class_method" title="for (class method)">+ (Talia3::Resource) <strong>for</strong>(uri, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Quick loader, creates a new resource and loads it.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#from_lod-class_method" title="from_lod (class method)">+ (Talia3::Resource) <strong>from_lod</strong>(uri, redirect_limit = 10) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new resource from data acquired through a LOD URI.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#from_sparql-class_method" title="from_sparql (class method)">+ (Talia3::Resource) <strong>from_sparql</strong>(sparql, uri) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new resource from data acquired through a DESCRIBE query to a
+sparql endpoint.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type-class_method" title="type (class method)">+ (Object) <strong>type</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Stores a default type for this class.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#%5B%5D-instance_method" title="#[] (instance method)">- (String, Array&lt;Talia3::Resource, String&gt;) <strong>[]</strong>(predicate) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Interprets and returns the object of a statement given <span class='object_link'><a href="#uri-instance_method" title="Talia3::Resource#uri (method)">#uri</a></span> as subject
+and the argument as predicate.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#%5B%5D%3D-instance_method" title="#[]= (instance method)">- (Object) <strong>[]=</strong>(name, value) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Sets the value for a predicate.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#all_properties-instance_method" title="#all_properties (instance method)">- (Object) <strong>all_properties</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the list of all properties (predicates) for this resource.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attribute-instance_method" title="#attribute (instance method)">- (Object) <strong>attribute</strong>(name) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns an attribute value given a valid attribute identifier.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete%21-instance_method" title="#delete! (instance method)">- (Talia3::Resource) <strong>delete!</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Deletes statements from the active repository that correspond to this
+resource&#8217;s statements.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#depth%3D-instance_method" title="#depth= (instance method)">- (Object) <strong>depth=</strong>(depth) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Sets the <tt>:depth</tt> option.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#direction%3D-instance_method" title="#direction= (instance method)">- (Object) <strong>direction=</strong>(direction) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Sets the <tt>:direction</tt> option.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Talia3::Resource) <strong>initialize</strong>(uri = nil, options = {}) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new Resource object.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#inspect-instance_method" title="#inspect (instance method)">- (String) <strong>inspect</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns a developer-friendly representation of this object.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#inverse_properties-instance_method" title="#inverse_properties (instance method)">- (Object) <strong>inverse_properties</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the list of properties (predicates) that have this resource as
+object.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#label-instance_method" title="#label (instance method)">- (String) <strong>label</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns a label for this resource.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#load%21-instance_method" title="#load! (instance method)">- (Talia3::Resource) <strong>load!</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Loads statements from the active repository.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#persisted%3D-instance_method" title="#persisted= (instance method)">- (Boolean) <strong>persisted=</strong>(bool) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Allows to change the persisted state.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#persisted%3F-instance_method" title="#persisted? (instance method)">- (Boolean) <strong>persisted?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Indicates whether this record is present in the store or is a new one.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#raw-instance_method" title="#raw (instance method)">- (Array&lt;RDF::URI, RDF::Literal&gt;) <strong>raw</strong>(predicate) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns values for a predicate on this resource in raw form.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#raw_set-instance_method" title="#raw_set (instance method)">- (Array) <strong>raw_set</strong>(predicate, value) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Adds a triple to the resource using its URI as <b>subject</b> and ignoring
+any check  and schema constraints.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#raw_set_inverse-instance_method" title="#raw_set_inverse (instance method)">- (Array) <strong>raw_set_inverse</strong>(predicate, value) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Adds a triple to the resource using its URI as <b>object</b> and ignoring
+any check  and schema constraints.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save%21-instance_method" title="#save! (instance method)">- (Talia3::Resource) <strong>save!</strong> </a>
+    
+
+    
+      (also: #update!)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Saves the statements in the active repository.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_attribute-instance_method" title="#set_attribute (instance method)">- (Object) <strong>set_attribute</strong>(name, value) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Sets an attribute value, overwriting existing values.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type-instance_method" title="#type (instance method)">- (RDF::URI, Talia3::RDF::OWL.thing) <strong>type</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns a single type URI for this resource.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type%3D-instance_method" title="#type= (instance method)">- (RDF::URI, ...) <strong>type=</strong>(type_uri) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Explicitly sets the type (rdf:type) for this resource.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#undefined_properties-instance_method" title="#undefined_properties (instance method)">- (Array) <strong>undefined_properties</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns only &#8220;unknown&#8221; properties (those predicates we have no
+schema information about).
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Talia3::Resource (class)">Talia3::Resource</a></span></tt>) <strong>initialize</strong>(uri = nil, options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+uri argument is optional for test purpouses only.
+</p>
+</div>
+  </div>
+
+<p>
+Creates a new Resource object.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uri</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="URI.html" title="Talia3::URI (class)">Talia3::URI</a></span></tt>, <tt>RDF::URI</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the resource URI
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+new resource options
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:repositories</span>
+          <span class="type">(<tt>Array&lt;<span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span>&gt;</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+An array of repository configuration names
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="name">:repository</span>
+          <span class="type">(<tt><span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The repository to use as active for this resource
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="name">:context</span>
+          <span class="type">(<tt><span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The context for this resource
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="name">:depth</span>
+          <span class="type">(<tt>1</tt>, <tt>2</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+How many relations to follow when  fetching statements for uri, defaults to
+1
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="name">:direction</span>
+          <span class="type">(<tt>:right</tt>, <tt>:left</tt>, <tt>:both</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+When fetching statements, follow only relations where  uri is the subject
+(:right), the object (:left) or :both
+</p>
+</div>
+        </tr>
+      
+    </ul>
+  
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Talia3::Resource.selfself.for</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+224
+225
+226
+227
+228
+229
+230
+231</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 224</span>
+
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id uri'>uri</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id uri'>uri</span>       <span class='op'>=</span> <span class='id uri'>uri</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id depth'>depth</span>     <span class='op'>=</span> <span class='id options'>options</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:depth</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='int'>1</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id direction'>direction</span> <span class='op'>=</span> <span class='id options'>options</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:direction</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='symbol'>:both</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id context'>context</span>   <span class='op'>=</span> <span class='id options'>options</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:context</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id context'>context</span>
+  <span class='id options'>options</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:repositories</span><span class='rparen'>)</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id r'>r</span><span class='op'>|</span> <span class='id add_repository'>add_repository</span> <span class='id r'>r</span><span class='rbrace'>}</span> <span class='kw'>unless</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:repositories</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='id use_repository'>use_repository</span> <span class='id options'>options</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:repository</span><span class='rparen'>)</span>                <span class='kw'>unless</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:repository</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <span id="options-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="options-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>options</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The options for this resource
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+133
+134
+135</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 133</span>
+
+<span class='kw'>def</span> <span class='id options'>options</span>
+  <span class='ivar'>@options</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="uri=-instance_method"></span>
+      <span id="uri-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="uri-instance_method">
+  
+    - (<tt>RDF::Uri</tt>) <strong>uri</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The URI for this resource.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RDF::Uri</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+128
+129
+130</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 128</span>
+
+<span class='kw'>def</span> <span class='id uri'>uri</span>
+  <span class='ivar'>@uri</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="for-class_method">
+  
+    + (<tt><span class='object_link'><a href="" title="Talia3::Resource (class)">Talia3::Resource</a></span></tt>) <strong>for</strong>(uri, options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Quick loader, creates a new resource and loads it.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uri</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="URI.html" title="Talia3::URI (class)">Talia3::URI</a></span></tt>, <tt>RDF::URI</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the resource URI
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+new resource options
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:repositories</span>
+          <span class="type">(<tt>Array&lt;<span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span>&gt;</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+An array of repository configuration names
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="name">:repository</span>
+          <span class="type">(<tt><span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The repository to use as active for this resource
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="name">:context</span>
+          <span class="type">(<tt><span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The context for this resource
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="name">:depth</span>
+          <span class="type">(<tt>1</tt>, <tt>2</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+How many relations to follow when  fetching statements for uri, defaults to
+1
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="name">:direction</span>
+          <span class="type">(<tt>:right</tt>, <tt>:left</tt>, <tt>:both</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+When fetching statements, follow only relations where  uri is the subject
+(:right), the object (:left) or :both
+</p>
+</div>
+        </tr>
+      
+    </ul>
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Talia3::Resource (class)">Talia3::Resource</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#initialize-instance_method" title="Talia3::Resource#initialize (method)">#initialize</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 168</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='kw'>for</span><span class='lparen'>(</span><span class='id uri'>uri</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id uri'>uri</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span><span class='period'>.</span><span class='id load!'>load!</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="from_lod-class_method">
+  
+    + (<tt><span class='object_link'><a href="" title="Talia3::Resource (class)">Talia3::Resource</a></span></tt>) <strong>from_lod</strong>(uri, redirect_limit = 10) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates a new resource from data acquired through a LOD URI.
+</p>
+<p>
+Will return an empty resource if the server response is 404 Not Found.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uri</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>redirect_limit</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>10</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Used internally to avoid redirect loops
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Talia3::Resource (class)">Talia3::Resource</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>URI.fetch</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+181
+182
+183
+184
+185
+186
+187
+188
+189</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 181</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id from_lod'>from_lod</span><span class='lparen'>(</span><span class='id uri'>uri</span><span class='comma'>,</span> <span class='id redirect_limit'>redirect_limit</span> <span class='op'>=</span> <span class='int'>10</span><span class='rparen'>)</span>
+  <span class='kw'>begin</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id uri'>uri</span><span class='rparen'>)</span><span class='period'>.</span><span class='id import_rdf'>import_rdf</span> <span class='id uri'>uri</span><span class='period'>.</span><span class='id to_uri'>to_uri</span><span class='period'>.</span><span class='id fetch'>fetch</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>application/rdf+xml</span><span class='tstring_end'>'</span></span>
+  <span class='kw'>rescue</span> <span class='const'>Net</span><span class='op'>::</span><span class='const'>HTTPServerException</span>
+    <span class='comment'># FIXME: apparently Net::HTTP now raises only one type of exception, I'm missing somthing?
+</span>    <span class='id raise'>raise</span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='gvar'>$!</span><span class='period'>.</span><span class='id message'>message</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^404 </span><span class='regexp_end'>/</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+    <span class='kw'>return</span> <span class='kw'>self</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id uri'>uri</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="from_sparql-class_method">
+  
+    + (<tt><span class='object_link'><a href="" title="Talia3::Resource (class)">Talia3::Resource</a></span></tt>) <strong>from_sparql</strong>(sparql, uri) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates a new resource from data acquired through a DESCRIBE query to a
+sparql endpoint.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sparql</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="URI.html" title="Talia3::URI (class)">Talia3::URI</a></span></tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Sparql endpoint URL.
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>uri</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="URI.html" title="Talia3::URI (class)">Talia3::URI</a></span></tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Resource URI.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Talia3::Resource (class)">Talia3::Resource</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+198
+199
+200
+201
+202
+203
+204
+205
+206</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 198</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id from_sparql'>from_sparql</span><span class='lparen'>(</span><span class='id sparql'>sparql</span><span class='comma'>,</span> <span class='id uri'>uri</span><span class='rparen'>)</span>
+  <span class='kw'>begin</span>
+    <span class='id resource'>resource</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id uri'>uri</span><span class='rparen'>)</span>
+    <span class='const'>RDF</span><span class='op'>::</span><span class='const'>SPARQL</span><span class='op'>::</span><span class='const'>Repository</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id sparql'>sparql</span><span class='rparen'>)</span><span class='period'>.</span><span class='id query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DESCRIBE &lt;</span><span class='embexpr_beg'>#{</span><span class='id uri'>uri</span><span class='rbrace'>}</span><span class='tstring_content'>&gt;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id triple'>triple</span><span class='op'>|</span>
+      <span class='id resource'>resource</span> <span class='op'>&lt;&lt;</span> <span class='id triple'>triple</span>
+    <span class='kw'>end</span>
+    <span class='id resource'>resource</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="type-class_method">
+  
+    + (<tt>Object</tt>) <strong>type</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Stores a default type for this class.
+</p>
+<p>
+Used when generating dynamic classes like Talia3::FOAF::Person. Moved to
+subclasses cattr_accessor :type
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uri</span>
+      
+      
+        <span class='type'>(<tt>RDF::URI</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+150
+151
+152</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 150</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id type'>type</span>
+  <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="[]-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>Array&lt;<span class='object_link'><a href="" title="Talia3::Resource (class)">Talia3::Resource</a></span>, <span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>) <strong>[]</strong>(predicate) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+For now at least, some freedom is allowed to values, so you
+</p>
+</div>
+  </div>
+
+<p>
+Interprets and returns the object of a statement given <span class='object_link'><a href="#uri-instance_method" title="Talia3::Resource#uri (method)">#uri</a></span> as subject
+and the argument as predicate.
+</p>
+<p>
+Results will be converted in the best way possible given the resource
+schema and the properties&#8217; values.
+</p>
+<p>
+For example, Literals with language will be converted to a single string
+choosen from the best-fitting language.
+</p>
+<p>
+could get an array of strings and resources if the resource property value
+is &#8220;strange&#8221;.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>predicate</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>RDF::URI</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>Array&lt;<span class='object_link'><a href="" title="Talia3::Resource (class)">Talia3::Resource</a></span>, <span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if argument is not a valid URI.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#attribute-instance_method" title="Talia3::Resource#attribute (method)">#attribute</a></span></li>
+    
+      <li><span class='object_link'><a href="#raw-instance_method" title="Talia3::Resource#raw (method)">#raw</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+343
+344
+345</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 343</span>
+
+<span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span><span class='id predicate'>predicate</span><span class='rparen'>)</span>
+  <span class='id attribute'>attribute</span> <span class='id predicate'>predicate</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="[]=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>[]=</strong>(name, value) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+support i18n: literals with different language should not be replaced if we
+are inserting a String literal.
+</p>
+</div>
+  </div>
+
+
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+This method replaces all values for the attribute.
+</p>
+</div>
+  </div>
+
+<p>
+Sets the value for a predicate.
+</p>
+<p>
+Replaces existing values.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>RDF::URI</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt><span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The value argument.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if predicate is not a valid URI.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#set_attribute-instance_method" title="Talia3::Resource#set_attribute (method)">#set_attribute</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+362
+363
+364</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 362</span>
+
+<span class='kw'>def</span> <span class='op'>[]=</span><span class='lparen'>(</span><span class='id name'>name</span><span class='comma'>,</span> <span class='id value'>value</span><span class='rparen'>)</span>
+  <span class='id set_attribute'>set_attribute</span> <span class='id name'>name</span><span class='comma'>,</span> <span class='id value'>value</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="all_properties-instance_method">
+  
+    - (<tt>Object</tt>) <strong>all_properties</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+Does not include inverse properties (where the current resource is the
+object instead of the subject).
+</p>
+</div>
+  </div>
+
+<p>
+Returns the list of all properties (predicates) for this resource.
+</p>
+<p>
+Note that this returns only properties one step distant from the
+Talia3::Resource.selfself.uri. Predicates are converted to symbols by URI.to_key
+before being added to the result.
+</p>
+<p>
+@ return [Array<Symbol>] The list of properties, as symbols
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+296
+297
+298
+299
+300</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 296</span>
+
+<span class='kw'>def</span> <span class='id all_properties'>all_properties</span>
+  <span class='id graph'>graph</span><span class='period'>.</span><span class='id query'>query</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id uri'>uri</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id predicates'>predicates</span><span class='period'>.</span><span class='id map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id p'>p</span><span class='op'>|</span>
+    <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>URI</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id p'>p</span><span class='rparen'>)</span><span class='period'>.</span><span class='id to_key'>to_key</span>
+  <span class='kw'>end</span><span class='period'>.</span><span class='id compact'>compact</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="attribute-instance_method">
+  
+    - (<tt>Object</tt>) <strong>attribute</strong>(name) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns an attribute value given a valid attribute identifier.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>RDF::URI</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt><span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+371
+372
+373
+374
+375</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 371</span>
+
+<span class='kw'>def</span> <span class='id attribute'>attribute</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
+  <span class='id name'>name</span> <span class='op'>=</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>URI</span><span class='period'>.</span><span class='id new'>new</span> <span class='id name'>name</span>
+  <span class='comment'># Schema strictness issues are handled by #value
+</span>  <span class='id property_value'>property_value</span> <span class='id name'>name</span><span class='comma'>,</span> <span class='id raw'>raw</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="delete!-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Talia3::Resource (class)">Talia3::Resource</a></span></tt>) <strong>delete!</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+Does not clear local statements.
+</p>
+</div>
+  </div>
+
+<p>
+Deletes statements from the active repository that correspond to this
+resource&#8217;s statements.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Talia3::Resource (class)">Talia3::Resource</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+self (chainable)
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Exception</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if no repository is active
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Exception</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if repository is read-only
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+547
+548
+549
+550</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 547</span>
+
+<span class='kw'>def</span> <span class='id delete!'>delete!</span>
+  <span class='id raise'>raise</span> <span class='const'>Exception</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Cannot delete, no repository chosen</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id repository'>repository</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='id delete_from_repository!'>delete_from_repository!</span> <span class='id repository'>repository</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="depth=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>depth=</strong>(depth) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Sets the <tt>:depth</tt> option.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>depth</span>
+      
+      
+        <span class='type'>(<tt>Number</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>
+the argument
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if argument is not an integer
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Exception</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if argument > 2 (for efficiency reasons)
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+463
+464
+465
+466
+467</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 463</span>
+
+<span class='kw'>def</span> <span class='id depth='>depth=</span><span class='lparen'>(</span><span class='id depth'>depth</span><span class='rparen'>)</span>
+  <span class='id check_depth'>check_depth</span> <span class='id depth'>depth</span>
+  <span class='lparen'>(</span><span class='ivar'>@options</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='symbol'>:depth</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id depth'>depth</span>
+  <span class='id depth'>depth</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="direction=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>direction=</strong>(direction) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Sets the <tt>:direction</tt> option
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'></span>
+      
+      
+        <span class='type'>(<tt>:right</tt>, <tt>:left</tt>, <tt>:both</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>
+the argument
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if argument is unexpected value
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+475
+476
+477
+478
+479</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 475</span>
+
+<span class='kw'>def</span> <span class='id direction='>direction=</span><span class='lparen'>(</span><span class='id direction'>direction</span><span class='rparen'>)</span>
+  <span class='id check_direction'>check_direction</span> <span class='id direction'>direction</span>
+  <span class='lparen'>(</span><span class='ivar'>@options</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='symbol'>:direction</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id direction'>direction</span>
+  <span class='id direction'>direction</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="inspect-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>inspect</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns a developer-friendly representation of this object.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+556
+557
+558</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 556</span>
+
+<span class='kw'>def</span> <span class='id inspect'>inspect</span>
+  <span class='id sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#&lt;%s:%#0x(%s)&gt;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id name'>name</span><span class='comma'>,</span> <span class='id __id__'>__id__</span><span class='comma'>,</span> <span class='id uri'>uri</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="inverse_properties-instance_method">
+  
+    - (<tt>Object</tt>) <strong>inverse_properties</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+inverse properties are not filtered by schema constraints.
+</p>
+</div>
+  </div>
+
+<p>
+Returns the list of properties (predicates) that have this resource as
+object.
+</p>
+<p>
+@ return [Array<Symbol>] The list of properties, as symbols
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+317
+318
+319
+320
+321</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 317</span>
+
+<span class='kw'>def</span> <span class='id inverse_properties'>inverse_properties</span>
+  <span class='id graph'>graph</span><span class='period'>.</span><span class='id query'>query</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id uri'>uri</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id predicates'>predicates</span><span class='period'>.</span><span class='id map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id p'>p</span><span class='op'>|</span>
+    <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>URI</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id p'>p</span><span class='rparen'>)</span><span class='period'>.</span><span class='id to_key'>to_key</span>
+  <span class='kw'>end</span><span class='period'>.</span><span class='id compact'>compact</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="label-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>label</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns a label for this resource.
+</p>
+<p>
+Will try to use rdfs:label if present, or a pretty-formatted URI.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+239
+240
+241</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 239</span>
+
+<span class='kw'>def</span> <span class='id label'>label</span>
+  <span class='id raw'>raw</span><span class='lparen'>(</span><span class='symbol'>:rdfs__label</span><span class='rparen'>)</span><span class='period'>.</span><span class='id blank?'>blank?</span> <span class='op'>?</span> <span class='id uri'>uri</span><span class='period'>.</span><span class='id short'>short</span> <span class='op'>:</span> <span class='id raw'>raw</span><span class='lparen'>(</span><span class='symbol'>:rdfs__label</span><span class='rparen'>)</span><span class='period'>.</span><span class='id first'>first</span><span class='period'>.</span><span class='id to_s'>to_s</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="load!-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Talia3::Resource (class)">Talia3::Resource</a></span></tt>) <strong>load!</strong>(options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+you cannot change context from here&#8230; too risky.
+</p>
+</div>
+  </div>
+
+<p>
+Loads statements from the active repository.
+</p>
+<p>
+Accepts new values for <tt>:repository</tt>, <tt>:depth</tt> and
+<tt>:direction</tt>, that will be used for this operation only.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a customizable set of options
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:repository</span>
+          <span class="type">(<tt><span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The repository to use as active for this resource
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="name">:depth</span>
+          <span class="type">(<tt>1</tt>, <tt>2</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+How many relations to follow when  fetching statements for uri, defaults to
+1
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="name">:direction</span>
+          <span class="type">(<tt>:right</tt>, <tt>:left</tt>, <tt>:both</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+When fetching statements, follow only relations where
+</p>
+</div>
+        </tr>
+      
+    </ul>
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Talia3::Resource (class)">Talia3::Resource</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+self (chainable)
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Exception</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if the resource has no URI set
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Exception</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if no repository is active or indicated in options
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 495</span>
+
+<span class='kw'>def</span> <span class='id load!'>load!</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id raise'>raise</span> <span class='const'>Exception</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No uri specified for resource</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id uri'>uri</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='id check_options'>check_options</span> <span class='id options'>options</span>
+  <span class='comment'># If a repository is indicated, it will be used for this operation only.
+</span>  <span class='id old_repository'>old_repository</span> <span class='op'>=</span> <span class='id repository'>repository</span>
+  <span class='id use_repository'>use_repository</span> <span class='id options'>options</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:repository</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:repository</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='id options'>options</span><span class='period'>.</span><span class='id reject!'>reject!</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id key'>key</span><span class='comma'>,</span> <span class='id value'>value</span><span class='op'>|</span> <span class='op'>!</span><span class='lbracket'>[</span><span class='symbol'>:repository</span><span class='comma'>,</span> <span class='symbol'>:depth</span><span class='comma'>,</span> <span class='symbol'>:direction</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id include?'>include?</span><span class='lparen'>(</span><span class='id key'>key</span><span class='rparen'>)</span><span class='rbrace'>}</span>
+  <span class='id options'>options</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id options'>options</span><span class='period'>.</span><span class='id merge'>merge</span> <span class='id options'>options</span>
+  <span class='id raise'>raise</span> <span class='const'>Exception</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Cannot load, no repository chosen</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id repository'>repository</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+
+  <span class='id clear_graph'>clear_graph</span>
+  <span class='id query'>query</span> <span class='op'>=</span> <span class='id load_query'>load_query</span><span class='lparen'>(</span><span class='id options'>options</span><span class='rparen'>)</span>
+
+  <span class='id repository'>repository</span><span class='period'>.</span><span class='id query'>query</span><span class='lparen'>(</span><span class='id query'>query</span><span class='rparen'>)</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id statement'>statement</span><span class='op'>|</span>
+    <span class='id graph'>graph</span> <span class='op'>&lt;&lt;</span> <span class='id statement'>statement</span>
+  <span class='kw'>end</span>
+  <span class='id repository'>repository</span> <span class='op'>=</span> <span class='id old_repository'>old_repository</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id persisted'>persisted</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="persisted=-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>persisted=</strong>(bool) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Allows to change the persisted state.
+</p>
+<p>
+@todo: shouldn&#8217;t this be at least private?
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bool</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the newly set value
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+283
+284
+285</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 283</span>
+
+<span class='kw'>def</span> <span class='id persisted='>persisted=</span><span class='lparen'>(</span><span class='id bool'>bool</span><span class='rparen'>)</span>
+  <span class='ivar'>@persisted</span> <span class='op'>=</span> <span class='op'>!</span><span class='op'>!</span><span class='id bool'>bool</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="persisted?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>persisted?</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Indicates whether this record is present in the store or is a new one.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+272
+273
+274</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 272</span>
+
+<span class='kw'>def</span> <span class='id persisted?'>persisted?</span>
+  <span class='ivar'>@persisted</span> <span class='op'>||=</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="raw-instance_method">
+  
+    - (<tt>Array&lt;RDF::URI, RDF::Literal&gt;</tt>) <strong>raw</strong>(predicate) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+This method always returns an array, even if there is only one object.
+</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+Given the nature of RDF terms, a single value can still
+</p>
+</div>
+  </div>
+
+<p>
+Returns values for a predicate on this resource in raw form.
+</p>
+<p>
+As no interpretation whatsoever is done on the values, it&#8217;s always
+assumed that there is more than one, that&#8217;s why an array is returned.
+</p>
+<p>
+have more than one result, taking language in consideration, for example.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'></span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>RDF::URI</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;RDF::URI, RDF::Literal&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+416
+417
+418
+419
+420</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 416</span>
+
+<span class='kw'>def</span> <span class='id raw'>raw</span><span class='lparen'>(</span><span class='id predicate'>predicate</span><span class='rparen'>)</span>
+  <span class='lparen'>(</span><span class='id graph'>graph</span><span class='period'>.</span><span class='id query'>query</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id uri'>uri</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>URI</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id predicate'>predicate</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id statement'>statement</span><span class='op'>|</span>
+    <span class='id statement'>statement</span><span class='period'>.</span><span class='id object'>object</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>RDF</span><span class='op'>::</span><span class='const'>URI</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>URI</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id statement'>statement</span><span class='period'>.</span><span class='id object'>object</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id statement'>statement</span><span class='period'>.</span><span class='id object'>object</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="raw_set-instance_method">
+  
+    - (<tt>Array</tt>) <strong>raw_set</strong>(predicate, value) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Adds a triple to the resource using its URI as <b>subject</b> and ignoring
+any check  and schema constraints.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>predicate</span>
+      
+      
+        <span class='type'>(<tt>RDF::URI</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt><span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>[RDF::URI, <span class='object_link'><a href="../String.html" title="String (class)">String</a></span>, <span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span>]</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+429
+430
+431</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 429</span>
+
+<span class='kw'>def</span> <span class='id raw_set'>raw_set</span><span class='lparen'>(</span><span class='id predicate'>predicate</span><span class='comma'>,</span> <span class='id value'>value</span><span class='rparen'>)</span>
+  <span class='id graph'>graph</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id uri'>uri</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>URI</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id predicate'>predicate</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id value'>value</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="raw_set_inverse-instance_method">
+  
+    - (<tt>Array</tt>) <strong>raw_set_inverse</strong>(predicate, value) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Adds a triple to the resource using its URI as <b>object</b> and ignoring
+any check  and schema constraints.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>predicate</span>
+      
+      
+        <span class='type'>(<tt>RDF::URI</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt><span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value,</span>
+      
+      
+        <span class='type'>(<tt>[RDF::URI, <span class='object_link'><a href="../String.html" title="String (class)">String</a></span>, <span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span>]</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+note that this is <b>always</b> considered  a URI and used as subject for
+the new triple
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+441
+442
+443</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 441</span>
+
+<span class='kw'>def</span> <span class='id raw_set_inverse'>raw_set_inverse</span><span class='lparen'>(</span><span class='id predicate'>predicate</span><span class='comma'>,</span> <span class='id value'>value</span><span class='rparen'>)</span>
+  <span class='id graph'>graph</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>URI</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id value'>value</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>URI</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id predicate'>predicate</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id uri'>uri</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="save!-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Talia3::Resource (class)">Talia3::Resource</a></span></tt>) <strong>save!</strong> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='update!-instance_method'>update!</span></span>
+    </span>
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+Saving a resource removes all triples from the store first. This means that
+of all triples with the resource&#8217;s URI only the ones present in the
+resource itself at the time of saving will remain.
+</p>
+</div>
+  </div>
+
+<p>
+Saves the statements in the active repository.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Talia3::Resource (class)">Talia3::Resource</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+self (chainable)
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Exception</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if no repository is active
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Exception</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if repository is read-only
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+527
+528
+529
+530
+531
+532
+533
+534
+535</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 527</span>
+
+<span class='kw'>def</span> <span class='id save!'>save!</span>
+  <span class='id raise'>raise</span> <span class='const'>Exception</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Cannot load, no repository chosen</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id repository'>repository</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='comment'># Make sure type is saved as a triple too.
+</span>  <span class='id graph'>graph</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id uri'>uri</span><span class='comma'>,</span> <span class='const'>RDF</span><span class='period'>.</span><span class='id type'>type</span><span class='comma'>,</span> <span class='id type'>type</span><span class='rbracket'>]</span>
+  <span class='id cleanse_uri!'>cleanse_uri!</span>
+  <span class='id save_graph!'>save_graph!</span> <span class='id repository'>repository</span>
+  <span class='id persisted'>persisted</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="set_attribute-instance_method">
+  
+    - (<tt>Object</tt>) <strong>set_attribute</strong>(name, value) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Sets an attribute value, overwriting existing values.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>RDF::URI</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt><span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>, <tt>Array&lt;Object&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The value argument.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 383</span>
+
+<span class='kw'>def</span> <span class='id set_attribute'>set_attribute</span><span class='lparen'>(</span><span class='id name'>name</span><span class='comma'>,</span> <span class='id value'>value</span><span class='rparen'>)</span>
+  <span class='id name'>name</span> <span class='op'>=</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>URI</span><span class='period'>.</span><span class='id new'>new</span> <span class='id name'>name</span>
+  <span class='kw'>unless</span> <span class='id strict_schema?'>strict_schema?</span> <span class='kw'>and</span> <span class='kw'>not</span> <span class='id properties'>properties</span><span class='period'>.</span><span class='id include?'>include?</span> <span class='id name'>name</span><span class='period'>.</span><span class='id to_key'>to_key</span>
+    <span class='id value'>value</span> <span class='op'>=</span> <span class='id value'>value</span><span class='period'>.</span><span class='id uri'>uri</span> <span class='kw'>if</span> <span class='id value'>value</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='symbol'>:uri</span>
+    <span class='id value'>value</span> <span class='op'>=</span> <span class='id property_value_from'>property_value_from</span><span class='lparen'>(</span><span class='id name'>name</span><span class='period'>.</span><span class='id to_key'>to_key</span><span class='comma'>,</span> <span class='id value'>value</span><span class='rparen'>)</span>
+    <span class='comment'># TODO: this should be more intelligent and less drastic.
+</span>    <span class='kw'>self</span> <span class='op'>-</span> <span class='lbracket'>[</span><span class='id uri'>uri</span><span class='comma'>,</span> <span class='id name'>name</span><span class='rbracket'>]</span>
+    <span class='kw'>unless</span> <span class='id value'>value</span><span class='period'>.</span><span class='id blank?'>blank?</span>
+      <span class='kw'>if</span> <span class='id value'>value</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Array</span><span class='rparen'>)</span>
+        <span class='id value'>value</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id v'>v</span><span class='op'>|</span> <span class='kw'>self</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id uri'>uri</span><span class='comma'>,</span> <span class='id name'>name</span><span class='comma'>,</span> <span class='id v'>v</span><span class='rbracket'>]</span><span class='rbrace'>}</span>
+      <span class='kw'>else</span>
+        <span class='kw'>self</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id uri'>uri</span><span class='comma'>,</span> <span class='id name'>name</span><span class='comma'>,</span> <span class='id value'>value</span><span class='rbracket'>]</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+    <span class='id value'>value</span>
+  <span class='kw'>else</span>
+    <span class='kw'>nil</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="type-instance_method">
+  
+    - (<tt>RDF::URI</tt>, <tt>Talia3::RDF::OWL.thing</tt>) <strong>type</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+configurable main type
+</p>
+</div>
+  </div>
+
+<p>
+Returns a single type URI for this resource.
+</p>
+<p>
+Required to implement the `HasSchema` behaviour. The default is the first
+rdf:type from the resource RDF, or Talia3::N::OWL.Thing.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RDF::URI</tt>, <tt>Talia3::RDF::OWL.thing</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>HasSchema</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+252
+253
+254
+255</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 252</span>
+
+<span class='kw'>def</span> <span class='id type'>type</span>
+  <span class='ivar'>@type</span> <span class='op'>||=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id raw'>raw</span><span class='lparen'>(</span><span class='const'>RDF</span><span class='period'>.</span><span class='id type'>type</span><span class='rparen'>)</span><span class='period'>.</span><span class='id first'>first</span> <span class='op'>||</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>OWL</span><span class='period'>.</span><span class='const'>Thing</span>
+  <span class='ivar'>@type</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="type=-instance_method">
+  
+    - (<tt>RDF::URI</tt>, ...) <strong>type=</strong>(type_uri) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Explicitly sets the type (rdf:type) for this resource.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'></span>
+      
+      
+        <span class='type'>(<tt>RDF::URI</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RDF::URI</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the argument in its original format
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>
+ArgumentError if the argument is an invalid URI.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+263
+264
+265
+266</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 263</span>
+
+<span class='kw'>def</span> <span class='id type='>type=</span><span class='lparen'>(</span><span class='id type_uri'>type_uri</span><span class='rparen'>)</span>
+  <span class='id type_uri'>type_uri</span> <span class='op'>=</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>URI</span><span class='period'>.</span><span class='id new'>new</span> <span class='id type_uri'>type_uri</span> <span class='kw'>unless</span> <span class='id type_uri'>type_uri</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='ivar'>@type</span> <span class='op'>=</span> <span class='id type_uri'>type_uri</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="undefined_properties-instance_method">
+  
+    - (<tt>Array</tt>) <strong>undefined_properties</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+Does not include inverse properties (where the current resource is the
+object instead of the subject).
+</p>
+</div>
+  </div>
+
+<p>
+Returns only &#8220;unknown&#8221; properties (those predicates we have no
+schema information about).
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+308
+309
+310</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/resource.rb', line 308</span>
+
+<span class='kw'>def</span> <span class='id undefined_properties'>undefined_properties</span>
+  <span class='id all_properties'>all_properties</span> <span class='op'>-</span> <span class='id properties'>properties</span> 
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Aug 25 17:54:23 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

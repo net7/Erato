@@ -1,0 +1,36 @@
+application_name: Talia3 Application
+# Final '/' is required.
+application_url: http://localhost:3000/
+# Final '/' is required.
+base_uri: http://localhost:3000/
+locales: [en, none, it, de]
+user_emails_enabled: true
+api_enabled: true
+contexts:
+  # internal default to "#{base_uri}public"
+  public:  
+  # internal default to "#{base_uri}ontology"
+  ontology: 
+repositories:
+  development:
+    local: 
+      # Type is _always_ required
+      # Supported types: sesame
+      # Future types: memory, file
+      type: 
+      location: 
+  test:
+    local: 
+      # Type is _always_ required
+      # Supported types: sesame
+      # Future types: memory, file
+      type: 
+      location: 
+  production:
+    local: 
+      # Type is _always_ required
+      # Supported types: sesame
+      # Future types: memory, file
+      type:  
+      location: 
+loose_schema: false

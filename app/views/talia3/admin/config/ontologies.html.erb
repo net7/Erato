@@ -1,0 +1,9 @@
+<%= link_to 'Configuration', talia3_admin_config_path %>
+<h2>Ontologies</h2>
+<h3>Import</h3>
+<b>Content must be in RDF/XML format (for now)</b>
+<br/>
+<form action="/talia3/admin/config/import_ontology" enctype="multipart/form-data" method="post">
+  <input type="file" name="ontology_file"/>
+  <input type="submit" name="import" value="Import"/>
+<form>

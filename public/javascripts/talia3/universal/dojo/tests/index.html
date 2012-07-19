@@ -1,0 +1,40 @@
+<html>
+    <head>
+        
+        <title>Request Medusa Test</title>
+        
+        <link rel="stylesheet" href="../lib/dijit/themes/tundra/tundra.css" type="text/css" media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js" type="text/javascript"></script>
+        
+        <script src="../lib/dojo/dojo.js" type="text/javascript" charset="utf-8"></script>        
+        <script src="../request/init.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../request/md5.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../request/request.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script type="text/javascript" charset="utf-8">
+            
+		    dojo.ready(function() {               
+    	    	document.medusaReq = new semlib.MedusaRequest({
+            		tokenForFieldType: function(type) { return "example"; },
+            		userId: 200,
+            		apiKey: "example",
+            		emptyMessage: "This is the empty message",
+            		getTerm: function() {
+            		    return jQuery("#theKeyword").val();
+            		}                
+    	    	});
+    	    	
+    	    	document.medusaReq.clear("example");
+		    });
+            
+        </script>
+        
+    </head>
+    <body>
+        <input type="text" name="name" value="Dream" id="theKeyword"><br /><br />
+        <span type-name="example" href="#" keyword="keyword" class="agorized-input"></span>
+        
+    </body>
+</html>

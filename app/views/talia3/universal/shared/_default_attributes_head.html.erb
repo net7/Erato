@@ -1,0 +1,11 @@
+<tr>
+  <td width="20%"><span title="<%= Talia3::N::RDF.type.to_s %>"><%= _('Type') %></span></td>
+    <td><%= render :partial => 'talia3/universal/shared/attribute', :object => :rdf__type, :locals => {:record => record, :force => :uri} %></td>
+</tr>
+<tr>
+  <td width="20%"><span title="<%= Talia3::N::RDFS.label.to_s %>"><%= _('Label') %></span></td>
+    <td><%= render :partial => 'talia3/universal/shared/attribute', :object => :rdfs__label, :locals => {:record => record, :force => :literal} %></td>
+</tr>
+<tr>
+  <td width="20%"><span title="<%= Talia3::N::RDFS.comment.to_s %>"><%= _('Description') %></span></td>
+    <td><%= render :partial => 'talia3/universal/shared/attribute', :object => :rdfs__comment, :locals => {:record => record, :force => :literal} %></td> </tr>

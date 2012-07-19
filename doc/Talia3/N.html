@@ -1,0 +1,835 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Talia3::N
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (N)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Talia3.html" title="Talia3 (module)">Talia3</a></span></span>
+     &raquo; 
+    <span class="title">N</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Talia3::N
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Talia3::N</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/talia3/namespace.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+Add prefix recognition from uris to get the short form, e.g: &#8220;<a
+href="http://example.org/uri">example.org/uri</a>&#8220; =>
+&#8220;ex:uri&#8220;
+</p>
+</div>
+  </div>
+
+<p>
+Talia3 namespace utilities.
+</p>
+<p>
+Talia3 namespaces are a simple way to write uris. Namespaces include all
+those defined by RDF with RDF::Vocabulary except for rdf itself. 
+</p>
+<p>
+Results are always a Talia3::URI.
+</p>
+<p>
+@note: the main difference between RDF.rb vocabularies and Talia3
+</p>
+<pre class="code">
+  namespaces is that vocabularies represent uris from OWL or RDFS
+  definitions, and can have additional features related to that
+  characteristic. Namespaces work on a different context, they are
+  there to help when using uris in general and should simpler.
+  Also: you cannot use #name for vocabularies (RDF::DC.name =&gt;
+  &quot;RDF::DC&quot;).
+</pre>
+<p>
+@note: I found the ex namespace is used a lot in examples, so I
+</p>
+<pre class="code">
+  added it to the predefined namespaces. Useful in tests.
+</pre>
+<p>
+It is possible to create special namespaces that have some specific
+behaviour. Predefined namespace include Talia3::N::LOCAL and
+Talia3::N::CONTEXTS which use some information from the Talia3
+configuration file to generate their uris. You can use those classes&#8217;
+code as reference to create others.
+</p>
+<p>
+Talia3::N::LOCAL uses Talia3.config(:base_uri) to generate uris for the
+application resources.
+</p>
+<p>
+Talia3::N::CONTEXTS uses Talia3.config(:contexts) to generate uris for
+contexts. Predefined contexts include &#8220;public&#8221; and
+&#8220;ontology&#8221;. Any non defined context defaults to
+Talia3::N::LOCAL.#&amp;&amp;#8220;/contexts/&lt;context&gt;&amp;&amp;#8220;/contexts/&lt;context&gt;&amp;#8221;.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+Getting a list of defined namespaces with their prefix:
+</p>
+</div></h4>
+      <pre class="example code">Talia3::N.namespaces
+=&gt; {:ex=&gt;&quot;http://example.org/&quot;, ...}</pre>
+    
+      <h4><div class='inline'><p>
+Adding a new namespace:
+</p>
+</div></h4>
+      <pre class="example code">Talia3::N.namespaces &lt;&lt; {:ns =&gt; &quot;http://ns.example.org/&quot;}
+=&gt; {:ex=&gt;&quot;http://example.org/&quot;, ...}</pre>
+    
+      <h4><div class='inline'><p>
+Generate a uri for <a href="http://example.org/uri">example.org/uri</a>
+(ex:uri)
+</p>
+</div></h4>
+      <pre class="example code"><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>EX</span><span class='period'>.</span><span class='id uri'>uri</span></pre>
+    
+      <h4><div class='inline'><p>
+Generate a uri for dc:name
+</p>
+</div></h4>
+      <pre class="example code"><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>DC</span><span class='period'>.</span><span class='id name'>name</span></pre>
+    
+      <h4><div class='inline'><p>
+Generate a uri for rdf:type:
+</p>
+</div></h4>
+      <pre class="example code"><span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>RDF</span><span class='period'>.</span><span class='id type'>type</span></pre>
+    
+      <h4><div class='inline'><p>
+Generate a local uri
+</p>
+</div></h4>
+      <pre class="example code">Talia3::LOCAL.uri.to_s
+=&gt; &quot;http://localhost:3000/uri&quot;</pre>
+    
+      <h4><div class='inline'><p>
+Generate our uri for a public context:
+</p>
+</div></h4>
+      <pre class="example code">Talia3::CONTEXT.public.to_s
+=&gt; &quot;http://localhost:3000/contexts/public&quot;</pre>
+    
+      <h4><div class='inline'><p>
+Define a new base for ontology context and generate:
+</p>
+</div></h4>
+      <pre class="example code">In config/talia3.yml:
+contexts:
+  ontology: http://mycontexts.example.org/
+
+Talia3::N::CONTEXTS.ontology.to_s
+=&gt; &quot;http://mycontexts.example.org/ontology&quot;</pre>
+    
+  </div>
+
+</div>
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="namespaces-classvariable" class="">@@namespaces =
+          <div class="docstring">
+  <div class="discussion">
+    <p>
+Predefined namespaces
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span>
+  <span class='comment'># Use RDF vocabulary for rdf namespace
+</span>  <span class='symbol'>:ex</span>     <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>http://example.org/</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+  <span class='symbol'>:mview</span>  <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>http://purl.org/net7/vocab/muruca-view/</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+  <span class='symbol'>:t3view</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>http://purl.org/net7/talia3/views/</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+  <span class='symbol'>:rdf</span>    <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>http://www.w3.org/1999/02/22-rdf-syntax-ns#</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+  <span class='symbol'>:cs</span>     <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>http://purl.org/vocab/changeset/schema#</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+  <span class='symbol'>:talia</span>  <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>http://purl.org/net7/vocab/talia/</span><span class='tstring_end'>'</span></span>
+<span class='rbrace'>}</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#%3C%3C-class_method" title="&lt;&lt; (class method)">+ (Class) <strong>&lt;&lt;</strong>(namespace) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Adds a new namespace.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#local_name-class_method" title="local_name (class method)">+ (String) <strong>local_name</strong>(uri) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the local name part of the URI.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#namespace%3F-class_method" title="namespace? (class method)">+ (Boolean) <strong>namespace?</strong>(namespace) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns true if the argument is a defined namespace.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#namespaces-class_method" title="namespaces (class method)">+ (Hash) <strong>namespaces</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the defined namespaces with their prefixes.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#prefix-class_method" title="prefix (class method)">+ (String) <strong>prefix</strong>(uri) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the namespace prefix for the argument URI, if possible.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="<<-class_method">
+  
+    + (<tt>Class</tt>) <strong>&lt;&lt;</strong>(namespace) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Adds a new namespace.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'></span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>namespace</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a customizable set of options
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    <h3>Options Hash (<tt>namespace</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:prefix</span>
+          <span class="type">(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </tr>
+      
+    </ul>
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+self (chainable)
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+For invalid namespace information
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+149
+150
+151
+152
+153
+154
+155
+156
+157</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3/namespace.rb', line 149</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='op'>&lt;&lt;</span><span class='lparen'>(</span><span class='id namespace'>namespace</span><span class='rparen'>)</span>
+  <span class='kw'>unless</span> <span class='id namespace'>namespace</span><span class='period'>.</span><span class='id is_a?'>is_a?</span> <span class='const'>Hash</span>
+    <span class='id raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Namespace must be a {:prefix =&gt; \&quot;base uri\&quot;} Hash</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='id namespace'>namespace</span><span class='period'>.</span><span class='id each_pair'>each_pair</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id prefix'>prefix</span><span class='comma'>,</span> <span class='id uri'>uri</span><span class='op'>|</span>
+    <span class='cvar'>@@namespaces</span><span class='lbracket'>[</span><span class='id prefix'>prefix</span><span class='period'>.</span><span class='id to_sym'>to_sym</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id uri'>uri</span><span class='period'>.</span><span class='id to_s'>to_s</span>
+  <span class='kw'>end</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="local_name-class_method">
+  
+    + (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>local_name</strong>(uri) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the local name part of the URI.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uri</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>RDF::URI</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+119
+120
+121
+122
+123
+124</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3/namespace.rb', line 119</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id local_name'>local_name</span><span class='lparen'>(</span><span class='id uri'>uri</span><span class='rparen'>)</span>
+  <span class='cvar'>@@namespaces</span><span class='period'>.</span><span class='id each_pair'>each_pair</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id prefix'>prefix</span><span class='comma'>,</span> <span class='id base_uri'>base_uri</span><span class='op'>|</span>
+    <span class='kw'>return</span> <span class='id uri'>uri</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id gsub'>gsub</span><span class='lparen'>(</span><span class='id base_uri'>base_uri</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id uri'>uri</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id include?'>include?</span> <span class='id base_uri'>base_uri</span>
+  <span class='kw'>end</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="namespace?-class_method">
+  
+    + (<tt>Boolean</tt>) <strong>namespace?</strong>(namespace) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns true if the argument is a defined namespace.
+</p>
+<p>
+The argument will be converted to a namespace symbol (i.e. :rdf) if
+possible.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>a</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>, <tt>RDF::URI</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+valid namespace representation (e.g.: :foaf, &#8220;<a
+href="http://xmlns.com/foaf/0.1">xmlns.com/foaf/0.1</a>/&#8221;)
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+134
+135
+136
+137
+138
+139</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3/namespace.rb', line 134</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id namespace?'>namespace?</span><span class='lparen'>(</span><span class='id namespace'>namespace</span><span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id namespace'>namespace</span>
+    <span class='kw'>when</span> <span class='const'>Symbol</span> <span class='kw'>then</span> <span class='id namespaces'>namespaces</span><span class='period'>.</span><span class='id keys'>keys</span><span class='period'>.</span><span class='id include?'>include?</span> <span class='id namespace'>namespace</span>
+    <span class='kw'>else</span> <span class='id namespaces'>namespaces</span><span class='period'>.</span><span class='id values'>values</span><span class='period'>.</span><span class='id include?'>include?</span> <span class='id namespace'>namespace</span><span class='period'>.</span><span class='id to_s'>to_s</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="namespaces-class_method">
+  
+    + (<tt>Hash</tt>) <strong>namespaces</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+Does not include &#8220;special&#8221; namespaces like Talia3::N::LOCAL.
+</p>
+</div>
+  </div>
+
+<p>
+Returns the defined namespaces with their prefixes.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+98
+99
+100</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3/namespace.rb', line 98</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id namespaces'>namespaces</span>
+  <span class='cvar'>@@namespaces</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="prefix-class_method">
+  
+    + (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>prefix</strong>(uri) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the namespace prefix for the argument URI, if possible.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uri</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>RDF::URI</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+107
+108
+109
+110
+111
+112</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/talia3/namespace.rb', line 107</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id prefix'>prefix</span><span class='lparen'>(</span><span class='id uri'>uri</span><span class='rparen'>)</span>
+  <span class='cvar'>@@namespaces</span><span class='period'>.</span><span class='id each_pair'>each_pair</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id namespace'>namespace</span><span class='comma'>,</span> <span class='id base_uri'>base_uri</span><span class='op'>|</span>
+    <span class='kw'>return</span> <span class='id namespace'>namespace</span><span class='period'>.</span><span class='id to_s'>to_s</span> <span class='kw'>if</span> <span class='id uri'>uri</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id include?'>include?</span> <span class='id base_uri'>base_uri</span>
+  <span class='kw'>end</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Aug 25 17:54:20 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

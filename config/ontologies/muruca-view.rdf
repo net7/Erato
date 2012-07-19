@@ -1,0 +1,299 @@
+<rdf:RDF xmlns:mview="http://purl.org/net7/vocab/muruca-view/"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+  <owl:Ontology rdf:about="http://purl.org/net7/vocab/muruca-view/"
+                dc:title="Muruca view vocabulary"
+                dc:description="A vocabulary to describe constraints and visualization formats for RDF classes and properties">
+  </owl:Ontology>
+
+  <!-- VIEWS begin -->
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/ClassView"
+              rdfs:label="Class view"
+              rdfs:comment="An RDF class view definition">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/PropertyView"
+              rdfs:label="Property view"
+              rdfs:comment="A single RDF class property view definition">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/ViewAllProperties"
+              rdfs:label="View all properties"
+              rdfs:comment="Involves all of a Class properties in a view, avoiding writing them all">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/ViewNoProperties"
+              rdfs:label="View no properties"
+              rdfs:comment="Indicates that no property will be involved in the view">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+
+  <!-- VIEWS PROPERTIES begin -->
+  <rdf:Property rdf:about="http://purl.org/net7/vocab/muruca-view/domain"
+                rdfs:label="View domain"
+                rdfs:comment="The resource type this view applies to">
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/ClassView"/>
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/PropertyView"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="http://purl.org/net7/vocab/muruca-view/viewName"
+                rdfs:label="View name"
+                rdfs:comment="View name, groups together class and property views for a given presentation">
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/ClassView"/>
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/PropertyView"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="http://purl.org/net7/vocab/muruca-view/default"
+                rdfs:label="Default?"
+                rdfs:comment="Denotes a default View for a given View domain, should be a single boolean">
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/ClassView"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdf:Property>
+
+  <!-- Range: mview:ViewAllProperties, ViewNoProperties -->
+  <rdf:Property rdf:about="http://purl.org/net7/vocab/muruca-view/properties"
+                rdfs:label="List properties"
+                rdfs:comment="If present allows for special properties selection">
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/ClassView"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdf:Property>
+
+  <!-- Range: mview:ViewAllProperties, ViewNoProperties -->
+  <!-- If absent, :properties is used instead -->
+  <rdf:Property rdf:about="http://purl.org/net7/vocab/muruca-view/shortProperties"
+                rdfs:label="Abstract properties"
+                rdfs:comment="If present allows for special properties selection with abstract-like views">
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/ClassView"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdf:Property>
+
+  <!-- Range: mview:ViewAllProperties, ViewNoProperties -->
+  <!-- If absent, :properties is used instead -->
+  <rdf:Property rdf:about="http://purl.org/net7/vocab/muruca-view/editProperties"
+                rdfs:label="Edit properties"
+                rdfs:comment="If present allows for special properties selection with edit views">
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/ClassView"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="http://purl.org/net7/vocab/muruca-view/propertyName"
+                rdfs:label="The property name"
+                rdfs:comment="The property name">
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/PropertyView"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdf:Property>
+
+  <!-- Range is an integer, smaller numbers go first. 0 means property is not to be shown -->
+  <!-- Random positioning if not present -->
+  <rdf:Property rdf:about="http://purl.org/net7/vocab/muruca-view/listPos"
+                rdfs:label="Property position in list views"
+                rdfs:comment="Property position in list views">
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/PropertyView"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdf:Property>
+
+  <!-- Range is an integer, smaller numbers go first. 0 means property is not to be shown -->
+  <!-- Follow mview:listPos if not present -->
+  <rdf:Property rdf:about="http://purl.org/net7/vocab/muruca-view/shortPos"
+                rdfs:label="Property position in abstract views"
+                rdfs:comment="Property position in abstract views">
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/PropertyView"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdf:Property>
+
+  <!-- Range is an integer, smaller numbers go first. 0 means property is not to be shown -->
+  <!-- Follow mview:listPos if not present -->
+  <rdf:Property rdf:about="http://purl.org/net7/vocab/muruca-view/editPos"
+                rdfs:label="Property position in edit views"
+                rdfs:comment="Property position in edit views">
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/PropertyView"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="http://purl.org/net7/vocab/muruca-view/propertyType"
+                rdfs:label="Property visualization type"
+                rdfs:comment="How we want the property to be rendered when viewed">
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/PropertyView"/>
+    <rdfs:range rdf:resource="http://purl.org/net7/vocab/muruca-view/PropertyType"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="http://purl.org/net7/vocab/muruca-view/cardinality"
+                rdfs:label="Cardinality"
+                rdfs:comment="Property cardinality (zero or one)">
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/PropertyView"/>
+    <rdfs:range rdf:resource="http://purl.org/net7/vocab/muruca-view/Cardinality"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="http://purl.org/net7/vocab/muruca-view/constraints"
+                rdfs:label="Constraints list"
+                rdfs:comment="Unordered list of constraints, zero or more">
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/PropertyView"/>
+    <rdfs:range rdf:resource="http://purl.org/net7/vocab/muruca-view/Constraint"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="http://purl.org/net7/vocab/muruca-view/view"
+                rdfs:label="Property subview"
+                rdfs:comment="Allows to define a view to render resources related through this property (property must be a URI)">
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/PropertyView"/>
+    <rdfs:range rdf:resource="http://purl.org/net7/vocab/muruca-view/View"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdf:Property>
+  <!-- VIEWS PROPERTIES end -->
+  <!-- VIEWS end -->
+
+  <!-- PROPERTY TYPES begin -->
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/PropertyType"
+              rdfs:label="Property types"
+              rdfs:comment="Basic types for property visualization or validation">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/String"
+              rdfs:label="String property type"
+              rdfs:comment="A basic type for properties: string">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/Integer"
+              rdfs:label="Integer property type"
+              rdfs:comment="A basic type for properties: integer">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/Decimal"
+              rdfs:label="Decimal property type"
+              rdfs:comment="A basic type for properties: decimal">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/Date"
+              rdfs:label="Date property type"
+              rdfs:comment="A basic type for properties: date">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/Email"
+              rdfs:label="Image property type"
+              rdfs:comment="A basic type for properties: image">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/Link"
+              rdfs:label="Link property type"
+              rdfs:comment="A basic type for properties: link">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+
+  <!-- Subclass of Link? -->
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/Image"
+              rdfs:label="Image property type"
+              rdfs:comment="A basic type for properties: image">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+
+  <!-- Needed? Subclass of Link? -->
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/Flash"
+              rdfs:label="Link property type"
+              rdfs:comment="A basic type for properties: link">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+  <!-- PROPERTY TYPES end -->
+
+  <!-- CARDINALITY begin -->
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/Cardinality"
+              rdfs:label="Cardinality"
+              rdfs:comment="Basic cardinality information and constraint">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/ZeroOrOne"
+              rdfs:label="Cardinality: zero or one"
+              rdfs:comment="Zero or one cardinality">
+    <rdfs:subClassOf>
+      <rdf:Class rdf:about="http://purl.org/net7/vocab/muruca-view/Cardinality"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+  
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/ZeroOrMore"
+              rdfs:label="Cardinality: zero or more"
+              rdfs:comment="Zero or more cardinality">
+    <rdfs:subClassOf>
+      <rdf:Class rdf:about="http://purl.org/net7/vocab/muruca-view/Cardinality"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+  <!-- CARDINALITY end --> 
+
+  <!-- CONSTRAINTS begin -->
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/Constraint"
+              rdfs:label="Constraint"
+              rdfs:comment="A generic constraint, see subclasses">
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/RequiredConstraint"
+              rdfs:label="Constraint: required"
+              rdfs:comment="Required presence constraint">
+    <rdfs:subClassOf>
+      <rdf:Class rdf:about="http://purl.org/net7/vocab/muruca-view/Constraint"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/UniqueConstraint"
+              rdfs:label="Constraint: unique"
+              rdfs:comment="Uniqueness constrant">
+    <rdfs:subClassOf>
+      <rdf:Class rdf:about="http://purl.org/net7/vocab/muruca-view/Constraint"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+  
+  <rdfs:Class rdf:about="http://purl.org/net7/vocab/muruca-view/LenghtConstraint"
+              rdfs:label="Constraint: lenght"
+              rdfs:comment="Length constrant, minimum and/or maximum">
+    <rdfs:subClassOf>
+      <rdf:Class rdf:about="http://purl.org/net7/vocab/muruca-view/Constraint"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdfs:Class>
+
+  <!-- CONSTRAINT PROPERTIES begin -->
+  <rdf:Property rdf:about="http://purl.org/net7/vocab/muruca-view/minLength"
+                rdfs:label="Minimum length"
+                rdfs:comment="Length constraint: minimum length">
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/LenghtConstraint"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdf:Property>
+  
+  <rdf:Property rdf:about="http://purl.org/net7/vocab/muruca-view/maxLength"
+                rdfs:label="Maximum length"
+                rdfs:comment="Length constraint: maximum length">
+    <rdfs:domain rdf:resource="http://purl.org/net7/vocab/muruca-view/LenghtConstraint"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/net7/vocab/muruca-view/"/>
+  </rdf:Property>
+  <!-- CONSTRAINT PROPERTIES end -->
+
+  <!-- CONSTRAINTS end -->
+</rdf:RDF>

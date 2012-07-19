@@ -1,0 +1,39 @@
+SPEC SESAME
+1) Sesame RDF Store and size, did he consider it as a problem?
+
+* rdf-spec lib/rdf/spec/enumerable.rb *
+2) Line 69: shouldn't it use @enumerable.statements instead of
+   @statements? Problems with blank nodes ids that get renamed in
+   Sesame.
+3) Same for 117 for problem 1) (which should not be checked for
+   here). Sesame uses inference _and_ add some triples on its own.
+4) Line 122, same as 2).
+5) Line 158, same as 3).
+6) Line 163, same as 3).
+7) Line 215, same as 3).
+8) Line 264, same as 3).
+9) Line 314, , same as 3).
+
+rdf-spec lib/rdf/spec/queryable.rb
+10) SPARQL, PATTERNS AND BLANK NODES
+Line 237
+
+How to build a construct query from patterns like:
+_:node15lnq399ox6615 <http://xmlns.com/foaf/0.1/mbox_sha1sum> nil
+?
+
+rdf-spec lib/rdf/spec/mutable.rb
+11) Line 153, same as 1)
+
+
+
+and so on...
+
+extra: accepting a sparql query as string in
+RDF::SPARQL::Repository#query. Ok?
+
+@failing_pattern in lib/rdf/spec/queryable.rb, line 149 is valid? 
+SPARQL does not like bnodes as predicates...
+
+
+12) Testing non mutable repository?

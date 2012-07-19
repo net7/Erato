@@ -1,0 +1,18 @@
+<tr>
+<td colspan="2"><b>Additional properties</b></td>
+</tr>
+<tr id="new_row_interface">
+  <td colspan="2">
+    <%= text_field_tag "", "", :id => 'new_row_label', :size => 50 %>
+    <%= submit_tag 'Add', :id => "add_row", :class=>"attribute_clone" %>
+  </td>
+</tr>
+
+<tr hidden="hidden" id="new_row_prototype">
+  <td width="20%">&nbsp;</td>
+  <td>
+    <% # TODO: use _attribute partial when we use hashes and not records directly %>
+    <input type="submit" value="Add" name="commit" class="attribute_clone" />
+    <%= render :partial => 'talia3/universal/shared/attribute_prototype', :object => 'new', :locals => {:type => 'uri'} %>
+  </td>
+</tr>

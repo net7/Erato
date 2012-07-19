@@ -1,0 +1,12 @@
+<h3>Known classes</h3>
+<ul>
+  <% @types.each do |type|%>
+  <li>
+    <%= type.short %>
+    |
+    <%= link_to "New", new_talia3_record_path(:type => type.key)%>
+    |
+    <%= link_to "View", talia3_records_path(:type => type.key)%>
+  </li>
+  <% end %>
+</ul>

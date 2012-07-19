@@ -1,0 +1,13 @@
+<%= link_to "Backend", talia3_admin_backend_path %>
+<h2>Records for type <%= @type.short %></h2>
+<% @records.each do |record|%>
+<ul>
+  <li>
+    <%= record.label %>
+    |
+    <%= link_to "Edit", edit_talia3_record_path(:id => record.uri.to_key, :type => record.type.to_key)%>
+    |
+    <%= link_to "Delete", talia3_record_path(:id => record.uri.to_key), :method => :delete, :confirm => 'Delete?' %>
+  </li>
+</ul>
+<% end %>

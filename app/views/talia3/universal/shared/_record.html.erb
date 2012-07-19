@@ -1,0 +1,76 @@
+<!--
+<p>
+  <b>Note:</b> Properties of type <em>Date</em> must follow this specification: http://www.w3.org/TR/xmlschema-2/#date.
+  <br/>
+  A simple valid format would be: yyyy-mm-dd, e.g 2011-09-09
+</p>
+
+<p>
+  <b>Note:</b> Properties of type <em>Date/time</em> must follow this specification: http://www.w3.org/TR/xmlschema-2/#dateTime.
+  <br/>
+  A simple valid format would be: yyyy-mm-ddThh:mm:ss, e.g 2002-10-10T12:00:00
+</p>
+-->
+<%=
+form_tag url, :method => :post, :multipart => false, :id => 'talia3_record' do %>
+  <%= hidden_field_tag :type, record.type.to_key %>
+
+<%
+  q.each do |k, v| 
+%>
+  <%= hidden_field_tag k.to_s, v.to_s unless k == :uri or k == :type %>
+<%
+   end 
+%>
+
+  <%= submit_tag "Save changes", :class=>"btn success save-button cf"  %>
+
+  <table class="zebra-striped clear" width="90%" border="1" cellpadding="5">
+    <tr>
+      <td width="20%"><%= "URI" %></td>
+      <td><%= render :partial => 'talia3/universal/shared/uri', :object => record.uri, :locals => {:new => new_resource, :q => q}%>
+    </tr>
+
+    <%= render :partial => 'talia3/universal/shared/default_attributes_head', :locals => {:record => record, :errors => errors} %>
+<%
+  # There could be interest in separating these three groups visually in the future, this is why there are three groups and three calls to the partial.
+  type_namespaces = record.raw(:rdf__type).map do |type_namespace|
+    type_namespace.to_s.to_uri.namespace
+  end.uniq
+
+  namespace_properties, properties, undefined_properties = talia3_regroup_properties(type_namespaces, record.attributes, record.undefined_properties)
+%>
+
+    <%= render :partial => 'talia3/universal/shared/attributes',
+               :object => namespace_properties,
+               :locals => {:record => record,
+                           :errors => errors,
+                           :exclude => [:rdfs__label, :rdfs__comment, :rdf__type]} %>
+
+    <%= render :partial => 'talia3/universal/shared/attributes',
+               :object => properties,
+               :locals => {:record => record,
+                           :errors => errors,
+                           :exclude => [:rdfs__label, :rdfs__comment, :rdf__type]} %>
+
+    <%= render :partial => 'talia3/universal/shared/attributes',
+               :object => undefined_properties,
+               :locals => {:record => record,
+                           :errors => errors,
+                           :exclude => [:rdfs__label, :rdfs__comment, :rdf__type]} %>
+
+  </table>
+  <table class="zebra-striped" width="90%" border="1" cellpadding="5">
+    <%= render :partial => 'talia3/universal/shared/additional_attributes', :locals => {:record => record} %>
+  </table>
+
+  <table class="zebra-striped" width="90%" border="1" cellpadding="5">
+    <%= render :partial => 'talia3/universal/shared/inverse_properties', :object => record.inverse_properties,:locals => {
+          :record => record, :errors => errors
+        } %>
+  </table> 
+
+  <%= submit_tag "Save changes", :class=>"btn success save-button" %> <%= submit_tag "What would be sent if you saved right now", :id => "preview_save" %>
+<%
+end
+%>

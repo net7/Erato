@@ -1,0 +1,48 @@
+  <body data-edit_url="<%= url_for talia3_universal_url %>" data-new="1">
+	<div class="wrapper">
+ 
+  <div class="topbar-wrapper">
+  
+   <div class="topbar">
+    <div class="topbar-inner">
+    <div class="container" >
+	<h3>  <%= link_to "Erato. A Linked Data editor", :root %></h3>
+    <ul class="nav">
+		
+    <li>  <% if @type %>
+      <%= link_to "Back", talia3_universal_instances_path(@querystring) %>
+      <% else %>
+      <%= link_to "Back", talia3_universal_types_path(@querystring) %>
+      <% end %></li>
+	  </ul>
+		</div>
+		</div>
+	</div>
+    <h3 class="resource-title"><%= "New Resource" %></h3>
+    <h4 class="resource-endpoint new">Saving in SPARQL endpoint: <%= @source %></h4>
+    <%= render 'talia3/partials/messages' %>
+    <%= render :partial => 'talia3/universal/shared/record',
+               :object => @record,
+               :locals => {
+                 :new_resource => true,
+                 :url => talia3_universal_create_url,
+                 :errors => @errors,
+                 :q => @querystring} %>
+				 
+				 
+ <script>
+  dojo.ready(function() {               
+    		document.medusaReq = new semlib.MedusaRequest({
+				theme:"tundra",
+				selector:".agorized-input",
+			 	tokenForFieldType: function(type) {return "4GLgEDa5wA";},
+        		userId: 16,
+        		apiKey:"cc6ae414ab436e36d30af1cbde742614",
+				getTerm: function(){return tempKeyword;}	
+			});
+
+	document.medusaReq.clear("example1");			
+    		
+		});
+		
+  </script>

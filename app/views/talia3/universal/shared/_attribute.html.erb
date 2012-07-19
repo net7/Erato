@@ -1,0 +1,61 @@
+<% 
+# TODO: this is for RDF-oriented forms. There should be something different for DB ones.
+# FIXME: refactoring
+
+q = controller.send :querystring
+force = local_assigns[:force] || nil
+
+attribute_type, datatype = case record.property_type attribute
+                             when :object, nil then ['uri', nil]
+                             else ['literal', nil]
+                           end
+
+# Will contain any instance of BNodes we find for this property,
+# as they need to be shown altogether.
+bnodes = []
+# TODO: schema-defined fields handling
+record.raw(attribute).each do |value|
+  if value.node?
+   (bnodes ||= []) << value
+  else
+    language = value.respond_to?(:language) ? value.language : nil
+    type = value.present? ? (value.uri? ? 'uri' : 'literal' rescue 'uri') : attribute_type
+    hide_edit_resource = (type == "uri" and value.to_s.starts_with?(q[:namespace])) ? "" : "hidden" 
+%>
+<br/>
+<span class="record_attribute" data-attribute="<%= attribute %>">
+  <input type="text" name="record[<%= attribute %>][][value]" value="<%= value %>" class="record_attribute_value keyword span5"
+         data-value="<%= value %>" placeholder="insert a url or a keyword to search in Medusa"
+         size="60"/>
+  <input type="button" name="" class="agorized-input hidden" />
+  <input type="submit" name="commit" value="" class="clear-field <%= (type != 'uri') ? 'hidden' : '' %>" />
+  <%= talia3_literal_uri_selection attribute, value, :force => force, :selected => type %>
+  <%= talia3_datatype_selection attribute, value, {:force => force, :selected => datatype}, {:size => 20}%>
+  <%= talia3_language_selection attribute, language, type  %>
+  <a href="<%= talia3_universal_url(q.merge :uri => nil) %>" class="navigate-to <%= hide_edit_resource %>" 
+     data-controls-modal="modal-from-dom" data-backdrop="static">
+    Edit resource</a>
+  <input type="submit" name="commit" value="Delete" class="attribute_remove" />
+</span>
+<%
+  end # if value.node?
+end # record.raw(attribute).each
+%>
+
+<%= submit_tag 'Add', :class => "attribute_clone", :'data-attribute' => "#{attribute}" %>
+<%= render :partial => 'talia3/universal/shared/attribute_prototype', 
+           :object => attribute, 
+           :locals => {:force => force,
+                       :type => attribute_type,
+                       :datatype => datatype} %>
+
+<%
+if bnodes.present?
+%>
+<br/><hr/><br/>
+<%= render :partial => 'talia3/universal/shared/bnodes', 
+           :object => bnodes, 
+           :locals => {:uri => record.uri.to_s, :property => attribute.to_uri.to_s, :q => q} %>
+<%
+end
+%>

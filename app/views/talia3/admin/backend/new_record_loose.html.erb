@@ -1,0 +1,15 @@
+<%= link_to "Backend", talia3_admin_backend_path %>
+<h2>New record</h2>
+<h3>Assign a type to the new record</h3>
+<%= form_for Talia3::Record.new, :url => new_talia3_record_path, :html => {:method => :get, :id => 'choose_type'} do |f| %>
+  <%= label_tag :choose_type, "Choose a type" %>
+  <%= select_tag :type, options_from_collection_for_select(@types, :key, :short), :id => 'choose_type', :include_blank => 'Select a type' %>
+  <%= f.submit "Proceed"%>
+  <br/>
+  <br/>
+<% end %>
+<%= form_for Talia3::Record.new, :url => new_talia3_record_path, :html => {:method => :get, :id => 'input_type'} do |f| %>
+  <%= label_tag :new_type, "Or add one" %>
+  <%= text_field_tag :type, nil, :id => 'new_type' %>
+  <%= f.submit "Proceed"%>
+<% end %>

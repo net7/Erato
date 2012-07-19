@@ -1,0 +1,34 @@
+<%
+property_html_id = property.to_s.gsub(/[^a-zA-Z0-9_]/, '_')
+%>
+<span class="record_attribute_bnodes">
+  This property contains <%= pluralize bnodes.size, "Blank node" %>.
+  <div id="record_attribute_bnodes_<%= property_html_id %>">
+    <a href="<%= talia3_universal_bnodes_url({:uri => uri, :property => property, :sparql => q[:sparql]}) %>" 
+       data-remote="true" data-type="script" data-disable-with="Loading...">
+      Expand.</a>
+  </div>
+
+  <br/>
+<%
+if q[:cb].present? and q[:update]=='sparql' and q[:namespace].present?
+  message  = "Blank nodes will be converted in resources.\nThis operation will reload the page: you will lose all unsaved changes.\nContinue?"
+%>
+  <a href="<%= talia3_universal_bnodes_transform_url({:property => property, :q => q}) %>"
+     id="edit_<%= property_html_id %>_link" class="hidden"
+     data-confirm="<%= message %>" data-method="post">
+    Make editable</a>
+  <div id="edit_<%= property_html_id %>_not_implemented" class="hidden">
+    Editing on this Bnode is not supported.
+  </div>
+<%
+elsif q[:update] != 'sparql'
+%>
+  <div>
+    Note: blank node transformation is currently supported only for the SPARQL Update protocol.
+  </div>
+<%
+end
+%>
+</span>
+<br/>

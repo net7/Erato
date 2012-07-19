@@ -1,0 +1,62 @@
+@prefix mview:    <http://purl.org/net7/vocab/muruca-view/> .
+@prefix foaf:     <http://xmlns.com/foaf/0.1/> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix :         <http://purl.org/net7/talia3/views/> .
+
+:foafPersonDefaultView rdf:type              mview:ClassView;
+                      mview:viewName        "foafPersonDefault";
+                      rdfs:label            "FOAF::Person default";
+                      mview:domain          foaf:Person;
+                      mview:default         "true"^^xsd:boolean.
+
+:foafPersonNameDefaultView rdf:type           mview:PropertyView;
+                           mview:viewName     "foafPersonDefault";
+                           mview:listPos      1;
+                           mview:shortPos     1;
+                           mview:domain       foaf:Person;
+                           mview:propertyName foaf:firstName;
+                           rdfs:label         "Name";
+                           mview:propertyType mview:String;
+                           mview:cardinality  mview:ZeroOrOne.
+
+:foafPersonSurnameDefaultView rdf:type           mview:PropertyView;
+                              mview:viewName     "foafPersonDefault";
+                              mview:listPos      2;
+                              mview:shortPos     3;
+                              mview:domain       foaf:Person;
+                              mview:propertyName foaf:surname;
+                              rdfs:label         "Surname";
+                              mview:propertyType mview:String;
+                              mview:cardinality  mview:ZeroOrOne.
+
+:foafPersonNickDefaultView rdf:type           mview:PropertyView;
+                           mview:viewName     "foafPersonDefault";
+                           mview:listPos      3;
+                           mview:shortPos     2;
+                           mview:domain       foaf:Person;
+                           mview:propertyName foaf:nick;
+                           rdfs:label         "Nickname";
+                           mview:propertyType mview:String;
+                           mview:cardinality  mview:ZeroOrOne.
+
+:foafPersonDepictionDefaultView rdf:type           mview:PropertyView;
+                                mview:viewName     "foafPersonDefault";
+                                mview:listPos      4;
+                                mview:shortPos     0;
+                                mview:domain       foaf:Person;
+                                mview:propertyName foaf:depiction;
+                                rdfs:label         "Picture";
+                                mview:propertyType mview:Image;
+                                mview:cardinality  mview:ZeroOrOne.
+
+:foafPersonImageDefaultView  rdf:type           mview:PropertyView;
+                                mview:viewName     "foafPersonDefault";
+                                mview:listPos      5;
+                                mview:shortPos     0;
+                                mview:domain       foaf:Person;
+                                mview:propertyName foaf:img;
+                                rdfs:label         "Image";
+                                mview:propertyType foaf:Image;
+                                mview:cardinality  mview:ZeroOrMore.

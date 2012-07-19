@@ -1,0 +1,771 @@
+
+
+Erato is an experimental Linked Data editor developed by Net7. It is designed as a web service that can be pointed to any SPARQL endpoint to provide a GUI for browsing and editing data behind such an endpoint. Please visit the Erato web site at http://erato.netseven.it for a live demo and basic API documentation.
+
+Erato is the evolution of a project called Talia3, that was origianlly intended as a ruby framework for working with RDF data. That is why the following documentation often refers to Talia3. 
+
+Please note that the tool is experimental and that is at the moment not fully supported, due to the fact the the min developer is no more working for Net7. We will try anyway our best to provide support to those who are interested in using, forking and further developing the tool. The following documentation might not be updated to the latest version.
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Riccardo Giomi
+V0.0.1, 17th of January 2011
+
+.Talia3 and JRuby
+NOTE: Talia3 currently does not work with JRuby.
+
+.Talia3 and warble
+NOTE: Use of warble gem is untested or now.
+
+Talia3, RDF::SPARQL and RDF::Sesame
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Talia3 includes a substantial rewrite of two RDF.rb plugins:
+https://github.com/bendiken/rdf-sesame[rdf-sesame]
+and
+https://github.com/bendiken/sparql-client[sparql-client].
+
+The rewrite was needed to move these two plugins, essential for
+Talia3, up to par with the other RDF.rb at version 0.3.0.
+
+Hopefully in the future these changs will be incorporated in those
+plugins, but for the moment there you have them.
+
+Requirements
+------------
+* libxml2 (and headers) libxslt (and headers) for Nokogiri (used by RDF.rb)
+* sqlite3 (and headers)
+
+Installation
+------------
+
+Using the Talia3_test application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+It is suggested to download and install the Talia3 Test application,
+which cames bundled with all the gems needed and is also where the
+test suite for Talia3 is.
+
+Follow
+https://net7.codebasehq.com/talia/talia3-test-application/raw/master/README.asciidoc[these instructions]
+
+From scratch
+~~~~~~~~~~~~
+NOTE: No tests included are included in the base plugin.
+
+*Clone or download the Talia3 plugin repository* (if you have not alredy done so)
+
+Clone: 
+
+----
+git clone git@codebasehq.com:net7/talia/talia3.git
+----
+
+*or* 
+
+https://net7.codebasehq.com/talia/talia3/archives/master[download].
+
+*Install the required gems*
+
+(Optional, highly recommended) Using RVM, create an empty gemset.
+
+Install Ruby on Rails 3:
+----
+gem install bundler
+gem install rails -v 3.0.3
+----
+
+*Create a new Rails project*
+
+  rails new <name>
+
+
+*Copy or link the plugin directory*
+
+Copy, move or link the talia3/ directory* in <name>/vendor/plugins/.
+
+
+*Edit the Gemfile*
+
+Edit the <name> Gemfile file, adding the required gems and also the
+Talia3 plugin. Here is a valid Gemfile, you can copy and replace all
+the file content with this:
+
+----
+source 'http://rubygems.org'
+
+gem 'rails', '3.0.3'
+if defined?(JRUBY_VERSION)
+  gem 'jdbc-sqlite3'
+  gem 'activerecord-jdbc-adapter'
+  gem 'activerecord-jdbcsqlite3-adapter'
+  gem 'jruby-openssl'
+  gem 'jruby-rack'
+else
+  gem 'sqlite3-ruby', :require => 'sqlite3'
+end
+gem 'talia3', :path => 'vendor/plugins/talia3'
+----
+
+NOTE: This configuration also detects Jruby, if present, and installs
+the right gems for it.
+
+If you are using only Ruby, just:
+
+----
+gem 'sqlite3-ruby', :require => 'sqlite3'
+gem 'talia3', :path => 'vendor/plugins/talia3'
+----
+
+will do, while for Jruby only:
+
+----
+gem 'jdbc-sqlite3'
+gem 'activerecord-jdbc-adapter'
+gem 'activerecord-jdbcsqlite3-adapter'
+gem 'jruby-openssl'
+gem 'jruby-rack'
+gem 'talia3', :path => 'vendor/plugins/talia3'
+----
+
+*Run the bundler*
+From the <name>/ directory, run:
+
+----
+bundle install
+----
+
+and wait for the gems to download.
+
+*Create a new sesame repository*
+You will need a Sesame repository do play with Talia3, using the
+workbench, create a new repository and remember its location.
+
+For the rest of these instructions, we will use
+`http://localhost:8080/open-rdf/repositories/talia3` in the examples.
+
+
+*Initialize and configure Talia3*
+From the <name>/ directory, run:
+
+----
+rake talia3:init
+----
+
+this will create a new configuration file `<name>/config/talia3.yml`,
+which you can now edit. In particular define a repository for
+development - test:
+
+----
+<name>/config/talia3.yml
+
+repositories:
+  development:
+    local: 
+      type: sesame
+      location: http://localhost:8080/openrdf-sesame/repositories/talia3
+----
+
+All done! The following tutorial will show how to examine the
+Talia3 features using the console.
+
+Talia3 tutorial
+---------------
+
+Let's start by opening the Rails console, from the <name>/ directory,
+run:
+
+----
+rails console
+----
+
+Talia3 Repositories and configuration in general
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Configuration
+^^^^^^^^^^^^^
+
+The configuration for the plugin, taken from the configuration file
+`config/talia3.yml`, is available through:
+
+----
+pp Talia3.config
+
+{:application_name=>"Talia3 Application",
+ :base_uri=>"http://localhost:3000/",
+ :contexts=>{"public"=>nil, "ontology"=>nil},
+ :repositories=>
+  {"development"=>
+    {"local"=>
+      {"type"=>"sesame",
+       "location"=>
+        "http://localhost:8080/openrdf-sesame/repositories/talia3_test"}},
+   "test"=>{"local"=>nil},
+   "production"=>{"local"=>{"type"=>nil, "location"=>nil}}}}
+----
+
+You can focus the result on one of the base settings:
+
+.Application name
+
+----
+Talia3.config(:application_name)
+#=> "Talia3 Application" 
+----
+
+This is a useful place to keep the application name once and for
+all. Future plugins for the Talia3 series will use this value.
+
+.Base URI
+----
+Talia3.config(:base_uri)
+#=> "http://localhost:3000/" 
+----
+
+This is for convienience when creating URLs or URIs local to the
+application. We will see another use in a bit when using the Namespace
+class.
+
+Repositories
+^^^^^^^^^^^^
+
+Talia3 allows for some shortcuts when working with repositories:
+
+.Get local repository for current environment
+----
+Talia3.repository(:local)
+# => #<RDF::Sesame::Repository:...(http://localhost:8080/openrdf-sesame/repositories/talia3)>
+----
+
+Talia3 configuration will always automatically account for the current
+Rails environment and use the corresponding configuration to create a
+new RDF::Repository object that allows for direct access to the
+repository using the fantastic work of the RDF.rb creator and
+contributors. Some examples:
+
+.Inserting triples
+----
+
+statement1 = [
+  RDF::URI.new('http://localhost/uri'),          #subject
+  RDF::URI.new('http://purl.org/dc/terms/name'), #predicate
+  'URI'                                          #object
+]
+
+statement2 = [
+  RDF::URI.new('http://localhost/uri'),                 #subject
+  RDF::URI.new('http://purl.org/dc/terms/description'), #predicate
+  'URI description'                                     #object
+]
+
+repository = Talia3.repository(:local)
+repository << statement1
+
+repository.insert(statement1, statement2)
+----
+
+.Querying
+----
+repository = Talia3.repository(:local)
+result = repository.query([RDF::URI.new('http://localhost/uri'), nil, nil])
+
+result.count
+# => 2 (possibly more with inference)
+
+result.each do |statement|
+  pp statement
+end
+# => (RDF::Statements)
+----
+
+.Clearing the repository
+----
+Talia3.repository(:local).clear
+----
+
+NOTE: `Talia3.repository` will default to local if no key is given,
+  making `Talia3.repository(:local) == Talia3.repository`.
+
+
+talia3 RDF Resources
+~~~~~~~~~~~~~~~~~~~~
+
+URIs and namespaces
+^^^^^^^^^^^^^^^^^^^
+
+Talia3 always works with RDF::URI objects when dealing with URIs. To
+declare a URI simply create a new RDF::URI:
+
+.Creating a new URI
+----
+uri = RDF::URI.new('http://example.org/an_uri')
+# => #<RDF::URI:...(http://example.org/an_uri)> 
+----
+
+Talia3 namespaces are helpers to generate URIs with a commonly used
+base URI. The base class for namespaces is Talia::N.
+
+.Get a list of defined namespaces
+----
+pp Talia3::N.namespaces
+
+{:ex=>"http://example.org/",
+ :exif=>"http://www.w3.org/2003/12/exif/ns#",
+ :http=>"http://www.w3.org/2006/http#",
+ :dc=>"http://purl.org/dc/terms/",
+ :xsd=>"http://www.w3.org/2001/XMLSchema#",
+ :dc11=>"http://purl.org/dc/elements/1.1/",
+ :rss=>"http://purl.org/rss/1.0/",
+ :doap=>"http://usefulinc.com/ns/doap#",
+ :skos=>"http://www.w3.org/2004/02/skos/core#",
+ :geo=>"http://www.w3.org/2003/01/geo/wgs84_pos#",
+ :wot=>"http://xmlns.com/wot/0.1/",
+ :owl=>"http://www.w3.org/2002/07/owl#",
+ :sioc=>"http://rdfs.org/sioc/ns#",
+ :types=>"http://rdfs.org/sioc/types#",
+ :xhtml=>"http://www.w3.org/1999/xhtml#",
+ :foaf=>"http://xmlns.com/foaf/0.1/",
+ :cert=>"http://www.w3.org/ns/auth/cert#",
+ :cc=>"http://creativecommons.org/ns#",
+ :rsa=>"http://www.w3.org/ns/auth/rsa#",
+ :rdfs=>"http://www.w3.org/2000/01/rdf-schema#"}
+----
+
+.Generate some URIs
+----
+Talia3::N::DC.name
+# => #<RDF::URI:...(http://purl.org/dc/terms/name)> 
+
+Talia3::N::EX.example1
+# => #<RDF::URI:...(http://example.org/example1)>
+----
+
+WARNING: Talia3::N does not generate URIs for the rdf namespace
+  (http://www.w3.org/1999/02/22-rdf-syntax-ns#).
+  Use the RDF class to generate those.
+
+.URIs for the rdf namespace
+----
+RDF.type
+# => #<RDF::URI:...(http://www.w3.org/1999/02/22-rdf-syntax-ns#type)> 
+----
+
+In addition to these namespaces, Talia3 offers two configuration
+specific namespace helpers, LOCAL and CONTEXTS.
+
+.Generating a local URI
+----
+Talia3::N::LOCAL.uri =>
+# => #<RDF::URI:...(http://localhost:3000/uri)> 
+----
+
+.Generate a URI suitable for a context
+----
+Talia3::N::CONTEXTS.public
+# => #<RDF::URI:...(http://localhost:3000/contexts/public)> 
+
+Talia3::N::CONTEXTS.ontology
+# => #<RDF::URI:...(http://localhost:3000/contexts/ontology)> 
+----
+
+Context URIs are useful to organize data in a RDF store. Talia3 allows
+to redefine two contexts, "public" and "context" in the
+`config/talia3.yml` file:
+
+----
+contexts:
+  # internal default to "#{base_uri}public"
+  public:
+  # internal default to "#{base_uri}ontology"
+  ontology:
+----
+
+You can redefine them by indicating the entire URI to use instead of
+the default.
+
+More contextes will probably be added in the furure.
+
+Statements and Patterns
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Statements and patterns are constructs inherited from the RDF.rb
+plugin. They allow to easily represent triples, quadruples and query
+patterns.
+
+Even more interesting all methods that accept statements or patterns
+as a parameter also allow for an array of 3 or 4 URIs and will
+autogenerate an object of the right class for them internally.
+
+If you are wondering what the fourth element in an array is: it is the
+*context* for the statement/pattern.
+
+Some examples:
+
+.Creating some statements
+----
+# All the following are treated the same way by Talia3 methods:
+statement = RDF::Statement.new(
+  Talia3::N::LOCAL.uri, RDF.type,
+  Talia3::N::EX.type1, 
+  :context => Talia3::N::CONTEXTS.public
+)
+
+array_statement = [
+  Talia3::N::LOCAL.uri,
+  RDF.type,
+  Talia3::N::EX.type1,
+  Talia3::N::CONTEXTS.public
+]
+
+statement_from_array = RDF::Statement.from array_statement
+----
+
+Patters are statements that also accept nil and a symbol as one of
+their values. Patterns are used to query any statent container (like a
+repository).
+
+.Creating some patterns
+----
+# All the following are treated the same way by Talia3 methods:
+pattern = RDF::Query::Pattern.new(
+  Talia3::N::LOCAL.uri, RDF.type,
+  nil, 
+  :context => Talia3::N::CONTEXTS.public
+)
+
+array_pattern = [
+  Talia3::N::LOCAL.uri,
+  RDF.type,
+  nil,
+  Talia3::N::CONTEXTS.public
+]
+
+pattern_from_array = RDF::Query::Pattern.from array_pattern
+----
+
+NOTE: The null (default) context is set by using nil as value or not
+passing anything.
+
+.Querying from a pattern
+----
+Talia3.repository.query([Talia3::N::LOCAL.uri, nil, nil])
+----
+
+.Results of a repository query are statements
+----
+results = Talia3.repository.query([Talia3::N::LOCAL.uri, nil, nil])
+results.each do |result|
+  pp result
+end
+# => #<RDF::Statement:...(<http://localhost:3000/uri> <http://purl.org/dc/terms/name> URI .)>
+# => #<RDF::Statement:0x4a5304e(<http://localhost:3000/uri> <http://purl.org/dc/terms/description> URI description .)>
+----
+
+.Accessing a statement values
+----
+statement = RDF::Statement.new(
+  Talia3::N::LOCAL.uri, RDF.type,
+  Talia3::N::EX.type1,
+  :context => Talia3::N::CONTEXTS.public
+)
+
+statement.subject
+statement.predicate
+statement.object
+statement.context
+----
+
+The same methods apply to patterns.
+
+Resource
+^^^^^^^^
+
+A Talia3 resource is an object that can contain and operate on
+statements, has a context and some repositories. It also works
+mostly(*) with statements related to a specific URI.
+
+
+NOTE: (*) While when loading data from a store only those statements are
+  fetched, you can always add any statement you want and save them,
+  for example, even if those statements have nothing to do with your
+  URI. This actually considered a desired feature.
+
+.A Talia3::Resource object should always be initialized with a URI
+----
+resource = Talia3::Resource.new(Talia3::N::LOCAL.uri)
+----
+
+.By default it has context :public and uses the :local repository
+----
+resource.context
+# => #<RDF::URI:...(http://localhost:3000/contexts/public)>
+
+resource.repository
+# => #<RDF::Sesame::Repository:...(http://localhost:8080/openrdf-sesame/repositories/talia3)>
+----
+
+.You can change the context
+----
+resource.context = :ontology)
+resource.context = Talia3::N::LOCAL.whatever
+resource.context = :null
+----
+
+WARNING: Use :null instead of nil to use the default context.
+
+.You can change the repository used...
+----
+resource.use_repository :repository2
+# => Exception: Repository repository2 not declared for this object.
+----
+
+\... but of course you must have it declared in config/talia3.yml...
+
+(and the repository must exist in Sesame)
+
+.Adding a new repository to the configuration
+----
+...
+repositories:
+  development:
+    local: 
+      type: sesame
+      location: http://localhost:8080/openrdf-sesame/repositories/talia3
+    repository2:
+      type: sesame
+      location: http://localhost:8080/openrdf-sesame/repositories/talia3_2
+  ...
+...
+----
+
+\... and the repository must be declared usable by the resource
+
+----
+resource.repositories.defined?(:repository2)
+# => true
+
+resource.repositories << :repository2
+
+resource.repositories.include?(:respository2)
+# => true
+
+resource.use_repository :repository2
+----
+
+All these options can also be set when the resource is created:
+----
+uri = Talia3::N::LOCAL.uri
+options = {
+  :context      => :ontology,
+  :repositories => [:repository2],
+  :repository   => :repository2
+}
+
+resource = Talia3::Resource.new(uri, options)
+----
+
+The best way to set new context and repositories to objects is to
+create a new class extending Talia3::Resource:
+----
+class MyResource < Talia3::Resource
+  set_context :ontology
+  add_repository :repository2
+
+  def initialize((uri=nil, options={})
+    use_repository(:repository2) 
+  end
+end
+
+resource = MyResource.new(Talia3::N::LOCAL.uri)
+----
+
+*Loading*
+
+When loading a resource, only those statements that have the resource
+URI as either subject or object are loaded.
+
+Please note that only statements with the correct context will be
+fetched.
+
+.Loading a resource
+----
+resource = Talia3::Resource.new(uri).load!
+
+# this does the same thing:
+resource = Talia3::Resource.for(uri)
+----
+
+The following will save any statement currently held by the resource:
+
+.Saving a resource
+----
+resource.save!
+----
+
+The following will delete from the store any statement that are
+contained in the resource. The statements are *not* removed from the
+resource itself.
+
+.Deleting statements from the repositories
+----
+resource.delete!
+----
+
+There is also a method to delete from the store any statement that is
+"around" the current URI. Note that this does not consider statements
+present in the resource.
+
+----
+# Note how we don't need to load:
+Talia3::Resource.new(uri).cleanse_uri!
+----
+
+On the same line you can delete from a store all statements in the
+same context as the resource:
+
+----
+Talia3::Resource.new(uri).cleanse_context!
+----
+
+A resource is a statement container, which means that you can access
+and modify its statements:
+----
+resource = Talia3::Resource.for(uri)
+
+# Add the statement
+resource << [uri, Talia3::N::RDFS.label, 'URI label']
+
+# Remove the statement
+resource - [uri, Talia3::N::RDFS.label, 'URI label']
+
+# Interrogate the repository
+result = resource.query([uri, nil, nil])
+result.size
+result.each do |statement|
+ pp statement
+end
+
+# Clear all statements from the resource
+resource.clear
+----
+
+NOTE: all operators that work with a statement will work with another
+resource, on the basis that we want to repeat the same operation for
+every statement of the second resource.
+
+.Operations between resources
+----
+resource1 << resource2
+# equivalent to resource.each {|s| resource1 << s}
+
+resource1 + resource2
+# equivalent to resource.each {|s| resource1 << s}
+
+resource1 - resource2
+# equivalent to resource.each {|s| resource1 - s}
+----
+
+
+NOTE: When adding statements, the inserted statements context will be
+  automatically changed to the resource context.
+
+Talia3 resources also have a method to quickly access the objects of
+all stamentents that have `uri` has subject and the given predicate:
+----
+resource[Talia3::N::DC.name]
+# => [#<RDF::Literal:0x48d4060("URI")>]
+----
+
+Note that the method returns an array of values: being this a RDF
+resource we always assume that more than one value is possible. Even
+when working with strings we must expect more than one result, one per
+language.
+
+
+*Advanced loading*
+
+
+One interesting feature of the resource is the possibility to change
+the meaning of "around" our URI: as we have seen, by default the
+resource will grab all statements that have the resource's uri as
+either subject or object.
+
+We can change this behaviour by the :direction and :depth
+options. :depth can be either 1 or 2, :direction can be one of :left,
+:right or :both.
+
+These options can be set in various ways:
+
+* At initialization time
+
+----
+Talia3::Resource.new(uri, :direction => :right, :depth => 2)
+Talia3::Resource.for(uri, :direction => :right, :depth => 2)
+----
+
+* During the life cycle of the object
+
+----
+resource = Talia3::Resource.new(uri)
+resource.direction = :right
+resource.depth = 2
+----
+
+* Only for the duration of one load operation, as options for `load!`
+
+----
+resource = Talia3::Resource.new(uri)
+resource.load!(:direction => :right, :depth => 2)
+----
+
+*:direction* allows to load statements that are related to the
+#resource uri only by having it as subject (:right) or object
+(:left). :both is the default and we have seen its behaviour.
+
+*:depth* if its value is 2 the `load!` operation will fetch more
+statements, including those related to the resource URI through
+another statement, in a valid direction.
+
+For example, let's say that a repository contains the following
+statements:
+
+----
+# Note the public context
+Talia3.repository.insert(
+  [Talia3::N::LOCAL.uri1, RDF.type, Talia3::N::EX.type1, Talia3::N::CONTEXTS.public],
+  [Talia3::N::LOCAL.uri1, Talia3::N::DC.name, "name", Talia3::N::CONTEXTS.public],
+  [Talia3::N::LOCAL.uri2, RDF.type, Talia3::N::EX.type2, Talia3::N::CONTEXTS.public],
+  [Talia3::N::LOCAL.uri2, Talia3::N::EX.relation, Talia3::N::LOCAL.uri1, Talia3::N::CONTEXTS.public]
+)
+----
+
+Here's what different values for `:depth' and `:direction` would
+return:
+
+----
+Talia3::Resource.for(Talia3::N::LOCAL.uri1, :direction => :right)
+# [Talia3::N::LOCAL.uri1, RDF.type, Talia3::N::EX.type1]
+# [Talia3::N::LOCAL.uri1, Talia3::N::DC.name, "name"]
+
+Talia3::Resource.for(Talia3::N::LOCAL.uri1, :direction => :left)
+# [Talia3::N::LOCAL.uri2, Talia3::N::EX.relation, Talia3::N::LOCAL.uri1]
+
+Talia3::Resource.for(Talia3::N::LOCAL.uri1, :depth => 2)
+# [Talia3::N::LOCAL.uri1, RDF.type, Talia3::N::EX.type1]
+# [Talia3::N::LOCAL.uri1, Talia3::N::DC.name, "name"]
+# [Talia3::N::LOCAL.uri2, RDF.type, Talia3::N::EX.type2]
+# [Talia3::N::LOCAL.uri2, Talia3::N::EX.relation, Talia3::N::LOCAL.uri1]
+# Note how the fourth statement is related to our uri through the third
+----
+
+NOTE: values of :depth greater then two are not allowed, for efficiency reasons.
+
+Talia3 ActiveModel Resources
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+IMPORTANT: TODO
+
+
+
+Copyright (c) 2010 Net7 SRL, <http://www.netseven.it/>                                                                                          

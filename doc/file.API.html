@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: API
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: API</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'><h1>Talia3 HTTP API</h1>
+
+<h2>Authentication</h2>
+
+<p>Authentication in Talia API is token-based. Before any operation that
+requires authentication you will need:</p>
+
+<ul>
+<li>A Talia3 user with the correct permissions, identified by email
+and password.</li>
+<li>To obtain an authorization token.</li>
+<li>To append the authorization token to any future request that
+requires an authenticated user.</li>
+</ul>
+
+
+<p>A token lasts, currently, for 2 hours.</p>
+
+<p>Any successive authentication request with email and password will
+create a new token, with a new 6-hours life period --any existing
+token for the user will be extended.</p>
+
+<p>If a new authentication is requested with an existing token, its
+lifetime will be extended.</p>
+
+<p><strong>Request:</strong></p>
+
+<pre class="code">POST /talia3/api/auth HTTP/1.1
+</pre>
+
+<p><strong>Parameters:</strong></p>
+
+<ul>
+<li><strong>email</strong>, <strong>password</strong>: user identification.</li>
+<li><strong>token</strong>: the authentication token itself --to renew it or confirm it.</li>
+</ul>
+
+
+<p><strong>Responses</strong>:
+*  200 OK</p>
+
+<p><strong>Examples</strong>
+Examples use curl in verbose mode, the response is edited for clarity.</p>
+
+<p>Succesful login:</p>
+
+<pre class="code">curl -v -F &quot;email=admin&quot; -F &quot;password=password&quot; http://localhost:3000/talia3/api/auth
+
+HTTP/1.1 200 OK
+Content-Type: plain/text
+
+31fa786113118e70c34b3de6287266ee7affc168d59f9270b32a5214de5f793b
+</pre>
+
+<p>Unsuccesful login:</p>
+
+<pre class="code">curl -v -F &quot;email=non-existent&quot; -F &quot;password=non-existent&quot; http://localhost:3000/talia3/api/auth
+
+HTTP/1.1 401 Unauthorized
+Content-Type: plain/text
+
+Invalid authentication information.
+</pre></div></div>
+    
+    <div id="footer">
+  Generated on Thu Aug 25 17:54:19 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

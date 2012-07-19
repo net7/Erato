@@ -1,0 +1,57 @@
+<body data-edit_url="<%= url_for talia3_universal_url %>">
+
+  <div class="wrapper">
+    <div class="topbar-wrapper">
+      <div class="topbar">
+        <div class="topbar-inner">
+          <div class="container" >
+            <h3><%= link_to "Erato. A Linked Data editor", :root %></h3>
+            <ul class="nav">
+<% if @type %>
+              <li><%= link_to "All classes", talia3_universal_types_path(@querystring) %></li>
+<% end %>
+
+              <li>
+                <% if @type %>
+                <%= link_to "Back", talia3_universal_instances_path(@querystring) %>
+                <% else %>
+                <%= link_to "Back", talia3_universal_types_path(@querystring) %>
+                <% end %>
+              </li>
+	          </ul>
+		      </div>
+		    </div>
+	    </div>
+    <h3 class="resource-title"><%= "Editing resource" %> </h3> <span class="resource-url"> <a href="<%= @record.uri.to_s %>"><%= @record.uri.to_s %></a></span>
+<% if params[:sparql] %>
+    <h4 class="resource-endpoint edit">From SPARQL endpoint: <%= params[:sparql] %></h4>
+<% else %>
+    <h4 class="resource-endpoint edit" >From LOD request</h4>
+<% end %>
+
+    <%= render 'talia3/partials/messages' %>
+    <%= render :partial => 'talia3/universal/shared/record',
+               :object => @record,
+               :locals => {
+                 :new_resource => false,
+                 :url => talia3_universal_update_url(:uri => @uri),
+                 :errors => @errors,
+                 :q => @querystring} %>
+
+				 
+				 <script>
+  dojo.ready(function() {               
+    		document.medusaReq = new semlib.MedusaRequest({
+				theme:"tundra",
+				selector:".agorized-input",
+			 	tokenForFieldType: function(type) {return "4GLgEDa5wA";},
+        		userId: 16,
+        		apiKey:"cc6ae414ab436e36d30af1cbde742614",
+				getTerm: function(){return tempKeyword;}	
+			});
+
+	document.medusaReq.clear("example1");			
+    		
+		});
+		
+  </script>

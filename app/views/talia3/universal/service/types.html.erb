@@ -1,0 +1,11 @@
+<body>
+  <div class="wrapper">
+    <div class="topbar-wrapper">
+      <div class="topbar">
+        <div class="topbar-inner">
+          <div class="container" ><h3><%= link_to "Erato. A Linked Data editor", :root %></h3></div>
+		    </div>
+	    </div>
+      <h3 class="resource-title"><%= "Editing dataset" %></h3> <span class="resource-url"> <a href="<%= @source %>"><%= @source %></a></span>
+      <h3><%= "Available classes" %>:</h3>
+      <%= render :partial => 'talia3/universal/shared/types', :object => @types, :locals => {:source => @source, :q => @querystring, :l => @l, :o => @o} %>

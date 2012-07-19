@@ -1,0 +1,23 @@
+<%-
+nested_bnode     = false
+property_html_id = @property.to_s.gsub(/[^a-zA-Z0-9_]/, '_')
+-%>
+
+$("#record_attribute_bnodes_<%= property_html_id %>").html(' \
+<%- @subgraph.each_subject do |bnode| -%> 
+<ul> \
+  <%- @subgraph.query([bnode]).each do |statement| -%>
+  <%- nested_bnode = true if statement.object.node? %>
+  <li><strong><%= escape_javascript(talia3_main_label(statement.predicate.to_s).capitalize) %>:</strong><%= escape_javascript(statement.object.to_s) %></li> \
+  <%- end -%>
+</ul> \
+<%- end -%>
+');
+
+if($("#edit_<%= property_html_id %>_link")) {
+<%- unless nested_bnode -%>
+  $("#edit_<%= property_html_id %>_link").removeClass("hidden");
+<%- else -%>
+  $("#edit_<%= property_html_id %>_not_implemented").removeClass("hidden");
+<%- end -%>
+}

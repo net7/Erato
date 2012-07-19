@@ -1,0 +1,649 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Talia3::Mixin::HasNamedGraph::ClassMethods
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../../..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../../_index.html">Index (C)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../../Talia3.html" title="Talia3 (module)">Talia3</a></span></span> &raquo; <span class='title'>Mixin</span> &raquo; <span class='title'><span class='object_link'><a href="../HasNamedGraph.html" title="Talia3::Mixin::HasNamedGraph (module)">HasNamedGraph</a></span></span>
+     &raquo; 
+    <span class="title">ClassMethods</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Talia3::Mixin::HasNamedGraph::ClassMethods
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">app/models/talia3/mixin/has_named_graph.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+Adds methods to the class to allow for shared context information.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cleanse_context%21-instance_method" title="#cleanse_context! (instance method)">- (RDF::HasNamedGraph) <strong>cleanse_context!</strong>(repository = nil, context = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Removes all statements from the indicated repository and context.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#context-instance_method" title="#context (instance method)">- (Talia3::URI) <strong>context</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the current default context for objects of this class.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#format_context-instance_method" title="#format_context (instance method)">- (Talia3::URI) <strong>format_context</strong>(context) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Converts a context URI representation to a Talia3::URI.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_context-instance_method" title="#set_context (instance method)">- (Class) <strong>set_context</strong>(context) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Sets the default context for new objects of this class.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="cleanse_context!-instance_method">
+  
+    - (<tt>RDF::HasNamedGraph</tt>) <strong>cleanse_context!</strong>(repository = nil, context = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Removes all statements from the indicated repository and context.
+</p>
+<p>
+Works regardless of statements currently present in the graph. Statements
+are <b>not</b> cleared if present.
+</p>
+<p>
+<tt>repository</tt> can be omitted if the class responds to #repository
+(includes <span class='object_link'><a href="../HasRepositories.html" title="Talia3::Mixin::HasRepositories (module)">Talia3::Mixin::HasRepositories</a></span>).
+</p>
+<p>
+if <tt>context</tt> is omitted self.context is used.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>repository</span>
+      
+      
+        <span class='type'>(<tt>RDF::Repository</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+optional if object responds to <span class='object_link'><a href="../HasRepositories.html#repository-instance_method" title="Talia3::Mixin::HasRepositories#repository (method)">Talia3::Mixin::HasRepositories#repository</a></span>
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt>RDF::URI</tt>, <tt><span class='object_link'><a href="../../../String.html" title="String (class)">String</a></span></tt>, <tt><span class='object_link'><a href="../../../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+optional if nil, self.context is used
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RDF::HasNamedGraph</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+self (chainable)
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if argument is an invalid repository
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Exception</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if repository is read-only
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/has_named_graph.rb', line 147</span>
+
+<span class='kw'>def</span> <span class='id cleanse_context!'>cleanse_context!</span><span class='lparen'>(</span><span class='id repository'>repository</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id context'>context</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id context'>context</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id context'>context</span> <span class='kw'>if</span> <span class='id context'>context</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='id repository'>repository</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id repository'>repository</span> <span class='kw'>if</span> <span class='id repository'>repository</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='kw'>and</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='symbol'>:repository</span>
+  <span class='id raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No repository chosen</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id repository'>repository</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='id raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No context chosen</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id context'>context</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='id raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Argument must be a RDF::Repository, </span><span class='embexpr_beg'>#{</span><span class='id repository'>repository</span><span class='period'>.</span><span class='id class'>class</span><span class='rbrace'>}</span><span class='tstring_content'> given</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id repository'>repository</span><span class='period'>.</span><span class='id is_a?'>is_a?</span> <span class='const'>RDF</span><span class='op'>::</span><span class='const'>Repository</span>
+  <span class='id raise'>raise</span> <span class='const'>Exception</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Repository is read-only</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id repository'>repository</span><span class='period'>.</span><span class='id mutable?'>mutable?</span>
+  <span class='id pattern'>pattern</span> <span class='op'>=</span> <span class='const'>RDF</span><span class='op'>::</span><span class='const'>Query</span><span class='op'>::</span><span class='const'>Pattern</span><span class='period'>.</span><span class='id new'>new</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='kw'>nil</span>
+  <span class='id pattern'>pattern</span><span class='period'>.</span><span class='id context'>context</span> <span class='op'>=</span> <span class='id context'>context</span> <span class='kw'>unless</span> <span class='id context'>context</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='id repository'>repository</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='id pattern'>pattern</span><span class='rparen'>)</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="context-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../../URI.html" title="Talia3::URI (class)">Talia3::URI</a></span></tt>) <strong>context</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the current default context for objects of this class.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../URI.html" title="Talia3::URI (class)">Talia3::URI</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+89
+90
+91
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/has_named_graph.rb', line 89</span>
+
+<span class='kw'>def</span> <span class='id context'>context</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='ivar'>@context</span><span class='period'>.</span><span class='id is_a?'>is_a?</span> <span class='const'>Symbol</span> <span class='kw'>and</span> <span class='ivar'>@context</span> <span class='op'>==</span> <span class='symbol'>:null</span>
+  <span class='ivar'>@context</span> <span class='op'>||</span> <span class='id format_context'>format_context</span><span class='lparen'>(</span><span class='symbol'>:public</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="format_context-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../../URI.html" title="Talia3::URI (class)">Talia3::URI</a></span></tt>) <strong>format_context</strong>(context) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+Use :null to set the context to nil
+</p>
+</div>
+  </div>
+
+<p>
+Converts a context URI representation to a Talia3::URI.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>any</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../String.html" title="String (class)">String</a></span></tt>, <tt><span class='object_link'><a href="../../URI.html" title="Talia3::URI (class)">Talia3::URI</a></span></tt>, <tt><span class='object_link'><a href="../../../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>, <tt>RDF::URI</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+valid context URI representation
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../URI.html" title="Talia3::URI (class)">Talia3::URI</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+if the argument is not a valid URI.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+122
+123
+124
+125
+126
+127
+128</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/has_named_graph.rb', line 122</span>
+
+<span class='kw'>def</span> <span class='id format_context'>format_context</span><span class='lparen'>(</span><span class='id context'>context</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id context'>context</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='kw'>or</span> <span class='lparen'>(</span><span class='id context'>context</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Symbol</span><span class='rparen'>)</span> <span class='kw'>and</span> <span class='id context'>context</span> <span class='op'>==</span> <span class='symbol'>:null</span><span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id context'>context</span>
+  <span class='kw'>when</span> <span class='const'>Symbol</span> <span class='kw'>then</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>N</span><span class='op'>::</span><span class='const'>CONTEXTS</span><span class='period'>.</span><span class='id __send__'>__send__</span> <span class='id context'>context</span>
+  <span class='kw'>else</span> <span class='const'>Talia3</span><span class='op'>::</span><span class='const'>URI</span><span class='period'>.</span><span class='id new'>new</span> <span class='id context'>context</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="set_context-instance_method">
+  
+    - (<tt>Class</tt>) <strong>set_context</strong>(context) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+Use :null to set the context to nil
+</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+If the argument is a symbol, except for :null,
+</p>
+</div>
+  </div>
+
+<p>
+Sets the default context for new objects of this class.
+</p>
+<p>
+Talia3::Namespace::CONTEXTS.<argument> is used to generate the context URI.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>any</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../String.html" title="String (class)">String</a></span></tt>, <tt><span class='object_link'><a href="../../URI.html" title="Talia3::URI (class)">Talia3::URI</a></span></tt>, <tt><span class='object_link'><a href="../../../Symbol.html" title="Symbol (class)">Symbol</a></span></tt>, <tt>RDF::URI</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+valid context URI representation
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+self (chainable)
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+106
+107
+108
+109
+110</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/talia3/mixin/has_named_graph.rb', line 106</span>
+
+<span class='kw'>def</span> <span class='id set_context'>set_context</span><span class='lparen'>(</span><span class='id context'>context</span><span class='rparen'>)</span>
+  <span class='id context'>context</span> <span class='op'>=</span> <span class='id format_context'>format_context</span> <span class='id context'>context</span>
+  <span class='ivar'>@context</span> <span class='op'>=</span> <span class='id context'>context</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='op'>?</span> <span class='symbol'>:null</span> <span class='op'>:</span> <span class='id context'>context</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Aug 25 17:54:26 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

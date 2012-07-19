@@ -1,0 +1,54 @@
+<body>
+  
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".delete_instance").click(function(e) {
+      e.preventDefault();
+        if(confirm("Please confirm delete operation on '"+$(this).attr("href")+"'")) {
+          request_delete($(this).attr("href"));
+        }
+        return false;
+      });
+    });
+
+    function request_delete(uri, inverse) {
+      data = {sparql: "<%= @source %>", uri: uri, cb: "<%= @callback %>", update: "<%= @update %>"};
+      if(inverse) data.inverse = inverse;
+      $.ajax({
+        type: "GET",
+        url : "<%= talia3_universal_destroy_url %>",
+        data: data,
+        success: function() {
+          window.location.reload();
+        },
+        error: function(response) {
+          if(response.status == 400 && response.responseText == 'Required inverse parameter') {
+            inverse = confirm("Do you want to remove also references from other resources?") ? 'true' : 'false';
+            request_delete(uri, inverse);
+          } else alert("Error in request: \n Status: " + response.status + " \n Message: " + response.responseText)
+        }
+      });
+    }
+  </script>
+  <div class="wrapper">
+    <div class="topbar-wrapper">
+      <div class="topbar">
+        <div class="topbar-inner">
+          <div class="container" >
+            <h3><%= link_to "Erato. A Linked Data editor", :root %></h3>
+            <ul class="nav">
+              <li><%= link_to "Back", talia3_universal_types_path(@querystring) %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+     <h3 class="resource-title"><%= "Editing dataset" %></h3> <span class="resource-url"> <a href="<%= @source %>"><%= @source %></a></span>
+<% unless @type.nil? %>
+     <h3>Available instances of <%= talia3_main_label @type %>(<a href="<%= @type.to_s %>"><%= @type.to_s %></a>):</h3>
+<% else %>
+     <h3>Available untyped instances:</h3>
+<% end %>
+     <%= render :partial => 'talia3/universal/shared/instances',
+                :object => @instances, 
+                :locals => {:repository => @repository, :q => @querystring, :l => @l, :o => @o} %>

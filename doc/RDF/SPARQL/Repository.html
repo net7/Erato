@@ -1,0 +1,2072 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: RDF::SPARQL::Repository
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (R)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../RDF.html" title="RDF (module)">RDF</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../SPARQL.html" title="RDF::SPARQL (module)">SPARQL</a></span></span>
+     &raquo; 
+    <span class="title">Repository</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: RDF::SPARQL::Repository
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Repository</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Repository</li>
+          
+            <li class="next">RDF::SPARQL::Repository</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/rdf/sparql/repository.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+A read-only repository view of a SPARQL endpoint.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Repository</li>
+    
+  </ul>
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="../Sesame/Repository.html" title="RDF::Sesame::Repository (class)">RDF::Sesame::Repository</a></span></p>
+</div>
+
+
+  
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#client-instance_method" title="#client (instance method)">- (RDF::SPARQL::Client) <strong>client</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#count-instance_method" title="#count (instance method)">- (Integer) <strong>count</strong> </a>
+    
+
+    
+      (also: #size, #length)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+TODO: maybe contextes should be factored in? Returns the number of
+statements in this repository.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each_context-instance_method" title="#each_context (instance method)">- (Object) <strong>each_context</strong>(&amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each_object-instance_method" title="#each_object (instance method)">- (Enumerator) <strong>each_object</strong> {|object| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+TODO: context? (Not in original&#8230;) Iterates over each object in this
+repository.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each_predicate-instance_method" title="#each_predicate (instance method)">- (Enumerator) <strong>each_predicate</strong> {|predicate| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+TODO: context? (Not in original&#8230;) Iterates over each predicate in
+this repository.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each_statement-instance_method" title="#each_statement (instance method)">- (Object) <strong>each_statement</strong>(&amp;block) </a>
+    
+
+    
+      (also: #each)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each_subject-instance_method" title="#each_subject (instance method)">- (Enumerator) <strong>each_subject</strong> {|subject| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+TODO: context? (Not in original&#8230;) Iterates over each subject in this
+repository.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#empty%3F-instance_method" title="#empty? (instance method)">- (Boolean) <strong>empty?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns `true` if this repository contains no statements.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_context%3F-instance_method" title="#has_context? (instance method)">- (Boolean) <strong>has_context?</strong>(context) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_object%3F-instance_method" title="#has_object? (instance method)">- (Boolean) <strong>has_object?</strong>(object) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+TODO: context? (Not in original&#8230;) Returns `true` if this repository
+contains the given object.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_predicate%3F-instance_method" title="#has_predicate? (instance method)">- (Boolean) <strong>has_predicate?</strong>(predicate) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns `true` if this repository contains the given predicate.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_statement%3F-instance_method" title="#has_statement? (instance method)">- (Boolean) <strong>has_statement?</strong>(statement) </a>
+    
+
+    
+      (also: #has_quad?)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns `true` if this repository contains the given `statement`.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_subject%3F-instance_method" title="#has_subject? (instance method)">- (Boolean) <strong>has_subject?</strong>(subject) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns `true` if this repository contains the given subject.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_triple%3F-instance_method" title="#has_triple? (instance method)">- (Boolean) <strong>has_triple?</strong>(triple) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns `true` if this repository contains the given `triple`.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Repository) <strong>initialize</strong>(url_or_options, &amp;block) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+BY RIK: made more compatible with RDF::Repository TODO: are options ever
+even used?.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#query-instance_method" title="#query (instance method)">- (Object) <strong>query</strong>(pattern, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Note that this method is compatible with RDF::Queryable#query but also
+supports additional features (sparql queries directly as String or
+represented by a  RDF::SPARQL::Query object).
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#supports%3F-instance_method" title="#supports? (instance method)">- (Boolean) <strong>supports?</strong>(feature) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#writable%3F-instance_method" title="#writable? (instance method)">- (Boolean) <strong>writable?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns `false` to indicate that this is a read-only repository.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    
+      <span class="overload">- (<tt><span class='object_link'><a href="" title="RDF::SPARQL::Repository (class)">Repository</a></span></tt>) <strong>initialize</strong>(url) {|repository| ... }</span>
+    
+      <span class="overload">- (<tt><span class='object_link'><a href="" title="RDF::SPARQL::Repository (class)">Repository</a></span></tt>) <strong>initialize</strong>(options = {}) {|repository| ... }</span>
+    
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+BY RIK: made more compatible with RDF::Repository TODO: are options ever
+even used?
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <h3>Overloads:</h3>
+  <ul class="overload">
+    
+      
+      <li class="overload_item">
+        <span class="signature">- (<tt><span class='object_link'><a href="" title="RDF::SPARQL::Repository (class)">Repository</a></span></tt>) <strong>initialize</strong>(url) {|repository| ... }</span>
+        <div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>url</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../String.html" title="String (class)">String</a></span></tt>, <tt>RDF::URI</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>repository</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Yield Parameters:</h3>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'></span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="RDF::SPARQL::Repository (class)">Repository</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+      </li>
+    
+      
+      <li class="overload_item">
+        <span class="signature">- (<tt><span class='object_link'><a href="" title="RDF::SPARQL::Repository (class)">Repository</a></span></tt>) <strong>initialize</strong>(options = {}) {|repository| ... }</span>
+        <div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash{<span class='object_link'><a href="../../Symbol.html" title="Symbol (class)">Symbol</a></span> =&gt; Object}</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:server</span>
+          <span class="type">(<tt>Server</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>nil</tt>
+            
+          </span>
+          &mdash; <div class='inline'></div>
+        </tr>
+      
+        <li>
+          <span class="name">:id</span>
+          <span class="type">(<tt><span class='object_link'><a href="../../String.html" title="String (class)">String</a></span></tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>nil</tt>
+            
+          </span>
+          &mdash; <div class='inline'></div>
+        </tr>
+      
+        <li>
+          <span class="name">:title</span>
+          <span class="type">(<tt><span class='object_link'><a href="../../String.html" title="String (class)">String</a></span></tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>nil</tt>
+            
+          </span>
+          &mdash; <div class='inline'></div>
+        </tr>
+      
+    </ul>
+  
+<h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>repository</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Yield Parameters:</h3>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'></span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="RDF::SPARQL::Repository (class)">Repository</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+      </li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 26</span>
+
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id url_or_options'>url_or_options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id url_or_options'>url_or_options</span><span class='period'>.</span><span class='id is_a?'>is_a?</span> <span class='const'>Hash</span>
+    <span class='ivar'>@options</span> <span class='op'>=</span> <span class='id url_or_options'>url_or_options</span><span class='period'>.</span><span class='id dup'>dup</span>
+    <span class='ivar'>@client</span> <span class='op'>=</span> <span class='const'>RDF</span><span class='op'>::</span><span class='const'>SPARQL</span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='ivar'>@options</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:endpoint</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='kw'>unless</span> <span class='id url_or_options'>url_or_options</span><span class='period'>.</span><span class='id is_a?'>is_a?</span> <span class='const'>String</span> <span class='kw'>or</span> <span class='id url_or_options'>url_or_options</span><span class='period'>.</span><span class='id is_a?'>is_a?</span> <span class='const'>RDF</span><span class='op'>::</span><span class='const'>URI</span>
+      <span class='id raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected String, RDF::URI or Hash, but got </span><span class='embexpr_beg'>#{</span><span class='id url_or_options'>url_or_options</span><span class='period'>.</span><span class='id inspect'>inspect</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+    <span class='ivar'>@client</span> <span class='op'>=</span> <span class='const'>RDF</span><span class='op'>::</span><span class='const'>SPARQL</span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id url_or_options'>url_or_options</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
+    <span class='ivar'>@options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>if</span> <span class='id block_given?'>block_given?</span>
+    <span class='kw'>case</span> <span class='id block'>block</span><span class='period'>.</span><span class='id arity'>arity</span>
+    <span class='kw'>when</span> <span class='int'>1</span> <span class='kw'>then</span> <span class='id block'>block</span><span class='period'>.</span><span class='id call'>call</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
+    <span class='kw'>else</span> <span class='id instance_eval'>instance_eval</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <span id="client-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="client-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Client.html" title="RDF::SPARQL::Client (class)">RDF::SPARQL::Client</a></span></tt>) <strong>client</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Client.html" title="RDF::SPARQL::Client (class)">RDF::SPARQL::Client</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='id client'>client</span>
+  <span class='ivar'>@client</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="count-instance_method">
+  
+    - (<tt>Integer</tt>) <strong>count</strong> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='size-instance_method'>size</span>, <span id='length-instance_method'>length</span></span>
+    </span>
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+TODO: maybe contextes should be factored in? Returns the number of
+statements in this repository.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Repository#count?</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 206</span>
+
+<span class='kw'>def</span> <span class='id count'>count</span>
+  <span class='kw'>begin</span>
+    <span class='id binding'>binding</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT COUNT(*) WHERE { ?s ?p ?o }</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id first'>first</span><span class='period'>.</span><span class='id to_hash'>to_hash</span>
+    <span class='id binding'>binding</span><span class='lbracket'>[</span><span class='id binding'>binding</span><span class='period'>.</span><span class='id keys'>keys</span><span class='period'>.</span><span class='id first'>first</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id value'>value</span><span class='period'>.</span><span class='id to_i'>to_i</span>
+  <span class='kw'>rescue</span> <span class='const'>RDF</span><span class='op'>::</span><span class='const'>SPARQL</span><span class='op'>::</span><span class='const'>Client</span><span class='op'>::</span><span class='const'>MalformedQuery</span> <span class='op'>=&gt;</span> <span class='id e'>e</span>
+    <span class='comment'># SPARQL 1.0 does not include support for aggregate functions:
+</span>    <span class='id count'>count</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='id each_statement'>each_statement</span> <span class='lbrace'>{</span> <span class='id count'>count</span> <span class='op'>+=</span> <span class='int'>1</span> <span class='rbrace'>}</span> <span class='comment'># TODO: optimize this
+</span>    <span class='id count'>count</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="each_context-instance_method">
+  
+    - (<tt>Object</tt>) <strong>each_context</strong>(&amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Enumerable#each_context</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+169
+170
+171
+172
+173
+174
+175
+176</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 169</span>
+
+<span class='kw'>def</span> <span class='id each_context'>each_context</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id enum_context'>enum_context</span> <span class='kw'>unless</span> <span class='id block_given?'>block_given?</span>
+  <span class='id require'>require</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>json</span><span class='tstring_end'>'</span></span> <span class='kw'>unless</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>JSON</span><span class='rparen'>)</span>
+  <span class='comment'># Client will raise his own exceptions if there is an error.
+</span>  <span class='id client'>client</span><span class='period'>.</span><span class='id query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT DISTINCT ?g WHERE{GRAPH ?g{?s ?p ?o}}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id result'>result</span><span class='op'>|</span>
+    <span class='id block'>block</span><span class='period'>.</span><span class='id call'>call</span> <span class='id result'>result</span><span class='period'>.</span><span class='id g'>g</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="each_object-instance_method">
+  
+    - (<tt>Enumerator</tt>) <strong>each_object</strong> {|object| ... }
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+TODO: context? (Not in original&#8230;) Iterates over each object in this
+repository.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>object</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Yield Parameters:</h3>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>object</span>
+      
+      
+        <span class='type'>(<tt>RDF::Value</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Enumerator</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Repository#each_object?</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+158
+159
+160
+161
+162
+163
+164</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 158</span>
+
+<span class='kw'>def</span> <span class='id each_object'>each_object</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>unless</span> <span class='id block_given?'>block_given?</span>
+    <span class='const'>RDF</span><span class='op'>::</span><span class='const'>Enumerator</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:each_object</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id client'>client</span><span class='period'>.</span><span class='id select'>select</span><span class='lparen'>(</span><span class='symbol'>:o</span><span class='rparen'>)</span><span class='period'>.</span><span class='id distinct'>distinct</span><span class='period'>.</span><span class='id where'>where</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='symbol'>:s</span><span class='comma'>,</span> <span class='symbol'>:p</span><span class='comma'>,</span> <span class='symbol'>:o</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id execute'>execute</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id solution'>solution</span><span class='op'>|</span> <span class='id block'>block</span><span class='period'>.</span><span class='id call'>call</span><span class='lparen'>(</span><span class='id solution'>solution</span><span class='lbracket'>[</span><span class='symbol'>:o</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="each_predicate-instance_method">
+  
+    - (<tt>Enumerator</tt>) <strong>each_predicate</strong> {|predicate| ... }
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+TODO: context? (Not in original&#8230;) Iterates over each predicate in
+this repository.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>predicate</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Yield Parameters:</h3>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>predicate</span>
+      
+      
+        <span class='type'>(<tt>RDF::URI</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Enumerator</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Repository#each_predicate?</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+142
+143
+144
+145
+146
+147
+148</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 142</span>
+
+<span class='kw'>def</span> <span class='id each_predicate'>each_predicate</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>unless</span> <span class='id block_given?'>block_given?</span>
+    <span class='const'>RDF</span><span class='op'>::</span><span class='const'>Enumerator</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:each_predicate</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id client'>client</span><span class='period'>.</span><span class='id select'>select</span><span class='lparen'>(</span><span class='symbol'>:p</span><span class='rparen'>)</span><span class='period'>.</span><span class='id distinct'>distinct</span><span class='period'>.</span><span class='id where'>where</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='symbol'>:s</span><span class='comma'>,</span> <span class='symbol'>:p</span><span class='comma'>,</span> <span class='symbol'>:o</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id execute'>execute</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id solution'>solution</span><span class='op'>|</span> <span class='id block'>block</span><span class='period'>.</span><span class='id call'>call</span><span class='lparen'>(</span><span class='id solution'>solution</span><span class='lbracket'>[</span><span class='symbol'>:p</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="each_statement-instance_method">
+  
+    - (<tt>Object</tt>) <strong>each_statement</strong>(&amp;block) 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='each-instance_method'>each</span></span>
+    </span>
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Enumerable#each_statement</li>
+    
+      <li><a href="http://www.openrdf.org/doc/sesame2/system/ch08.html#d0e304" target="_parent" title="http://www.openrdf.org/doc/sesame2/system/ch08.html#d0e304">http://www.openrdf.org/doc/sesame2/system/ch08.html#d0e304</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+70
+71
+72
+73
+74
+75
+76
+77</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 70</span>
+
+<span class='kw'>def</span> <span class='id each_statement'>each_statement</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id enum_statement'>enum_statement</span> <span class='kw'>unless</span> <span class='id block_given?'>block_given?</span>
+  <span class='comment'># Client will raise his own exceptions if there is an error.
+</span>  <span class='id results'>results</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id query'>query</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT DISTINCT * WHERE {{?s ?p ?o} UNION {GRAPH ?g {?s ?p ?o}}}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id results'>results</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id result'>result</span><span class='op'>|</span>
+    <span class='id block'>block</span><span class='period'>.</span><span class='id call'>call</span> <span class='const'>RDF</span><span class='op'>::</span><span class='const'>Statement</span><span class='period'>.</span><span class='id new'>new</span> <span class='id result'>result</span><span class='period'>.</span><span class='id s'>s</span><span class='comma'>,</span> <span class='id result'>result</span><span class='period'>.</span><span class='id p'>p</span><span class='comma'>,</span> <span class='id result'>result</span><span class='period'>.</span><span class='id o'>o</span><span class='comma'>,</span> <span class='symbol'>:context</span> <span class='op'>=&gt;</span> <span class='id result'>result</span><span class='lbracket'>[</span><span class='symbol'>:g</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="each_subject-instance_method">
+  
+    - (<tt>Enumerator</tt>) <strong>each_subject</strong> {|subject| ... }
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+TODO: context? (Not in original&#8230;) Iterates over each subject in this
+repository.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>subject</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Yield Parameters:</h3>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>subject</span>
+      
+      
+        <span class='type'>(<tt>RDF::Resource</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Enumerator</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Repository#each_subject?</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+126
+127
+128
+129
+130
+131
+132</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 126</span>
+
+<span class='kw'>def</span> <span class='id each_subject'>each_subject</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>unless</span> <span class='id block_given?'>block_given?</span>
+    <span class='const'>RDF</span><span class='op'>::</span><span class='const'>Enumerator</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:each_subject</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id client'>client</span><span class='period'>.</span><span class='id select'>select</span><span class='lparen'>(</span><span class='symbol'>:s</span><span class='rparen'>)</span><span class='period'>.</span><span class='id distinct'>distinct</span><span class='period'>.</span><span class='id where'>where</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='symbol'>:s</span><span class='comma'>,</span> <span class='symbol'>:p</span><span class='comma'>,</span> <span class='symbol'>:o</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id execute'>execute</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id solution'>solution</span><span class='op'>|</span> <span class='id block'>block</span><span class='period'>.</span><span class='id call'>call</span><span class='lparen'>(</span><span class='id solution'>solution</span><span class='lbracket'>[</span><span class='symbol'>:s</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="empty?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>empty?</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns `true` if this repository contains no statements.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Repository#empty?</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+226
+227
+228</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 226</span>
+
+<span class='kw'>def</span> <span class='id empty?'>empty?</span>
+  <span class='id client'>client</span><span class='period'>.</span><span class='id ask'>ask</span><span class='period'>.</span><span class='id whether'>whether</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='symbol'>:s</span><span class='comma'>,</span> <span class='symbol'>:p</span><span class='comma'>,</span> <span class='symbol'>:o</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id false?'>false?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="has_context?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>has_context?</strong>(context) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Enumerable#has_context?</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114
+115
+116</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 114</span>
+
+<span class='kw'>def</span> <span class='id has_context?'>has_context?</span><span class='lparen'>(</span><span class='id context'>context</span><span class='rparen'>)</span>
+  <span class='id client'>client</span><span class='period'>.</span><span class='id ask'>ask</span><span class='period'>.</span><span class='id whether'>whether</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='symbol'>:s</span><span class='comma'>,</span> <span class='symbol'>:p</span><span class='comma'>,</span> <span class='symbol'>:o</span><span class='comma'>,</span> <span class='id context'>context</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id true?'>true?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="has_object?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>has_object?</strong>(object) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+TODO: context? (Not in original&#8230;) Returns `true` if this repository
+contains the given object.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'></span>
+      
+      
+        <span class='type'>(<tt>RDF::Value</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Repository#has_object?</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 107</span>
+
+<span class='kw'>def</span> <span class='id has_object?'>has_object?</span><span class='lparen'>(</span><span class='id object'>object</span><span class='rparen'>)</span>
+  <span class='id client'>client</span><span class='period'>.</span><span class='id ask'>ask</span><span class='period'>.</span><span class='id whether'>whether</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='symbol'>:s</span><span class='comma'>,</span> <span class='symbol'>:p</span><span class='comma'>,</span> <span class='id object'>object</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id true?'>true?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="has_predicate?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>has_predicate?</strong>(predicate) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns `true` if this repository contains the given predicate.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'></span>
+      
+      
+        <span class='type'>(<tt>RDF::URI</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Repository#has_predicate?</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96
+97
+98</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 96</span>
+
+<span class='kw'>def</span> <span class='id has_predicate?'>has_predicate?</span><span class='lparen'>(</span><span class='id predicate'>predicate</span><span class='rparen'>)</span>
+  <span class='id client'>client</span><span class='period'>.</span><span class='id ask'>ask</span><span class='period'>.</span><span class='id whether'>whether</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='symbol'>:s</span><span class='comma'>,</span> <span class='id predicate'>predicate</span><span class='comma'>,</span> <span class='symbol'>:o</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id true?'>true?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="has_statement?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>has_statement?</strong>(statement) 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='has_quad?-instance_method'>has_quad?</span></span>
+    </span>
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns `true` if this repository contains the given `statement`.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>statement</span>
+      
+      
+        <span class='type'>(<tt>RDF::Statement</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Repository#has_statement?</li>
+    
+      <li>Enumerable#has_quad?</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+195
+196
+197</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 195</span>
+
+<span class='kw'>def</span> <span class='id has_statement?'>has_statement?</span><span class='lparen'>(</span><span class='id statement'>statement</span><span class='rparen'>)</span>
+  <span class='id client'>client</span><span class='period'>.</span><span class='id ask'>ask</span><span class='period'>.</span><span class='id whether'>whether</span><span class='lparen'>(</span><span class='id statement'>statement</span><span class='rparen'>)</span><span class='period'>.</span><span class='id true?'>true?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="has_subject?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>has_subject?</strong>(subject) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns `true` if this repository contains the given subject.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'></span>
+      
+      
+        <span class='type'>(<tt>RDF::Resource</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Repository#has_subject?</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+86
+87
+88</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 86</span>
+
+<span class='kw'>def</span> <span class='id has_subject?'>has_subject?</span><span class='lparen'>(</span><span class='id subject'>subject</span><span class='rparen'>)</span>
+  <span class='id client'>client</span><span class='period'>.</span><span class='id ask'>ask</span><span class='period'>.</span><span class='id whether'>whether</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id subject'>subject</span><span class='comma'>,</span> <span class='symbol'>:p</span><span class='comma'>,</span> <span class='symbol'>:o</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id true?'>true?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="has_triple?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>has_triple?</strong>(triple) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns `true` if this repository contains the given `triple`.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>triple</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;RDF::Resource, RDF::URI, RDF::Value&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Repository#has_triple?</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+184
+185
+186</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 184</span>
+
+<span class='kw'>def</span> <span class='id has_triple?'>has_triple?</span><span class='lparen'>(</span><span class='id triple'>triple</span><span class='rparen'>)</span>
+  <span class='id client'>client</span><span class='period'>.</span><span class='id ask'>ask</span><span class='period'>.</span><span class='id whether'>whether</span><span class='lparen'>(</span><span class='id triple'>triple</span><span class='period'>.</span><span class='id to_a'>to_a</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>...</span><span class='int'>3</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id true?'>true?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="query-instance_method">
+  
+    - (<tt>Object</tt>) <strong>query</strong>(pattern, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Note that this method is compatible with RDF::Queryable#query but also
+supports additional features (sparql queries directly as String or
+represented by a  RDF::SPARQL::Query object). Rememeber to always check if
+the repository #supports?(:sparql) before using the additional features.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TypeError</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Queryable#Query</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 236</span>
+
+<span class='kw'>def</span> <span class='id query'>query</span><span class='lparen'>(</span><span class='id pattern'>pattern</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
+  <span class='id raise'>raise</span> <span class='const'>TypeError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='rbrace'>}</span><span class='tstring_content'> is not readable</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:readable?</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id readable?'>readable?</span>
+  <span class='kw'>return</span> <span class='id enum_for'>enum_for</span><span class='lparen'>(</span><span class='symbol'>:query</span><span class='comma'>,</span> <span class='id pattern'>pattern</span><span class='rparen'>)</span><span class='period'>.</span><span class='id extend'>extend</span><span class='lparen'>(</span><span class='const'>RDF</span><span class='op'>::</span><span class='const'>Queryable</span><span class='comma'>,</span> <span class='const'>RDF</span><span class='op'>::</span><span class='const'>Enumerable</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id block_given?'>block_given?</span>
+
+  <span class='comment'># Allow for direct SPARQL queries:
+</span>  <span class='id sparql'>sparql</span> <span class='op'>=</span> <span class='id pattern'>pattern</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id pattern'>pattern</span> <span class='op'>:</span> <span class='const'>RDF</span><span class='op'>::</span><span class='const'>SPARQL</span><span class='op'>::</span><span class='const'>Query</span><span class='period'>.</span><span class='id from'>from</span><span class='lparen'>(</span><span class='id pattern'>pattern</span><span class='rparen'>)</span>
+  <span class='id results'>results</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id query'>query</span><span class='lparen'>(</span><span class='id sparql'>sparql</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='rparen'>)</span>
+  <span class='id results'>results</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id results'>results</span><span class='rbracket'>]</span> <span class='kw'>unless</span> <span class='id results'>results</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='symbol'>:each</span>
+  <span class='id results'>results</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id result'>result</span><span class='op'>|</span>
+    <span class='id block'>block</span><span class='period'>.</span><span class='id call'>call</span> <span class='id result'>result</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="supports?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>supports?</strong>(feature) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Repository#supports?</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60
+61
+62
+63
+64</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 58</span>
+
+<span class='kw'>def</span> <span class='id supports?'>supports?</span><span class='lparen'>(</span><span class='id feature'>feature</span><span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id feature'>feature</span><span class='period'>.</span><span class='id to_sym'>to_sym</span>
+    <span class='kw'>when</span> <span class='symbol'>:context</span> <span class='kw'>then</span> <span class='kw'>true</span> <span class='comment'># statement contexts / named graphs
+</span>    <span class='kw'>when</span> <span class='symbol'>:sparql</span> <span class='kw'>then</span> <span class='kw'>true</span> <span class='comment'># BY RIK, supports sparql queries
+</span>    <span class='kw'>else</span> <span class='kw'>super</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="writable?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>writable?</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns `false` to indicate that this is a read-only repository.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Mutable#mutable?</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rdf/sparql/repository.rb', line 51</span>
+
+<span class='kw'>def</span> <span class='id writable?'>writable?</span>
+  <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Aug 25 17:54:22 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>
